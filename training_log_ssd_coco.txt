@@ -1,0 +1,1361 @@
+2025-09-03 17:48:44,658 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=10, lr=0.001
+2025-09-03 17:56:55,332 - INFO - Epoca [1/10], Perdita media: 9.2409
+2025-09-03 18:05:11,107 - INFO - Epoca [2/10], Perdita media: 7.1032
+2025-09-03 18:13:25,370 - INFO - Epoca [3/10], Perdita media: 6.2785
+2025-09-03 18:21:54,770 - INFO - Epoca [4/10], Perdita media: 5.5844
+2025-09-03 18:30:11,253 - INFO - Epoca [5/10], Perdita media: 5.4492
+2025-09-03 18:38:28,612 - INFO - Epoca [6/10], Perdita media: 5.3649
+2025-09-03 18:46:45,614 - INFO - Epoca [7/10], Perdita media: 5.2846
+2025-09-03 18:55:02,059 - INFO - Epoca [8/10], Perdita media: 5.2650
+2025-09-03 19:03:17,482 - INFO - Epoca [9/10], Perdita media: 5.2610
+2025-09-03 19:11:34,031 - INFO - Epoca [10/10], Perdita media: 5.2510
+2025-09-03 19:11:34,204 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-03 19:11:34,204 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-03 19:12:16,929 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1472), 'map_50': tensor(0.2663), 'map_75': tensor(0.1443), 'map_small': tensor(0.0064), 'map_medium': tensor(0.2090), 'map_large': tensor(0.2338), 'mar_1': tensor(0.1699), 'mar_10': tensor(0.2301), 'mar_100': tensor(0.2383), 'mar_small': tensor(0.0083), 'mar_medium': tensor(0.3319), 'mar_large': tensor(0.3639), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-03 19:12:16,929 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-05 19:50:17,370 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=10, lr=0.001
+2025-09-05 19:58:31,428 - INFO - Epoca [1/10], Perdita media: 9.6540
+2025-09-05 20:06:18,533 - INFO - Epoca [2/10], Perdita media: 7.5878
+2025-09-05 20:14:07,581 - INFO - Epoca [3/10], Perdita media: 6.8048
+2025-09-05 20:21:53,250 - INFO - Epoca [4/10], Perdita media: 6.2119
+2025-09-05 20:29:50,724 - INFO - Epoca [5/10], Perdita media: 5.7812
+2025-09-05 20:37:36,721 - INFO - Epoca [6/10], Perdita media: 5.4643
+2025-09-05 20:45:22,357 - INFO - Epoca [7/10], Perdita media: 5.2258
+2025-09-05 20:53:08,166 - INFO - Epoca [8/10], Perdita media: 5.0536
+2025-09-05 21:00:54,823 - INFO - Epoca [9/10], Perdita media: 4.9349
+2025-09-05 21:08:42,142 - INFO - Epoca [10/10], Perdita media: 4.8675
+2025-09-05 21:08:42,286 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-05 21:08:42,287 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-05 21:09:22,237 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1710), 'map_50': tensor(0.3146), 'map_75': tensor(0.1718), 'map_small': tensor(0.0103), 'map_medium': tensor(0.2356), 'map_large': tensor(0.2800), 'mar_1': tensor(0.1833), 'mar_10': tensor(0.2509), 'mar_100': tensor(0.2597), 'mar_small': tensor(0.0134), 'mar_medium': tensor(0.3725), 'mar_large': tensor(0.4221), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-05 21:09:22,237 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1710, mAR@100: 0.2597
+2025-09-05 21:09:22,237 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-05 21:26:35,235 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=25, lr=0.001
+2025-09-05 21:34:25,567 - INFO - Epoca [1/25], Perdita media: 9.6246
+2025-09-05 21:42:15,539 - INFO - Epoca [2/25], Perdita media: 7.4905
+2025-09-05 21:50:05,105 - INFO - Epoca [3/25], Perdita media: 6.7101
+2025-09-05 21:57:54,494 - INFO - Epoca [4/25], Perdita media: 6.1359
+2025-09-05 22:05:44,808 - INFO - Epoca [5/25], Perdita media: 5.7451
+2025-09-05 22:13:34,891 - INFO - Epoca [6/25], Perdita media: 5.4230
+2025-09-05 22:21:25,015 - INFO - Epoca [7/25], Perdita media: 5.1638
+2025-09-05 22:29:14,108 - INFO - Epoca [8/25], Perdita media: 4.9910
+2025-09-05 22:37:03,041 - INFO - Epoca [9/25], Perdita media: 4.8068
+2025-09-05 22:44:49,955 - INFO - Epoca [10/25], Perdita media: 4.6367
+2025-09-05 22:52:35,324 - INFO - Epoca [11/25], Perdita media: 4.4813
+2025-09-05 23:00:24,384 - INFO - Epoca [12/25], Perdita media: 4.3593
+2025-09-05 23:08:11,624 - INFO - Epoca [13/25], Perdita media: 4.2407
+2025-09-05 23:15:59,548 - INFO - Epoca [14/25], Perdita media: 4.1296
+2025-09-05 23:23:47,794 - INFO - Epoca [15/25], Perdita media: 4.0373
+2025-09-05 23:31:36,178 - INFO - Epoca [16/25], Perdita media: 3.9465
+2025-09-05 23:39:23,834 - INFO - Epoca [17/25], Perdita media: 3.8698
+2025-09-05 23:47:11,928 - INFO - Epoca [18/25], Perdita media: 3.8064
+2025-09-05 23:54:58,423 - INFO - Epoca [19/25], Perdita media: 3.7376
+2025-09-06 00:02:44,620 - INFO - Epoca [20/25], Perdita media: 3.6840
+2025-09-06 00:10:31,665 - INFO - Epoca [21/25], Perdita media: 3.6520
+2025-09-06 00:18:19,674 - INFO - Epoca [22/25], Perdita media: 3.6201
+2025-09-06 00:26:17,758 - INFO - Epoca [23/25], Perdita media: 3.5949
+2025-09-06 00:34:05,845 - INFO - Epoca [24/25], Perdita media: 3.5765
+2025-09-06 00:41:55,056 - INFO - Epoca [25/25], Perdita media: 3.5758
+2025-09-06 00:41:55,217 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 00:41:55,218 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 02:11:04,762 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=25, lr=0.001
+2025-09-06 02:12:01,373 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=25, lr=0.001
+2025-09-06 02:12:37,318 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=25, lr=0.001
+2025-09-06 02:20:42,712 - INFO - Epoca [1/25], Perdita media: 9.6002
+2025-09-06 02:21:55,019 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=50, lr=0.001
+2025-09-06 02:30:04,562 - INFO - Epoca [1/50], Perdita media: 9.2986
+2025-09-06 02:38:16,726 - INFO - Epoca [2/50], Perdita media: 7.2883
+2025-09-06 02:46:28,091 - INFO - Epoca [3/50], Perdita media: 6.5912
+2025-09-06 02:54:41,249 - INFO - Epoca [4/50], Perdita media: 6.0638
+2025-09-06 03:02:53,595 - INFO - Epoca [5/50], Perdita media: 5.6973
+2025-09-06 03:11:06,343 - INFO - Epoca [6/50], Perdita media: 5.4114
+2025-09-06 03:19:18,900 - INFO - Epoca [7/50], Perdita media: 5.1869
+2025-09-06 03:27:31,019 - INFO - Epoca [8/50], Perdita media: 4.9943
+2025-09-06 03:35:42,349 - INFO - Epoca [9/50], Perdita media: 4.8133
+2025-09-06 03:43:53,893 - INFO - Epoca [10/50], Perdita media: 4.6711
+2025-09-06 03:52:05,222 - INFO - Epoca [11/50], Perdita media: 4.5207
+2025-09-06 04:00:16,216 - INFO - Epoca [12/50], Perdita media: 4.3874
+2025-09-06 04:08:27,340 - INFO - Epoca [13/50], Perdita media: 4.2710
+2025-09-06 04:16:37,936 - INFO - Epoca [14/50], Perdita media: 4.1999
+2025-09-06 04:24:49,304 - INFO - Epoca [15/50], Perdita media: 4.0740
+2025-09-06 04:32:59,452 - INFO - Epoca [16/50], Perdita media: 3.9676
+2025-09-06 04:41:10,315 - INFO - Epoca [17/50], Perdita media: 3.8884
+2025-09-06 04:49:21,933 - INFO - Epoca [18/50], Perdita media: 3.8080
+2025-09-06 04:57:32,496 - INFO - Epoca [19/50], Perdita media: 3.7331
+2025-09-06 05:05:44,224 - INFO - Epoca [20/50], Perdita media: 3.6509
+2025-09-06 05:13:56,354 - INFO - Epoca [21/50], Perdita media: 3.5904
+2025-09-06 05:22:07,642 - INFO - Epoca [22/50], Perdita media: 3.5027
+2025-09-06 05:30:18,343 - INFO - Epoca [23/50], Perdita media: 3.4722
+2025-09-06 05:38:29,654 - INFO - Epoca [24/50], Perdita media: 3.3759
+2025-09-06 05:46:41,481 - INFO - Epoca [25/50], Perdita media: 3.3451
+2025-09-06 05:54:54,549 - INFO - Epoca [26/50], Perdita media: 3.2903
+2025-09-06 06:03:06,000 - INFO - Epoca [27/50], Perdita media: 3.2441
+2025-09-06 06:11:17,924 - INFO - Epoca [28/50], Perdita media: 3.2007
+2025-09-06 06:19:29,789 - INFO - Epoca [29/50], Perdita media: 3.1321
+2025-09-06 06:27:41,291 - INFO - Epoca [30/50], Perdita media: 3.1083
+2025-09-06 06:35:52,458 - INFO - Epoca [31/50], Perdita media: 3.0628
+2025-09-06 06:44:03,859 - INFO - Epoca [32/50], Perdita media: 3.0248
+2025-09-06 06:52:12,953 - INFO - Epoca [33/50], Perdita media: 2.9864
+2025-09-06 07:00:25,029 - INFO - Epoca [34/50], Perdita media: 2.9565
+2025-09-06 07:08:36,201 - INFO - Epoca [35/50], Perdita media: 2.9326
+2025-09-06 07:16:47,751 - INFO - Epoca [36/50], Perdita media: 2.8828
+2025-09-06 07:24:59,908 - INFO - Epoca [37/50], Perdita media: 2.8668
+2025-09-06 07:33:11,242 - INFO - Epoca [38/50], Perdita media: 2.8521
+2025-09-06 07:41:23,475 - INFO - Epoca [39/50], Perdita media: 2.8206
+2025-09-06 07:49:33,052 - INFO - Epoca [40/50], Perdita media: 2.8043
+2025-09-06 07:57:45,164 - INFO - Epoca [41/50], Perdita media: 2.7811
+2025-09-06 08:05:56,612 - INFO - Epoca [42/50], Perdita media: 2.7876
+2025-09-06 08:14:08,731 - INFO - Epoca [43/50], Perdita media: 2.7474
+2025-09-06 08:22:20,934 - INFO - Epoca [44/50], Perdita media: 2.7536
+2025-09-06 08:30:42,379 - INFO - Epoca [45/50], Perdita media: 2.7368
+2025-09-06 08:38:53,747 - INFO - Epoca [46/50], Perdita media: 2.7314
+2025-09-06 08:47:05,860 - INFO - Epoca [47/50], Perdita media: 2.7416
+2025-09-06 08:55:15,987 - INFO - Epoca [48/50], Perdita media: 2.7157
+2025-09-06 09:03:25,863 - INFO - Epoca [49/50], Perdita media: 2.7112
+2025-09-06 09:11:36,104 - INFO - Epoca [50/50], Perdita media: 2.7173
+2025-09-06 09:11:36,259 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 09:11:36,260 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 09:12:17,222 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1873), 'map_50': tensor(0.3320), 'map_75': tensor(0.2071), 'map_small': tensor(0.0239), 'map_medium': tensor(0.2329), 'map_large': tensor(0.3160), 'mar_1': tensor(0.1930), 'mar_10': tensor(0.2602), 'mar_100': tensor(0.2710), 'mar_small': tensor(0.0519), 'mar_medium': tensor(0.3389), 'mar_large': tensor(0.4503), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-06 09:12:17,222 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1873, mAR@100: 0.2710
+2025-09-06 09:12:17,222 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 12:29:27,971 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 12:30:51,048 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 12:39:04,321 - INFO - Epoca [1/5], Perdita media: 9.7350
+2025-09-06 12:47:25,552 - INFO - Epoca [2/5], Perdita media: 7.7670
+2025-09-06 12:55:37,617 - INFO - Epoca [3/5], Perdita media: 7.0518
+2025-09-06 13:03:51,638 - INFO - Epoca [4/5], Perdita media: 6.5874
+2025-09-06 13:12:05,168 - INFO - Epoca [5/5], Perdita media: 6.3095
+2025-09-06 13:12:05,305 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 13:12:05,307 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 13:12:51,753 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1021), 'map_50': tensor(0.1839), 'map_75': tensor(0.1045), 'map_small': tensor(0.0040), 'map_medium': tensor(0.1561), 'map_large': tensor(0.1348), 'mar_1': tensor(0.1257), 'mar_10': tensor(0.1715), 'mar_100': tensor(0.1783), 'mar_small': tensor(0.0055), 'mar_medium': tensor(0.2590), 'mar_large': tensor(0.2616), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  27,  28,  29,  30,
+         31,  32,  33,  34,  36,  37,  38,  39,  42,  43,  44,  46,  47,  48,
+         50,  52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,  63,  64,
+         65,  67,  68,  69,  70,  71,  72,  74,  75,  76,  77,  78,  79,  80,
+         81,  82,  83,  84,  85,  86,  87,  88,  89,  90,  91,  92,  93,  94,
+         95,  96,  97,  98,  99, 101, 102, 103], dtype=torch.int32)}
+2025-09-06 13:12:51,753 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1021, mAR@100: 0.1783
+2025-09-06 13:12:51,753 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 13:19:16,738 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 13:27:41,378 - INFO - Epoca [1/5], Perdita media: 12.6267
+2025-09-06 13:36:10,538 - INFO - Epoca [2/5], Perdita media: 7.8097
+2025-09-06 13:44:40,936 - INFO - Epoca [3/5], Perdita media: 7.0828
+2025-09-06 13:53:11,840 - INFO - Epoca [4/5], Perdita media: 6.5171
+2025-09-06 14:01:45,330 - INFO - Epoca [5/5], Perdita media: 6.1694
+2025-09-06 14:01:45,493 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 14:01:45,493 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 14:02:35,272 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1120), 'map_50': tensor(0.2141), 'map_75': tensor(0.1195), 'map_small': tensor(9.9199e-05), 'map_medium': tensor(0.0932), 'map_large': tensor(0.1838), 'mar_1': tensor(0.1304), 'mar_10': tensor(0.1885), 'mar_100': tensor(0.1969), 'mar_small': tensor(0.0008), 'mar_medium': tensor(0.1402), 'mar_large': tensor(0.3340), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  42,  43,  44,  46,  47,
+         48,  49,  50,  52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,
+         63,  64,  65,  67,  68,  69,  70,  71,  72,  74,  75,  76,  77,  78,
+         79,  80,  81,  82,  83,  84,  85,  86,  87,  88,  89,  90,  91,  92,
+         93,  94,  95,  96,  97,  98,  99, 101, 102, 103], dtype=torch.int32)}
+2025-09-06 14:02:35,272 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1120, mAR@100: 0.1969
+2025-09-06 14:02:35,272 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 14:07:40,383 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 14:15:48,431 - INFO - Epoca [1/5], Perdita media: 12.6871
+2025-09-06 14:24:03,274 - INFO - Epoca [2/5], Perdita media: 7.8335
+2025-09-06 14:32:18,596 - INFO - Epoca [3/5], Perdita media: 7.1452
+2025-09-06 14:40:37,599 - INFO - Epoca [4/5], Perdita media: 6.6291
+2025-09-06 14:48:52,326 - INFO - Epoca [5/5], Perdita media: 6.2633
+2025-09-06 14:48:52,483 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 14:48:52,484 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 14:49:40,798 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.1080), 'map_50': tensor(0.2029), 'map_75': tensor(0.1085), 'map_small': tensor(0.0001), 'map_medium': tensor(0.0864), 'map_large': tensor(0.1815), 'mar_1': tensor(0.1267), 'mar_10': tensor(0.1797), 'mar_100': tensor(0.1862), 'mar_small': tensor(0.0008), 'mar_medium': tensor(0.1251), 'mar_large': tensor(0.3182), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  42,  43,  44,  45,  47,
+         48,  50,  52,  53,  54,  55,  56,  57,  58,  59,  60,  61,  62,  63,
+         64,  65,  67,  68,  69,  70,  71,  72,  74,  75,  76,  77,  78,  79,
+         80,  81,  82,  83,  84,  85,  86,  87,  88,  89,  90,  91,  92,  93,
+         94,  95,  96,  97,  98,  99, 101, 102, 103], dtype=torch.int32)}
+2025-09-06 14:49:40,799 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1080, mAR@100: 0.1862
+2025-09-06 14:49:40,799 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 15:09:57,771 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 15:11:53,471 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 15:14:31,429 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 15:18:37,847 - INFO - Epoca [1/1], Perdita media: 8.9001
+2025-09-06 15:38:38,929 - INFO - Epoca [1/4], Perdita media: 5.5405
+2025-09-06 15:58:50,917 - INFO - Epoca [2/4], Perdita media: 4.7960
+2025-09-06 16:18:57,032 - INFO - Epoca [3/4], Perdita media: 4.2067
+2025-09-06 16:38:58,269 - INFO - Epoca [4/4], Perdita media: 3.8120
+2025-09-06 16:38:58,430 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 16:38:58,430 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 16:39:59,604 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.2120), 'map_50': tensor(0.3771), 'map_75': tensor(0.2211), 'map_small': tensor(0.0202), 'map_medium': tensor(0.1645), 'map_large': tensor(0.3398), 'mar_1': tensor(0.2148), 'mar_10': tensor(0.3039), 'mar_100': tensor(0.3214), 'mar_small': tensor(0.0480), 'mar_medium': tensor(0.2800), 'mar_large': tensor(0.4651), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-06 16:39:59,604 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2120, mAR@100: 0.3214
+2025-09-06 16:39:59,605 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 19:08:37,322 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 19:12:43,526 - INFO - Epoca [1/1], Perdita media: 8.8201
+2025-09-06 19:33:44,575 - INFO - Epoca [1/4], Perdita media: 5.5254
+2025-09-06 19:55:23,312 - INFO - Epoca [2/4], Perdita media: 4.7948
+2025-09-06 20:17:31,183 - INFO - Epoca [3/4], Perdita media: 4.2245
+2025-09-06 20:39:21,144 - INFO - Epoca [4/4], Perdita media: 3.8314
+2025-09-06 20:39:21,277 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-06 20:39:21,277 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-06 20:40:11,887 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.2089), 'map_50': tensor(0.3696), 'map_75': tensor(0.2165), 'map_small': tensor(0.0248), 'map_medium': tensor(0.1468), 'map_large': tensor(0.3375), 'mar_1': tensor(0.2110), 'mar_10': tensor(0.2966), 'mar_100': tensor(0.3171), 'mar_small': tensor(0.0539), 'mar_medium': tensor(0.2653), 'mar_large': tensor(0.4655), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-06 20:40:11,888 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2089, mAR@100: 0.3171
+2025-09-06 20:40:11,888 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-06 21:01:15,806 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 21:05:45,375 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-06 21:17:39,733 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=25, lr=0.001
+2025-09-06 21:21:45,151 - INFO - Epoca [1/5], Perdita media: 8.8560
+2025-09-06 21:25:54,714 - INFO - Epoca [2/5], Perdita media: 7.7617
+2025-09-06 21:30:05,407 - INFO - Epoca [3/5], Perdita media: 7.4333
+2025-09-06 21:34:15,102 - INFO - Epoca [4/5], Perdita media: 7.4347
+2025-09-06 21:38:26,985 - INFO - Epoca [5/5], Perdita media: 7.3080
+2025-09-06 22:01:41,738 - INFO - Epoca [1/20], Perdita media: 5.2010
+2025-09-06 22:24:56,271 - INFO - Epoca [2/20], Perdita media: 4.5549
+2025-09-06 22:48:07,278 - INFO - Epoca [3/20], Perdita media: 4.2396
+2025-09-06 23:11:09,835 - INFO - Epoca [4/20], Perdita media: 3.9959
+2025-09-06 23:33:58,896 - INFO - Epoca [5/20], Perdita media: 3.7822
+2025-09-06 23:56:46,367 - INFO - Epoca [6/20], Perdita media: 3.5695
+2025-09-07 00:19:32,487 - INFO - Epoca [7/20], Perdita media: 3.3724
+2025-09-07 00:42:38,239 - INFO - Epoca [8/20], Perdita media: 3.2265
+2025-09-07 01:05:44,481 - INFO - Epoca [9/20], Perdita media: 3.0575
+2025-09-07 01:28:27,551 - INFO - Epoca [10/20], Perdita media: 2.9106
+2025-09-07 01:51:27,019 - INFO - Epoca [11/20], Perdita media: 2.7642
+2025-09-07 02:14:43,802 - INFO - Epoca [12/20], Perdita media: 2.6417
+2025-09-07 02:37:48,794 - INFO - Epoca [13/20], Perdita media: 2.5279
+2025-09-07 03:00:45,058 - INFO - Epoca [14/20], Perdita media: 2.4373
+2025-09-07 03:23:31,655 - INFO - Epoca [15/20], Perdita media: 2.3184
+2025-09-07 03:47:24,024 - INFO - Epoca [16/20], Perdita media: 2.2467
+2025-09-07 04:10:21,571 - INFO - Epoca [17/20], Perdita media: 2.1889
+2025-09-07 04:33:45,038 - INFO - Epoca [18/20], Perdita media: 2.1491
+2025-09-07 04:57:17,038 - INFO - Epoca [19/20], Perdita media: 2.1374
+2025-09-07 05:20:40,748 - INFO - Epoca [20/20], Perdita media: 2.1188
+2025-09-07 05:20:40,889 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-07 05:20:40,889 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-07 05:21:24,079 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.2010), 'map_50': tensor(0.3615), 'map_75': tensor(0.2032), 'map_small': tensor(0.0470), 'map_medium': tensor(0.1647), 'map_large': tensor(0.3159), 'mar_1': tensor(0.2129), 'mar_10': tensor(0.2930), 'mar_100': tensor(0.3123), 'mar_small': tensor(0.0864), 'mar_medium': tensor(0.2873), 'mar_large': tensor(0.4314), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-07 05:21:24,079 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2010, mAR@100: 0.3123
+2025-09-07 05:21:24,079 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-07 12:08:36,618 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 12:20:11,255 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 12:23:25,495 - INFO - Epoca [1/1], Perdita media: 8.8660
+2025-09-07 12:30:22,937 - INFO - Epoca [1/4], Perdita media: 5.5177
+2025-09-07 12:36:49,412 - INFO - Epoca [2/4], Perdita media: 4.7251
+2025-09-07 12:43:06,362 - INFO - Epoca [3/4], Perdita media: 4.1477
+2025-09-07 12:49:24,146 - INFO - Epoca [4/4], Perdita media: 3.7580
+2025-09-07 12:49:24,291 - INFO - Modello salvato in ssd_coco_model.pth
+2025-09-07 12:49:24,291 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-07 12:50:07,487 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(0.2104), 'map_50': tensor(0.3704), 'map_75': tensor(0.2201), 'map_small': tensor(0.0221), 'map_medium': tensor(0.1642), 'map_large': tensor(0.3464), 'mar_1': tensor(0.2130), 'mar_10': tensor(0.2985), 'mar_100': tensor(0.3176), 'mar_small': tensor(0.0466), 'mar_medium': tensor(0.2787), 'mar_large': tensor(0.4661), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-07 12:50:07,487 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2104, mAR@100: 0.3176
+2025-09-07 12:50:07,487 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-07 13:00:21,558 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 13:02:52,505 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 13:03:54,484 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 13:07:29,371 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 13:58:48,305 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 14:25:36,085 - INFO - Dispositivo: cuda, Parametri: batch_size=16, epochs=5, lr=0.001
+2025-09-07 18:04:28,606 - INFO - Epoca [1/1], Perdita media: 1.6759
+2025-09-07 18:24:01,572 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-07 18:24:23,176 - INFO - Epoca [1/1], Perdita media: 9.5710
+2025-09-07 18:24:50,083 - INFO - Epoca [1/4], Perdita media: 12.6337
+2025-09-07 18:25:19,489 - INFO - Epoca [2/4], Perdita media: 2.9218
+2025-09-07 18:25:53,971 - INFO - Epoca [3/4], Perdita media: 1.5137
+2025-09-07 18:26:29,653 - INFO - Epoca [4/4], Perdita media: 1.5571
+2025-09-07 18:26:29,826 - INFO - Modello salvato in retinanet_model.pth
+2025-09-07 18:26:29,826 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-07 18:31:29,639 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-07 18:53:47,937 - INFO - Epoca [1/1], Perdita media: 1.3374
+2025-09-07 22:52:37,224 - INFO - Epoca [1/4], Perdita media: 1.2385
+2025-09-08 03:24:29,153 - INFO - Epoca [2/4], Perdita media: 1.2366
+2025-09-08 07:55:06,197 - INFO - Epoca [3/4], Perdita media: 1.2125
+2025-09-08 12:23:35,575 - INFO - Epoca [4/4], Perdita media: 1.1864
+2025-09-08 12:23:35,780 - INFO - Modello salvato in retinanet_model.pth
+2025-09-08 12:23:35,781 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 12:29:17,526 - INFO - Valutazione completata. Risultati mAP: {'map': tensor(3.5481e-05), 'map_50': tensor(0.0001), 'map_75': tensor(5.3568e-06), 'map_small': tensor(2.5720e-05), 'map_medium': tensor(2.5429e-05), 'map_large': tensor(9.6629e-05), 'mar_1': tensor(1.2235e-05), 'mar_10': tensor(0.0003), 'mar_100': tensor(0.0023), 'mar_small': tensor(0.0011), 'mar_medium': tensor(0.0022), 'mar_large': tensor(0.0036), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  26,  28,  29,  30,
+         31,  32,  33,  36,  37,  38,  41,  42,  43,  46,  49,  51,  52,  53,
+         55,  56,  57,  59,  60,  61,  63,  64,  66,  67,  68,  70,  71,  73,
+         74,  75,  76,  77,  78,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  92,  93,  94,  95,  96,  97,  98, 102], dtype=torch.int32)}
+2025-09-08 12:29:17,526 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.0000, mAR@100: 0.0023
+2025-09-08 12:29:17,526 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 12:42:56,621 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=2, lr=0.001
+2025-09-08 13:14:14,230 - INFO - Dispositivo: cuda, Parametri: batch_size=8, epochs=5, lr=0.001
+2025-09-08 13:17:32,963 - INFO - Epoca [1/1], Perdita media: 10.5291
+2025-09-08 13:24:22,581 - INFO - Epoca [1/4], Perdita media: 5.6099
+2025-09-08 13:31:12,988 - INFO - Epoca [2/4], Perdita media: 4.8551
+2025-09-08 13:38:21,109 - INFO - Epoca [3/4], Perdita media: 4.5676
+2025-09-08 13:45:09,958 - INFO - Epoca [4/4], Perdita media: 4.4200
+2025-09-08 13:45:10,115 - INFO - Modello salvato in ssd_model.pth
+2025-09-08 13:45:10,116 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 13:46:00,590 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2082), 'map_50': tensor(0.3720), 'map_75': tensor(0.2167), 'map_small': tensor(0.0336), 'map_medium': tensor(0.1528), 'map_large': tensor(0.3406), 'mar_1': tensor(0.2110), 'mar_10': tensor(0.3075), 'mar_100': tensor(0.3271), 'mar_small': tensor(0.0680), 'mar_medium': tensor(0.2913), 'mar_large': tensor(0.4689), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-08 13:46:00,590 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2082, mAR@100: 0.3271
+2025-09-08 13:46:00,590 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 13:54:56,915 - INFO - Dispositivo: cuda, Parametri: batch_size=8, epochs=10, lr=0.001
+2025-09-08 13:58:17,395 - INFO - Epoca [1/2], Perdita media: 11.1164
+2025-09-08 14:01:40,543 - INFO - Epoca [2/2], Perdita media: 10.5330
+2025-09-08 14:08:25,888 - INFO - Epoca [1/8], Perdita media: 5.9718
+2025-09-08 14:15:04,885 - INFO - Epoca [2/8], Perdita media: 5.2618
+2025-09-08 14:21:42,701 - INFO - Epoca [3/8], Perdita media: 5.0103
+2025-09-08 14:28:21,180 - INFO - Epoca [4/8], Perdita media: 4.8239
+2025-09-08 14:34:59,103 - INFO - Epoca [5/8], Perdita media: 4.7016
+2025-09-08 14:41:42,289 - INFO - Epoca [6/8], Perdita media: 4.6037
+2025-09-08 14:48:21,040 - INFO - Epoca [7/8], Perdita media: 4.5473
+2025-09-08 14:54:59,172 - INFO - Epoca [8/8], Perdita media: 4.5122
+2025-09-08 14:54:59,330 - INFO - Modello salvato in ssd_model.pth
+2025-09-08 14:54:59,331 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 14:55:49,294 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2179), 'map_50': tensor(0.3827), 'map_75': tensor(0.2208), 'map_small': tensor(0.0261), 'map_medium': tensor(0.1717), 'map_large': tensor(0.3548), 'mar_1': tensor(0.2167), 'mar_10': tensor(0.3124), 'mar_100': tensor(0.3297), 'mar_small': tensor(0.0631), 'mar_medium': tensor(0.2889), 'mar_large': tensor(0.4803), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 14:55:49,294 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2179, mAR@100: 0.3297
+2025-09-08 14:55:49,294 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 15:32:38,326 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=10, lr=0.001
+2025-09-08 15:37:10,542 - INFO - Epoca [1/2], Perdita media: 14.2847
+2025-09-08 15:41:41,023 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=100, lr=0.001
+2025-09-08 15:45:31,222 - INFO - Epoca [1/20], Perdita media: 14.3153
+2025-09-08 15:49:25,522 - INFO - Epoca [2/20], Perdita media: 14.1138
+2025-09-08 15:53:21,202 - INFO - Epoca [3/20], Perdita media: 13.9353
+2025-09-08 15:57:14,754 - INFO - Epoca [4/20], Perdita media: 13.9426
+2025-09-08 16:01:08,838 - INFO - Epoca [5/20], Perdita media: 13.6710
+2025-09-08 16:05:04,610 - INFO - Epoca [6/20], Perdita media: 13.7331
+2025-09-08 16:09:01,873 - INFO - Epoca [7/20], Perdita media: 13.6939
+2025-09-08 16:12:55,997 - INFO - Epoca [8/20], Perdita media: 13.4927
+2025-09-08 16:16:51,479 - INFO - Epoca [9/20], Perdita media: 13.5595
+2025-09-08 16:20:45,560 - INFO - Epoca [10/20], Perdita media: 13.4832
+2025-09-08 16:24:40,470 - INFO - Epoca [11/20], Perdita media: 13.3662
+2025-09-08 16:28:33,459 - INFO - Epoca [12/20], Perdita media: 13.3777
+2025-09-08 16:32:26,038 - INFO - Epoca [13/20], Perdita media: 13.3014
+2025-09-08 16:36:19,785 - INFO - Epoca [14/20], Perdita media: 13.4276
+2025-09-08 16:40:16,108 - INFO - Epoca [15/20], Perdita media: 13.3389
+2025-09-08 16:44:56,352 - INFO - Epoca [16/20], Perdita media: 13.3024
+2025-09-08 16:49:28,896 - INFO - Epoca [17/20], Perdita media: 13.2259
+2025-09-08 16:54:11,319 - INFO - Epoca [18/20], Perdita media: 13.2140
+2025-09-08 16:58:48,617 - INFO - Epoca [19/20], Perdita media: 13.2691
+2025-09-08 17:03:27,734 - INFO - Epoca [20/20], Perdita media: 13.2068
+2025-09-08 17:11:48,351 - INFO - Epoca [1/1], Perdita media: 5.7789
+2025-09-08 17:11:48,353 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:12:41,542 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1750), 'map_50': tensor(0.3606), 'map_75': tensor(0.1517), 'map_small': tensor(0.0408), 'map_medium': tensor(0.1460), 'map_large': tensor(0.2939), 'mar_1': tensor(0.1881), 'mar_10': tensor(0.2738), 'mar_100': tensor(0.2910), 'mar_small': tensor(0.0878), 'mar_medium': tensor(0.2652), 'mar_large': tensor(0.4156), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 17:12:41,542 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1750, mAR@100: 0.2910
+2025-09-08 17:12:41,542 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:12:41,755 - INFO - Nuovo mAP migliore: 0.1750 all'epoca 1 del fine-tuning.
+2025-09-08 17:20:53,995 - INFO - Epoca [1/1], Perdita media: 4.9555
+2025-09-08 17:20:53,995 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:21:55,567 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1906), 'map_50': tensor(0.3660), 'map_75': tensor(0.1733), 'map_small': tensor(0.0494), 'map_medium': tensor(0.1523), 'map_large': tensor(0.3201), 'mar_1': tensor(0.1998), 'mar_10': tensor(0.2909), 'mar_100': tensor(0.3096), 'mar_small': tensor(0.0937), 'mar_medium': tensor(0.2736), 'mar_large': tensor(0.4453), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 17:21:55,567 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1906, mAR@100: 0.3096
+2025-09-08 17:21:55,568 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:21:55,808 - INFO - Nuovo mAP migliore: 0.1906 all'epoca 2 del fine-tuning.
+2025-09-08 17:30:09,979 - INFO - Epoca [1/1], Perdita media: 4.6682
+2025-09-08 17:30:09,981 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:31:10,881 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2023), 'map_50': tensor(0.3744), 'map_75': tensor(0.1944), 'map_small': tensor(0.0303), 'map_medium': tensor(0.1578), 'map_large': tensor(0.3344), 'mar_1': tensor(0.2058), 'mar_10': tensor(0.3013), 'mar_100': tensor(0.3202), 'mar_small': tensor(0.0799), 'mar_medium': tensor(0.2816), 'mar_large': tensor(0.4623), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-08 17:31:10,881 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2023, mAR@100: 0.3202
+2025-09-08 17:31:10,882 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:31:11,125 - INFO - Nuovo mAP migliore: 0.2023 all'epoca 3 del fine-tuning.
+2025-09-08 17:39:18,905 - INFO - Epoca [1/1], Perdita media: 4.4922
+2025-09-08 17:39:18,905 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:40:03,761 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2091), 'map_50': tensor(0.3800), 'map_75': tensor(0.2074), 'map_small': tensor(0.0407), 'map_medium': tensor(0.1672), 'map_large': tensor(0.3399), 'mar_1': tensor(0.2197), 'mar_10': tensor(0.3094), 'mar_100': tensor(0.3293), 'mar_small': tensor(0.0953), 'mar_medium': tensor(0.2942), 'mar_large': tensor(0.4730), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 17:40:03,761 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2091, mAR@100: 0.3293
+2025-09-08 17:40:03,761 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:40:03,977 - INFO - Nuovo mAP migliore: 0.2091 all'epoca 4 del fine-tuning.
+2025-09-08 17:48:08,291 - INFO - Epoca [1/1], Perdita media: 4.3612
+2025-09-08 17:48:08,292 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:49:10,037 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2105), 'map_50': tensor(0.3804), 'map_75': tensor(0.2135), 'map_small': tensor(0.0390), 'map_medium': tensor(0.1685), 'map_large': tensor(0.3495), 'mar_1': tensor(0.2173), 'mar_10': tensor(0.3119), 'mar_100': tensor(0.3304), 'mar_small': tensor(0.0797), 'mar_medium': tensor(0.2952), 'mar_large': tensor(0.4812), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 17:49:10,038 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2105, mAR@100: 0.3304
+2025-09-08 17:49:10,038 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:49:10,283 - INFO - Nuovo mAP migliore: 0.2105 all'epoca 5 del fine-tuning.
+2025-09-08 17:57:28,837 - INFO - Epoca [1/1], Perdita media: 4.2715
+2025-09-08 17:57:28,839 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 17:58:28,422 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2150), 'map_50': tensor(0.3839), 'map_75': tensor(0.2290), 'map_small': tensor(0.0368), 'map_medium': tensor(0.1602), 'map_large': tensor(0.3485), 'mar_1': tensor(0.2189), 'mar_10': tensor(0.3103), 'mar_100': tensor(0.3279), 'mar_small': tensor(0.0783), 'mar_medium': tensor(0.2866), 'mar_large': tensor(0.4763), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 17:58:28,423 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2150, mAR@100: 0.3279
+2025-09-08 17:58:28,423 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 17:58:28,663 - INFO - Nuovo mAP migliore: 0.2150 all'epoca 6 del fine-tuning.
+2025-09-08 18:06:41,785 - INFO - Epoca [1/1], Perdita media: 4.1344
+2025-09-08 18:06:41,786 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:07:41,605 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2163), 'map_50': tensor(0.3832), 'map_75': tensor(0.2316), 'map_small': tensor(0.0317), 'map_medium': tensor(0.1666), 'map_large': tensor(0.3494), 'mar_1': tensor(0.2239), 'mar_10': tensor(0.3119), 'mar_100': tensor(0.3312), 'mar_small': tensor(0.0805), 'mar_medium': tensor(0.2928), 'mar_large': tensor(0.4686), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 18:07:41,606 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2163, mAR@100: 0.3312
+2025-09-08 18:07:41,606 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:07:41,847 - INFO - Nuovo mAP migliore: 0.2163 all'epoca 7 del fine-tuning.
+2025-09-08 18:15:53,300 - INFO - Epoca [1/1], Perdita media: 4.0601
+2025-09-08 18:15:53,301 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:16:55,859 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2178), 'map_50': tensor(0.3845), 'map_75': tensor(0.2302), 'map_small': tensor(0.0322), 'map_medium': tensor(0.1693), 'map_large': tensor(0.3546), 'mar_1': tensor(0.2251), 'mar_10': tensor(0.3106), 'mar_100': tensor(0.3285), 'mar_small': tensor(0.0780), 'mar_medium': tensor(0.2933), 'mar_large': tensor(0.4703), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 18:16:55,859 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2178, mAR@100: 0.3285
+2025-09-08 18:16:55,859 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:16:56,096 - INFO - Nuovo mAP migliore: 0.2178 all'epoca 8 del fine-tuning.
+2025-09-08 18:25:09,360 - INFO - Epoca [1/1], Perdita media: 3.9962
+2025-09-08 18:25:09,361 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:26:09,249 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2121), 'map_50': tensor(0.3772), 'map_75': tensor(0.2219), 'map_small': tensor(0.0345), 'map_medium': tensor(0.1672), 'map_large': tensor(0.3400), 'mar_1': tensor(0.2180), 'mar_10': tensor(0.3063), 'mar_100': tensor(0.3253), 'mar_small': tensor(0.0811), 'mar_medium': tensor(0.2837), 'mar_large': tensor(0.4699), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 18:26:09,249 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2121, mAR@100: 0.3253
+2025-09-08 18:26:09,250 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:34:13,013 - INFO - Epoca [1/1], Perdita media: 3.9602
+2025-09-08 18:34:13,013 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:34:58,105 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2220), 'map_50': tensor(0.3892), 'map_75': tensor(0.2319), 'map_small': tensor(0.0269), 'map_medium': tensor(0.1732), 'map_large': tensor(0.3502), 'mar_1': tensor(0.2233), 'mar_10': tensor(0.3121), 'mar_100': tensor(0.3314), 'mar_small': tensor(0.0794), 'mar_medium': tensor(0.2960), 'mar_large': tensor(0.4673), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 18:34:58,105 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2220, mAR@100: 0.3314
+2025-09-08 18:34:58,105 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:34:58,334 - INFO - Nuovo mAP migliore: 0.2220 all'epoca 10 del fine-tuning.
+2025-09-08 18:42:42,923 - INFO - Epoca [1/1], Perdita media: 3.8739
+2025-09-08 18:42:42,924 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:43:30,761 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2270), 'map_50': tensor(0.3906), 'map_75': tensor(0.2402), 'map_small': tensor(0.0343), 'map_medium': tensor(0.1799), 'map_large': tensor(0.3630), 'mar_1': tensor(0.2259), 'mar_10': tensor(0.3158), 'mar_100': tensor(0.3355), 'mar_small': tensor(0.0804), 'mar_medium': tensor(0.2948), 'mar_large': tensor(0.4819), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-08 18:43:30,762 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2270, mAR@100: 0.3355
+2025-09-08 18:43:30,762 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:43:30,987 - INFO - Nuovo mAP migliore: 0.2270 all'epoca 11 del fine-tuning.
+2025-09-08 18:51:02,763 - INFO - Epoca [1/1], Perdita media: 3.8208
+2025-09-08 18:51:02,763 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 18:51:52,855 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2182), 'map_50': tensor(0.3869), 'map_75': tensor(0.2336), 'map_small': tensor(0.0340), 'map_medium': tensor(0.1777), 'map_large': tensor(0.3462), 'mar_1': tensor(0.2227), 'mar_10': tensor(0.3079), 'mar_100': tensor(0.3279), 'mar_small': tensor(0.0867), 'mar_medium': tensor(0.2918), 'mar_large': tensor(0.4696), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 18:51:52,855 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2182, mAR@100: 0.3279
+2025-09-08 18:51:52,855 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 18:59:26,063 - INFO - Epoca [1/1], Perdita media: 3.7660
+2025-09-08 18:59:26,063 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:00:09,299 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2164), 'map_50': tensor(0.3886), 'map_75': tensor(0.2260), 'map_small': tensor(0.0320), 'map_medium': tensor(0.1773), 'map_large': tensor(0.3465), 'mar_1': tensor(0.2240), 'mar_10': tensor(0.3096), 'mar_100': tensor(0.3273), 'mar_small': tensor(0.0820), 'mar_medium': tensor(0.2895), 'mar_large': tensor(0.4721), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:00:09,300 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2164, mAR@100: 0.3273
+2025-09-08 19:00:09,300 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:07:39,645 - INFO - Epoca [1/1], Perdita media: 3.7086
+2025-09-08 19:07:39,645 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:08:27,854 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2205), 'map_50': tensor(0.3842), 'map_75': tensor(0.2310), 'map_small': tensor(0.0298), 'map_medium': tensor(0.1724), 'map_large': tensor(0.3553), 'mar_1': tensor(0.2317), 'mar_10': tensor(0.3144), 'mar_100': tensor(0.3312), 'mar_small': tensor(0.0780), 'mar_medium': tensor(0.2850), 'mar_large': tensor(0.4778), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:08:27,854 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2205, mAR@100: 0.3312
+2025-09-08 19:08:27,854 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:15:57,890 - INFO - Epoca [1/1], Perdita media: 3.6601
+2025-09-08 19:15:57,891 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:16:49,870 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2172), 'map_50': tensor(0.3831), 'map_75': tensor(0.2356), 'map_small': tensor(0.0400), 'map_medium': tensor(0.1703), 'map_large': tensor(0.3519), 'mar_1': tensor(0.2253), 'mar_10': tensor(0.3148), 'mar_100': tensor(0.3327), 'mar_small': tensor(0.0851), 'mar_medium': tensor(0.2912), 'mar_large': tensor(0.4870), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:16:49,870 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2172, mAR@100: 0.3327
+2025-09-08 19:16:49,870 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:24:19,500 - INFO - Epoca [1/1], Perdita media: 3.6193
+2025-09-08 19:24:19,501 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:25:04,410 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2190), 'map_50': tensor(0.3777), 'map_75': tensor(0.2232), 'map_small': tensor(0.0385), 'map_medium': tensor(0.1696), 'map_large': tensor(0.3581), 'mar_1': tensor(0.2233), 'mar_10': tensor(0.3112), 'mar_100': tensor(0.3276), 'mar_small': tensor(0.0811), 'mar_medium': tensor(0.2867), 'mar_large': tensor(0.4782), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:25:04,410 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2190, mAR@100: 0.3276
+2025-09-08 19:25:04,410 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:32:33,911 - INFO - Epoca [1/1], Perdita media: 3.5769
+2025-09-08 19:32:33,911 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:33:17,669 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2197), 'map_50': tensor(0.3816), 'map_75': tensor(0.2330), 'map_small': tensor(0.0314), 'map_medium': tensor(0.1651), 'map_large': tensor(0.3551), 'mar_1': tensor(0.2221), 'mar_10': tensor(0.3097), 'mar_100': tensor(0.3268), 'mar_small': tensor(0.0792), 'mar_medium': tensor(0.2789), 'mar_large': tensor(0.4709), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:33:17,670 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2197, mAR@100: 0.3268
+2025-09-08 19:33:17,670 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:40:55,648 - INFO - Epoca [1/1], Perdita media: 3.5297
+2025-09-08 19:40:55,654 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:41:46,015 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2210), 'map_50': tensor(0.3795), 'map_75': tensor(0.2359), 'map_small': tensor(0.0431), 'map_medium': tensor(0.1717), 'map_large': tensor(0.3540), 'mar_1': tensor(0.2291), 'mar_10': tensor(0.3124), 'mar_100': tensor(0.3282), 'mar_small': tensor(0.0856), 'mar_medium': tensor(0.2810), 'mar_large': tensor(0.4729), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-08 19:41:46,015 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2210, mAR@100: 0.3282
+2025-09-08 19:41:46,015 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:49:24,882 - INFO - Epoca [1/1], Perdita media: 3.5019
+2025-09-08 19:49:24,882 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:50:06,485 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2197), 'map_50': tensor(0.3794), 'map_75': tensor(0.2389), 'map_small': tensor(0.0330), 'map_medium': tensor(0.1665), 'map_large': tensor(0.3606), 'mar_1': tensor(0.2247), 'mar_10': tensor(0.3109), 'mar_100': tensor(0.3288), 'mar_small': tensor(0.0782), 'mar_medium': tensor(0.2820), 'mar_large': tensor(0.4798), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:50:06,485 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2197, mAR@100: 0.3288
+2025-09-08 19:50:06,485 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 19:57:47,088 - INFO - Epoca [1/1], Perdita media: 3.4677
+2025-09-08 19:57:47,090 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 19:58:49,308 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2199), 'map_50': tensor(0.3764), 'map_75': tensor(0.2320), 'map_small': tensor(0.0321), 'map_medium': tensor(0.1707), 'map_large': tensor(0.3559), 'mar_1': tensor(0.2249), 'mar_10': tensor(0.3095), 'mar_100': tensor(0.3251), 'mar_small': tensor(0.0711), 'mar_medium': tensor(0.2861), 'mar_large': tensor(0.4679), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 19:58:49,308 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2199, mAR@100: 0.3251
+2025-09-08 19:58:49,308 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:06:35,486 - INFO - Epoca [1/1], Perdita media: 3.4248
+2025-09-08 20:06:35,487 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:07:26,927 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2223), 'map_50': tensor(0.3834), 'map_75': tensor(0.2387), 'map_small': tensor(0.0251), 'map_medium': tensor(0.1618), 'map_large': tensor(0.3604), 'mar_1': tensor(0.2268), 'mar_10': tensor(0.3138), 'mar_100': tensor(0.3299), 'mar_small': tensor(0.0699), 'mar_medium': tensor(0.2786), 'mar_large': tensor(0.4830), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-08 20:07:26,927 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2223, mAR@100: 0.3299
+2025-09-08 20:07:26,927 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:07:26,927 - INFO - Early stopping attivato. mAP migliore raggiunto: 0.2270
+2025-09-08 20:07:27,139 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:08:06,121 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.2270), 'map_50': tensor(0.3906), 'map_75': tensor(0.2402), 'map_small': tensor(0.0343), 'map_medium': tensor(0.1799), 'map_large': tensor(0.3630), 'mar_1': tensor(0.2259), 'mar_10': tensor(0.3158), 'mar_100': tensor(0.3355), 'mar_small': tensor(0.0804), 'mar_medium': tensor(0.2948), 'mar_large': tensor(0.4819), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:08:06,122 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.2270, mAR@100: 0.3355
+2025-09-08 20:08:06,122 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:10:48,005 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:11:58,217 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:13:36,517 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:15:22,818 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:16:55,958 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:18:28,303 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:19:35,947 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-08 20:22:34,944 - INFO - Epoca [1/1], Perdita media: 8.4614
+2025-09-08 20:27:32,497 - INFO - Epoca [1/1], Perdita media: 6.8350
+2025-09-08 20:27:32,498 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:28:18,508 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1108), 'map_50': tensor(0.2190), 'map_75': tensor(0.0899), 'map_small': tensor(0.0015), 'map_medium': tensor(0.0456), 'map_large': tensor(0.2187), 'mar_1': tensor(0.1411), 'mar_10': tensor(0.2236), 'mar_100': tensor(0.2480), 'mar_small': tensor(0.0044), 'mar_medium': tensor(0.1377), 'mar_large': tensor(0.4607), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:28:18,508 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1108, mAR@100: 0.2480
+2025-09-08 20:28:18,508 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:28:18,619 - INFO - Nuovo mAP migliore: 0.1108 all'epoca 1 del fine-tuning.
+2025-09-08 20:32:39,548 - INFO - Epoca [1/1], Perdita media: 6.2334
+2025-09-08 20:32:39,549 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:33:25,967 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1198), 'map_50': tensor(0.2318), 'map_75': tensor(0.1070), 'map_small': tensor(0.0006), 'map_medium': tensor(0.0508), 'map_large': tensor(0.2313), 'mar_1': tensor(0.1459), 'mar_10': tensor(0.2267), 'mar_100': tensor(0.2509), 'mar_small': tensor(0.0032), 'mar_medium': tensor(0.1424), 'mar_large': tensor(0.4690), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:33:25,967 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1198, mAR@100: 0.2509
+2025-09-08 20:33:25,967 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:33:26,093 - INFO - Nuovo mAP migliore: 0.1198 all'epoca 2 del fine-tuning.
+2025-09-08 20:37:40,145 - INFO - Epoca [1/1], Perdita media: 6.0516
+2025-09-08 20:37:40,146 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:38:26,855 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1249), 'map_50': tensor(0.2444), 'map_75': tensor(0.1097), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0548), 'map_large': tensor(0.2321), 'mar_1': tensor(0.1456), 'mar_10': tensor(0.2268), 'mar_100': tensor(0.2504), 'mar_small': tensor(0.0038), 'mar_medium': tensor(0.1434), 'mar_large': tensor(0.4660), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:38:26,855 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1249, mAR@100: 0.2504
+2025-09-08 20:38:26,855 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:38:26,968 - INFO - Nuovo mAP migliore: 0.1249 all'epoca 3 del fine-tuning.
+2025-09-08 20:42:40,529 - INFO - Epoca [1/1], Perdita media: 5.9855
+2025-09-08 20:42:40,530 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:43:30,028 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1251), 'map_50': tensor(0.2415), 'map_75': tensor(0.1117), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0546), 'map_large': tensor(0.2347), 'mar_1': tensor(0.1446), 'mar_10': tensor(0.2295), 'mar_100': tensor(0.2537), 'mar_small': tensor(0.0036), 'mar_medium': tensor(0.1466), 'mar_large': tensor(0.4679), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:43:30,029 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1251, mAR@100: 0.2537
+2025-09-08 20:43:30,029 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:43:30,138 - INFO - Nuovo mAP migliore: 0.1251 all'epoca 4 del fine-tuning.
+2025-09-08 20:43:30,275 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 20:44:24,133 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1251), 'map_50': tensor(0.2415), 'map_75': tensor(0.1117), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0546), 'map_large': tensor(0.2347), 'mar_1': tensor(0.1446), 'mar_10': tensor(0.2295), 'mar_100': tensor(0.2537), 'mar_small': tensor(0.0036), 'mar_medium': tensor(0.1466), 'mar_large': tensor(0.4679), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 20:44:24,133 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1251, mAR@100: 0.2537
+2025-09-08 20:44:24,133 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 20:46:45,758 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=100, lr=0.001
+2025-09-08 20:49:31,573 - INFO - Epoca [1/20], Perdita media: 8.4416
+2025-09-08 20:52:23,894 - INFO - Epoca [2/20], Perdita media: 8.0533
+2025-09-08 20:55:10,857 - INFO - Epoca [3/20], Perdita media: 7.9869
+2025-09-08 21:01:24,632 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=100, lr=0.001
+2025-09-08 21:05:23,592 - INFO - Epoca [1/20], Perdita media: 8.4714
+2025-09-08 21:08:46,533 - INFO - Epoca [2/20], Perdita media: 8.0449
+2025-09-08 21:11:36,448 - INFO - Epoca [3/20], Perdita media: 7.9978
+2025-09-08 21:14:13,758 - INFO - Epoca [4/20], Perdita media: 7.9355
+2025-09-08 21:16:49,988 - INFO - Epoca [5/20], Perdita media: 7.8811
+2025-09-08 21:19:27,462 - INFO - Epoca [6/20], Perdita media: 7.8534
+2025-09-08 21:22:03,821 - INFO - Epoca [7/20], Perdita media: 7.8684
+2025-09-08 21:25:09,613 - INFO - Epoca [8/20], Perdita media: 7.8283
+2025-09-08 21:27:47,667 - INFO - Epoca [9/20], Perdita media: 7.7878
+2025-09-08 21:30:24,498 - INFO - Epoca [10/20], Perdita media: 7.7798
+2025-09-08 21:33:00,250 - INFO - Epoca [11/20], Perdita media: 7.7445
+2025-09-08 21:35:38,217 - INFO - Epoca [12/20], Perdita media: 7.7553
+2025-09-08 21:38:15,044 - INFO - Epoca [13/20], Perdita media: 7.7308
+2025-09-08 21:40:50,992 - INFO - Epoca [14/20], Perdita media: 7.7245
+2025-09-08 21:43:29,381 - INFO - Epoca [15/20], Perdita media: 7.7617
+2025-09-08 21:46:05,967 - INFO - Epoca [16/20], Perdita media: 7.6891
+2025-09-08 21:48:42,189 - INFO - Epoca [17/20], Perdita media: 7.7080
+2025-09-08 21:51:19,521 - INFO - Epoca [18/20], Perdita media: 7.7090
+2025-09-08 21:53:57,390 - INFO - Epoca [19/20], Perdita media: 7.7269
+2025-09-08 21:56:34,491 - INFO - Epoca [20/20], Perdita media: 7.7036
+2025-09-08 22:00:16,691 - INFO - Epoca [1/1], Perdita media: 6.4271
+2025-09-08 22:00:16,692 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:00:59,496 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1148), 'map_50': tensor(0.2392), 'map_75': tensor(0.0984), 'map_small': tensor(0.0002), 'map_medium': tensor(0.0408), 'map_large': tensor(0.2394), 'mar_1': tensor(0.1376), 'mar_10': tensor(0.2148), 'mar_100': tensor(0.2328), 'mar_small': tensor(0.0023), 'mar_medium': tensor(0.1107), 'mar_large': tensor(0.4412), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:00:59,496 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1148, mAR@100: 0.2328
+2025-09-08 22:00:59,496 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:00:59,595 - INFO - Nuovo mAP migliore: 0.1148 all'epoca 1 del fine-tuning.
+2025-09-08 22:04:35,880 - INFO - Epoca [1/1], Perdita media: 5.8810
+2025-09-08 22:04:35,881 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:05:14,689 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1244), 'map_50': tensor(0.2502), 'map_75': tensor(0.1067), 'map_small': tensor(0.0004), 'map_medium': tensor(0.0504), 'map_large': tensor(0.2566), 'mar_1': tensor(0.1462), 'mar_10': tensor(0.2249), 'mar_100': tensor(0.2436), 'mar_small': tensor(0.0030), 'mar_medium': tensor(0.1185), 'mar_large': tensor(0.4705), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:05:14,689 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1244, mAR@100: 0.2436
+2025-09-08 22:05:14,689 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:05:14,805 - INFO - Nuovo mAP migliore: 0.1244 all'epoca 2 del fine-tuning.
+2025-09-08 22:08:52,753 - INFO - Epoca [1/1], Perdita media: 5.6286
+2025-09-08 22:08:52,754 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:09:34,418 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1331), 'map_50': tensor(0.2603), 'map_75': tensor(0.1169), 'map_small': tensor(0.0006), 'map_medium': tensor(0.0527), 'map_large': tensor(0.2660), 'mar_1': tensor(0.1537), 'mar_10': tensor(0.2316), 'mar_100': tensor(0.2492), 'mar_small': tensor(0.0034), 'mar_medium': tensor(0.1245), 'mar_large': tensor(0.4766), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:09:34,418 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1331, mAR@100: 0.2492
+2025-09-08 22:09:34,418 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:09:34,536 - INFO - Nuovo mAP migliore: 0.1331 all'epoca 3 del fine-tuning.
+2025-09-08 22:13:20,650 - INFO - Epoca [1/1], Perdita media: 5.4923
+2025-09-08 22:13:20,651 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:14:01,309 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1400), 'map_50': tensor(0.2670), 'map_75': tensor(0.1252), 'map_small': tensor(0.0006), 'map_medium': tensor(0.0577), 'map_large': tensor(0.2793), 'mar_1': tensor(0.1539), 'mar_10': tensor(0.2337), 'mar_100': tensor(0.2516), 'mar_small': tensor(0.0038), 'mar_medium': tensor(0.1287), 'mar_large': tensor(0.4866), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:14:01,310 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1400, mAR@100: 0.2516
+2025-09-08 22:14:01,310 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:14:01,423 - INFO - Nuovo mAP migliore: 0.1400 all'epoca 4 del fine-tuning.
+2025-09-08 22:17:41,268 - INFO - Epoca [1/1], Perdita media: 5.4054
+2025-09-08 22:17:41,268 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:18:24,210 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1411), 'map_50': tensor(0.2688), 'map_75': tensor(0.1374), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0605), 'map_large': tensor(0.2736), 'mar_1': tensor(0.1544), 'mar_10': tensor(0.2361), 'mar_100': tensor(0.2520), 'mar_small': tensor(0.0040), 'mar_medium': tensor(0.1336), 'mar_large': tensor(0.4866), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:18:24,210 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1411, mAR@100: 0.2520
+2025-09-08 22:18:24,210 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:18:24,322 - INFO - Nuovo mAP migliore: 0.1411 all'epoca 5 del fine-tuning.
+2025-09-08 22:22:06,753 - INFO - Epoca [1/1], Perdita media: 5.3237
+2025-09-08 22:22:06,753 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:22:53,493 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1453), 'map_50': tensor(0.2720), 'map_75': tensor(0.1341), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0625), 'map_large': tensor(0.2870), 'mar_1': tensor(0.1578), 'mar_10': tensor(0.2404), 'mar_100': tensor(0.2572), 'mar_small': tensor(0.0038), 'mar_medium': tensor(0.1412), 'mar_large': tensor(0.4942), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:22:53,493 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1453, mAR@100: 0.2572
+2025-09-08 22:22:53,493 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:22:53,603 - INFO - Nuovo mAP migliore: 0.1453 all'epoca 6 del fine-tuning.
+2025-09-08 22:26:33,883 - INFO - Epoca [1/1], Perdita media: 5.2373
+2025-09-08 22:26:33,884 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:27:13,177 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1484), 'map_50': tensor(0.2755), 'map_75': tensor(0.1466), 'map_small': tensor(0.0011), 'map_medium': tensor(0.0650), 'map_large': tensor(0.2935), 'mar_1': tensor(0.1606), 'mar_10': tensor(0.2433), 'mar_100': tensor(0.2603), 'mar_small': tensor(0.0042), 'mar_medium': tensor(0.1425), 'mar_large': tensor(0.4982), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:27:13,177 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1484, mAR@100: 0.2603
+2025-09-08 22:27:13,178 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:27:13,298 - INFO - Nuovo mAP migliore: 0.1484 all'epoca 7 del fine-tuning.
+2025-09-08 22:30:49,657 - INFO - Epoca [1/1], Perdita media: 5.2072
+2025-09-08 22:30:49,658 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:31:33,045 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1499), 'map_50': tensor(0.2780), 'map_75': tensor(0.1436), 'map_small': tensor(0.0011), 'map_medium': tensor(0.0647), 'map_large': tensor(0.2940), 'mar_1': tensor(0.1602), 'mar_10': tensor(0.2402), 'mar_100': tensor(0.2570), 'mar_small': tensor(0.0042), 'mar_medium': tensor(0.1379), 'mar_large': tensor(0.4935), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:31:33,045 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1499, mAR@100: 0.2570
+2025-09-08 22:31:33,045 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:31:33,164 - INFO - Nuovo mAP migliore: 0.1499 all'epoca 8 del fine-tuning.
+2025-09-08 22:35:08,770 - INFO - Epoca [1/1], Perdita media: 5.1459
+2025-09-08 22:35:08,771 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:35:51,887 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1522), 'map_50': tensor(0.2791), 'map_75': tensor(0.1536), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0630), 'map_large': tensor(0.2953), 'mar_1': tensor(0.1616), 'mar_10': tensor(0.2449), 'mar_100': tensor(0.2612), 'mar_small': tensor(0.0037), 'mar_medium': tensor(0.1387), 'mar_large': tensor(0.5017), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:35:51,887 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1522, mAR@100: 0.2612
+2025-09-08 22:35:51,887 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:35:51,993 - INFO - Nuovo mAP migliore: 0.1522 all'epoca 9 del fine-tuning.
+2025-09-08 22:39:27,936 - INFO - Epoca [1/1], Perdita media: 5.1251
+2025-09-08 22:39:27,936 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:40:06,903 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1527), 'map_50': tensor(0.2796), 'map_75': tensor(0.1466), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0627), 'map_large': tensor(0.2984), 'mar_1': tensor(0.1651), 'mar_10': tensor(0.2436), 'mar_100': tensor(0.2614), 'mar_small': tensor(0.0037), 'mar_medium': tensor(0.1403), 'mar_large': tensor(0.5021), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:40:06,904 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1527, mAR@100: 0.2614
+2025-09-08 22:40:06,904 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:40:07,012 - INFO - Nuovo mAP migliore: 0.1527 all'epoca 10 del fine-tuning.
+2025-09-08 22:43:45,162 - INFO - Epoca [1/1], Perdita media: 5.0755
+2025-09-08 22:43:45,163 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:44:33,476 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1510), 'map_50': tensor(0.2780), 'map_75': tensor(0.1502), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0609), 'map_large': tensor(0.2969), 'mar_1': tensor(0.1649), 'mar_10': tensor(0.2419), 'mar_100': tensor(0.2596), 'mar_small': tensor(0.0031), 'mar_medium': tensor(0.1379), 'mar_large': tensor(0.4991), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:44:33,476 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1510, mAR@100: 0.2596
+2025-09-08 22:44:33,476 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:48:18,033 - INFO - Epoca [1/1], Perdita media: 5.0349
+2025-09-08 22:48:18,033 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:48:59,828 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1528), 'map_50': tensor(0.2792), 'map_75': tensor(0.1415), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0633), 'map_large': tensor(0.2973), 'mar_1': tensor(0.1668), 'mar_10': tensor(0.2439), 'mar_100': tensor(0.2622), 'mar_small': tensor(0.0040), 'mar_medium': tensor(0.1442), 'mar_large': tensor(0.4994), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:48:59,828 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1528, mAR@100: 0.2622
+2025-09-08 22:48:59,828 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:48:59,939 - INFO - Nuovo mAP migliore: 0.1528 all'epoca 12 del fine-tuning.
+2025-09-08 22:52:42,548 - INFO - Epoca [1/1], Perdita media: 5.0017
+2025-09-08 22:52:42,548 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:53:25,511 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1522), 'map_50': tensor(0.2778), 'map_75': tensor(0.1442), 'map_small': tensor(0.0007), 'map_medium': tensor(0.0640), 'map_large': tensor(0.2963), 'mar_1': tensor(0.1669), 'mar_10': tensor(0.2442), 'mar_100': tensor(0.2639), 'mar_small': tensor(0.0034), 'mar_medium': tensor(0.1445), 'mar_large': tensor(0.4996), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:53:25,511 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1522, mAR@100: 0.2639
+2025-09-08 22:53:25,511 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:57:05,804 - INFO - Epoca [1/1], Perdita media: 4.9801
+2025-09-08 22:57:05,805 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 22:57:47,076 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1559), 'map_50': tensor(0.2781), 'map_75': tensor(0.1522), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0639), 'map_large': tensor(0.3043), 'mar_1': tensor(0.1708), 'mar_10': tensor(0.2478), 'mar_100': tensor(0.2668), 'mar_small': tensor(0.0040), 'mar_medium': tensor(0.1474), 'mar_large': tensor(0.5073), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 22:57:47,076 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1559, mAR@100: 0.2668
+2025-09-08 22:57:47,076 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 22:57:47,188 - INFO - Nuovo mAP migliore: 0.1559 all'epoca 14 del fine-tuning.
+2025-09-08 23:01:24,963 - INFO - Epoca [1/1], Perdita media: 4.9321
+2025-09-08 23:01:24,964 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:02:07,238 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1536), 'map_50': tensor(0.2764), 'map_75': tensor(0.1528), 'map_small': tensor(0.0011), 'map_medium': tensor(0.0641), 'map_large': tensor(0.2972), 'mar_1': tensor(0.1700), 'mar_10': tensor(0.2468), 'mar_100': tensor(0.2663), 'mar_small': tensor(0.0041), 'mar_medium': tensor(0.1503), 'mar_large': tensor(0.5000), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:02:07,238 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1536, mAR@100: 0.2663
+2025-09-08 23:02:07,238 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:05:43,563 - INFO - Epoca [1/1], Perdita media: 4.9171
+2025-09-08 23:05:43,564 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:06:28,084 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1531), 'map_50': tensor(0.2790), 'map_75': tensor(0.1506), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0640), 'map_large': tensor(0.2956), 'mar_1': tensor(0.1695), 'mar_10': tensor(0.2430), 'mar_100': tensor(0.2635), 'mar_small': tensor(0.0033), 'mar_medium': tensor(0.1492), 'mar_large': tensor(0.4959), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:06:28,084 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1531, mAR@100: 0.2635
+2025-09-08 23:06:28,084 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:10:06,254 - INFO - Epoca [1/1], Perdita media: 4.8980
+2025-09-08 23:10:06,255 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:10:53,017 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1524), 'map_50': tensor(0.2805), 'map_75': tensor(0.1489), 'map_small': tensor(0.0007), 'map_medium': tensor(0.0623), 'map_large': tensor(0.2963), 'mar_1': tensor(0.1680), 'mar_10': tensor(0.2451), 'mar_100': tensor(0.2651), 'mar_small': tensor(0.0040), 'mar_medium': tensor(0.1491), 'mar_large': tensor(0.5025), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:10:53,018 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1524, mAR@100: 0.2651
+2025-09-08 23:10:53,018 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:14:30,687 - INFO - Epoca [1/1], Perdita media: 4.8750
+2025-09-08 23:14:30,687 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:15:09,489 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1590), 'map_50': tensor(0.2822), 'map_75': tensor(0.1592), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0686), 'map_large': tensor(0.3026), 'mar_1': tensor(0.1709), 'mar_10': tensor(0.2471), 'mar_100': tensor(0.2657), 'mar_small': tensor(0.0030), 'mar_medium': tensor(0.1504), 'mar_large': tensor(0.5018), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:15:09,490 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1590, mAR@100: 0.2657
+2025-09-08 23:15:09,490 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:15:09,596 - INFO - Nuovo mAP migliore: 0.1590 all'epoca 18 del fine-tuning.
+2025-09-08 23:18:48,424 - INFO - Epoca [1/1], Perdita media: 4.8754
+2025-09-08 23:18:48,425 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:19:34,546 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1550), 'map_50': tensor(0.2789), 'map_75': tensor(0.1510), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0647), 'map_large': tensor(0.2960), 'mar_1': tensor(0.1671), 'mar_10': tensor(0.2457), 'mar_100': tensor(0.2649), 'mar_small': tensor(0.0037), 'mar_medium': tensor(0.1474), 'mar_large': tensor(0.4979), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:19:34,546 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1550, mAR@100: 0.2649
+2025-09-08 23:19:34,546 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:23:14,149 - INFO - Epoca [1/1], Perdita media: 4.8324
+2025-09-08 23:23:14,149 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:23:54,986 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1566), 'map_50': tensor(0.2819), 'map_75': tensor(0.1534), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0651), 'map_large': tensor(0.3002), 'mar_1': tensor(0.1697), 'mar_10': tensor(0.2458), 'mar_100': tensor(0.2649), 'mar_small': tensor(0.0035), 'mar_medium': tensor(0.1464), 'mar_large': tensor(0.5006), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:23:54,986 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1566, mAR@100: 0.2649
+2025-09-08 23:23:54,986 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:27:33,963 - INFO - Epoca [1/1], Perdita media: 4.8018
+2025-09-08 23:27:33,963 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:28:13,055 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1560), 'map_50': tensor(0.2800), 'map_75': tensor(0.1482), 'map_small': tensor(0.0007), 'map_medium': tensor(0.0691), 'map_large': tensor(0.2988), 'mar_1': tensor(0.1697), 'mar_10': tensor(0.2492), 'mar_100': tensor(0.2682), 'mar_small': tensor(0.0037), 'mar_medium': tensor(0.1559), 'mar_large': tensor(0.5028), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:28:13,055 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1560, mAR@100: 0.2682
+2025-09-08 23:28:13,055 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:31:51,286 - INFO - Epoca [1/1], Perdita media: 4.7972
+2025-09-08 23:31:51,287 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:32:32,483 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1557), 'map_50': tensor(0.2810), 'map_75': tensor(0.1483), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0665), 'map_large': tensor(0.2985), 'mar_1': tensor(0.1696), 'mar_10': tensor(0.2445), 'mar_100': tensor(0.2651), 'mar_small': tensor(0.0045), 'mar_medium': tensor(0.1465), 'mar_large': tensor(0.5010), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:32:32,483 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1557, mAR@100: 0.2651
+2025-09-08 23:32:32,483 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:36:11,347 - INFO - Epoca [1/1], Perdita media: 4.7726
+2025-09-08 23:36:11,348 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:36:54,456 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1566), 'map_50': tensor(0.2799), 'map_75': tensor(0.1546), 'map_small': tensor(0.0006), 'map_medium': tensor(0.0703), 'map_large': tensor(0.3011), 'mar_1': tensor(0.1712), 'mar_10': tensor(0.2459), 'mar_100': tensor(0.2670), 'mar_small': tensor(0.0037), 'mar_medium': tensor(0.1527), 'mar_large': tensor(0.5004), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:36:54,456 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1566, mAR@100: 0.2670
+2025-09-08 23:36:54,456 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:40:34,478 - INFO - Epoca [1/1], Perdita media: 4.7488
+2025-09-08 23:40:34,479 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:41:13,159 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1560), 'map_50': tensor(0.2796), 'map_75': tensor(0.1553), 'map_small': tensor(0.0011), 'map_medium': tensor(0.0683), 'map_large': tensor(0.2979), 'mar_1': tensor(0.1677), 'mar_10': tensor(0.2462), 'mar_100': tensor(0.2680), 'mar_small': tensor(0.0039), 'mar_medium': tensor(0.1519), 'mar_large': tensor(0.5041), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:41:13,159 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1560, mAR@100: 0.2680
+2025-09-08 23:41:13,159 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:44:50,050 - INFO - Epoca [1/1], Perdita media: 4.7586
+2025-09-08 23:44:50,051 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:45:31,392 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1556), 'map_50': tensor(0.2781), 'map_75': tensor(0.1509), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0632), 'map_large': tensor(0.2975), 'mar_1': tensor(0.1689), 'mar_10': tensor(0.2465), 'mar_100': tensor(0.2673), 'mar_small': tensor(0.0046), 'mar_medium': tensor(0.1489), 'mar_large': tensor(0.5006), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:45:31,392 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1556, mAR@100: 0.2673
+2025-09-08 23:45:31,392 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:49:10,109 - INFO - Epoca [1/1], Perdita media: 4.7324
+2025-09-08 23:49:10,109 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:49:51,220 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1566), 'map_50': tensor(0.2801), 'map_75': tensor(0.1525), 'map_small': tensor(0.0009), 'map_medium': tensor(0.0674), 'map_large': tensor(0.3003), 'mar_1': tensor(0.1701), 'mar_10': tensor(0.2511), 'mar_100': tensor(0.2707), 'mar_small': tensor(0.0044), 'mar_medium': tensor(0.1546), 'mar_large': tensor(0.5056), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:49:51,220 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1566, mAR@100: 0.2707
+2025-09-08 23:49:51,220 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:53:32,118 - INFO - Epoca [1/1], Perdita media: 4.7200
+2025-09-08 23:53:32,118 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:54:11,354 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1561), 'map_50': tensor(0.2815), 'map_75': tensor(0.1491), 'map_small': tensor(0.0013), 'map_medium': tensor(0.0716), 'map_large': tensor(0.2971), 'mar_1': tensor(0.1685), 'mar_10': tensor(0.2482), 'mar_100': tensor(0.2674), 'mar_small': tensor(0.0044), 'mar_medium': tensor(0.1537), 'mar_large': tensor(0.4993), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:54:11,354 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1561, mAR@100: 0.2674
+2025-09-08 23:54:11,354 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:57:49,809 - INFO - Epoca [1/1], Perdita media: 4.6936
+2025-09-08 23:57:49,810 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:58:38,721 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1556), 'map_50': tensor(0.2774), 'map_75': tensor(0.1506), 'map_small': tensor(0.0011), 'map_medium': tensor(0.0706), 'map_large': tensor(0.2910), 'mar_1': tensor(0.1705), 'mar_10': tensor(0.2494), 'mar_100': tensor(0.2697), 'mar_small': tensor(0.0039), 'mar_medium': tensor(0.1556), 'mar_large': tensor(0.4993), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,  43,
+         44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,
+         58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,
+         72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,
+         86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99,
+        100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:58:38,722 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1556, mAR@100: 0.2697
+2025-09-08 23:58:38,722 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-08 23:58:38,722 - INFO - Early stopping attivato. mAP migliore raggiunto: 0.1590
+2025-09-08 23:58:38,853 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-08 23:59:21,181 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1590), 'map_50': tensor(0.2822), 'map_75': tensor(0.1592), 'map_small': tensor(0.0008), 'map_medium': tensor(0.0686), 'map_large': tensor(0.3026), 'mar_1': tensor(0.1709), 'mar_10': tensor(0.2471), 'mar_100': tensor(0.2657), 'mar_small': tensor(0.0030), 'mar_medium': tensor(0.1504), 'mar_large': tensor(0.5018), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  1,   2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
+         15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,
+         29,  30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  40,  41,  42,
+         43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,
+         57,  58,  59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,
+         71,  72,  73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,
+         85,  86,  87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,
+         99, 100, 101, 102, 103], dtype=torch.int32)}
+2025-09-08 23:59:21,181 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1590, mAR@100: 0.2657
+2025-09-08 23:59:21,181 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 12:02:54,102 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=10, lr=0.001
+2025-09-09 12:05:52,388 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=10, lr=0.001
+2025-09-09 12:11:26,842 - INFO - Epoca [1/2], Perdita media: 9.3005
+2025-09-09 12:17:19,078 - INFO - Epoca [2/2], Perdita media: 8.9517
+2025-09-09 12:26:50,110 - INFO - Epoca [1/1], Perdita media: 8.6306
+2025-09-09 12:26:50,111 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 12:38:54,604 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-09 12:43:13,580 - INFO - Epoca [1/1], Perdita media: 14.1751
+2025-09-09 12:51:21,148 - INFO - Epoca [1/1], Perdita media: 6.2309
+2025-09-09 12:51:21,148 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 12:52:12,221 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1622), 'map_50': tensor(0.3398), 'map_75': tensor(0.1389), 'map_small': tensor(0.0204), 'map_medium': tensor(0.1171), 'map_large': tensor(0.2727), 'mar_1': tensor(0.1699), 'mar_10': tensor(0.2493), 'mar_100': tensor(0.2667), 'mar_small': tensor(0.0550), 'mar_medium': tensor(0.2269), 'mar_large': tensor(0.3928), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  40,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 101, 102, 103],
+       dtype=torch.int32)}
+2025-09-09 12:52:12,221 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1622, mAR@100: 0.2667
+2025-09-09 12:52:12,221 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 12:52:12,421 - INFO - Nuovo mAP migliore: 0.1622 all'epoca 1 del fine-tuning.
+2025-09-09 13:00:20,461 - INFO - Epoca [1/1], Perdita media: 5.3501
+2025-09-09 13:00:20,462 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 13:01:08,136 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1773), 'map_50': tensor(0.3555), 'map_75': tensor(0.1630), 'map_small': tensor(0.0212), 'map_medium': tensor(0.1253), 'map_large': tensor(0.2991), 'mar_1': tensor(0.1820), 'mar_10': tensor(0.2675), 'mar_100': tensor(0.2862), 'mar_small': tensor(0.0586), 'mar_medium': tensor(0.2371), 'mar_large': tensor(0.4241), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  40,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-09 13:01:08,137 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1773, mAR@100: 0.2862
+2025-09-09 13:01:08,137 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 13:01:08,334 - INFO - Nuovo mAP migliore: 0.1773 all'epoca 2 del fine-tuning.
+2025-09-09 13:03:07,897 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-09 13:03:48,958 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-09 13:08:24,835 - INFO - Epoca [1/1], Perdita media: 14.2656
+2025-09-09 13:16:19,190 - INFO - Epoca [1/1], Perdita media: 6.1973
+2025-09-09 13:16:19,190 - INFO - --- INIZIO VALUTAZIONE (TTA) ---
+2025-09-09 13:17:28,568 - INFO - Valutazione TTA completata. Risultati mAP Dettagliati: {'map': tensor(0.1374), 'map_50': tensor(0.2656), 'map_75': tensor(0.1260), 'map_small': tensor(0.0243), 'map_medium': tensor(0.1143), 'map_large': tensor(0.2290), 'mar_1': tensor(0.1875), 'mar_10': tensor(0.2946), 'mar_100': tensor(0.3294), 'mar_small': tensor(0.0905), 'mar_medium': tensor(0.2876), 'mar_large': tensor(0.4650), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  66,  67,  68,  69,  70,  71,  72,
+         73,  74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,
+         87,  88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100,
+        101, 102, 103], dtype=torch.int32)}
+2025-09-09 13:17:28,568 - INFO - RIEPILOGO VALUTAZIONE TTA -> mAP: 0.1374, mAR@100: 0.3294
+2025-09-09 13:17:28,569 - INFO - --- VALUTAZIONE TTA TERMINATA ---
+
+2025-09-09 13:17:28,773 - INFO - Nuovo mAP migliore: 0.1374 all'epoca 1 del fine-tuning.
+2025-09-09 13:25:22,558 - INFO - Epoca [1/1], Perdita media: 5.3380
+2025-09-09 13:25:22,559 - INFO - --- INIZIO VALUTAZIONE (TTA) ---
+2025-09-09 13:26:36,655 - INFO - Valutazione TTA completata. Risultati mAP Dettagliati: {'map': tensor(0.1564), 'map_50': tensor(0.2773), 'map_75': tensor(0.1667), 'map_small': tensor(0.0214), 'map_medium': tensor(0.1285), 'map_large': tensor(0.2671), 'mar_1': tensor(0.2022), 'mar_10': tensor(0.3059), 'mar_100': tensor(0.3411), 'mar_small': tensor(0.0931), 'mar_medium': tensor(0.2952), 'mar_large': tensor(0.4889), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-09 13:26:36,656 - INFO - RIEPILOGO VALUTAZIONE TTA -> mAP: 0.1564, mAR@100: 0.3411
+2025-09-09 13:26:36,656 - INFO - --- VALUTAZIONE TTA TERMINATA ---
+
+2025-09-09 13:26:36,869 - INFO - Nuovo mAP migliore: 0.1564 all'epoca 2 del fine-tuning.
+2025-09-09 13:34:26,769 - INFO - Epoca [1/1], Perdita media: 4.9919
+2025-09-09 13:34:26,770 - INFO - --- INIZIO VALUTAZIONE (TTA) ---
+2025-09-09 13:35:36,324 - INFO - Valutazione TTA completata. Risultati mAP Dettagliati: {'map': tensor(0.1671), 'map_50': tensor(0.2902), 'map_75': tensor(0.1719), 'map_small': tensor(0.0245), 'map_medium': tensor(0.1359), 'map_large': tensor(0.2934), 'mar_1': tensor(0.2091), 'mar_10': tensor(0.3155), 'mar_100': tensor(0.3513), 'mar_small': tensor(0.0936), 'mar_medium': tensor(0.3000), 'mar_large': tensor(0.5153), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-09 13:35:36,324 - INFO - RIEPILOGO VALUTAZIONE TTA -> mAP: 0.1671, mAR@100: 0.3513
+2025-09-09 13:35:36,324 - INFO - --- VALUTAZIONE TTA TERMINATA ---
+
+2025-09-09 13:35:36,543 - INFO - Nuovo mAP migliore: 0.1671 all'epoca 3 del fine-tuning.
+2025-09-09 13:43:27,690 - INFO - Epoca [1/1], Perdita media: 4.8200
+2025-09-09 13:43:27,691 - INFO - --- INIZIO VALUTAZIONE (TTA) ---
+2025-09-09 13:44:40,365 - INFO - Valutazione TTA completata. Risultati mAP Dettagliati: {'map': tensor(0.1638), 'map_50': tensor(0.2853), 'map_75': tensor(0.1689), 'map_small': tensor(0.0240), 'map_medium': tensor(0.1389), 'map_large': tensor(0.2867), 'mar_1': tensor(0.2092), 'mar_10': tensor(0.3219), 'mar_100': tensor(0.3547), 'mar_small': tensor(0.0873), 'mar_medium': tensor(0.3033), 'mar_large': tensor(0.5175), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-09 13:44:40,365 - INFO - RIEPILOGO VALUTAZIONE TTA -> mAP: 0.1638, mAR@100: 0.3547
+2025-09-09 13:44:40,365 - INFO - --- VALUTAZIONE TTA TERMINATA ---
+
+2025-09-09 13:44:40,529 - INFO - --- INIZIO VALUTAZIONE (TTA) ---
+2025-09-09 13:45:52,336 - INFO - Valutazione TTA completata. Risultati mAP Dettagliati: {'map': tensor(0.1671), 'map_50': tensor(0.2902), 'map_75': tensor(0.1719), 'map_small': tensor(0.0245), 'map_medium': tensor(0.1359), 'map_large': tensor(0.2934), 'mar_1': tensor(0.2091), 'mar_10': tensor(0.3155), 'mar_100': tensor(0.3513), 'mar_small': tensor(0.0936), 'mar_medium': tensor(0.3000), 'mar_large': tensor(0.5153), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-09 13:45:52,336 - INFO - RIEPILOGO VALUTAZIONE TTA -> mAP: 0.1671, mAR@100: 0.3513
+2025-09-09 13:45:52,337 - INFO - --- VALUTAZIONE TTA TERMINATA ---
+
+2025-09-09 13:46:10,667 - INFO - Dispositivo: cuda, Parametri: batch_size=4, epochs=5, lr=0.001
+2025-09-09 13:50:42,994 - INFO - Epoca [1/1], Perdita media: 14.2155
+2025-09-09 13:58:34,706 - INFO - Epoca [1/1], Perdita media: 6.1784
+2025-09-09 13:58:34,707 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 13:59:21,214 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1637), 'map_50': tensor(0.3310), 'map_75': tensor(0.1374), 'map_small': tensor(0.0257), 'map_medium': tensor(0.1305), 'map_large': tensor(0.2718), 'mar_1': tensor(0.1781), 'mar_10': tensor(0.2675), 'mar_100': tensor(0.2861), 'mar_small': tensor(0.0617), 'mar_medium': tensor(0.2567), 'mar_large': tensor(0.4102), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-09 13:59:21,214 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1637, mAR@100: 0.2861
+2025-09-09 13:59:21,214 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 13:59:21,419 - INFO - Nuovo mAP migliore: 0.1637 all'epoca 1 del fine-tuning.
+2025-09-09 14:07:13,178 - INFO - Epoca [1/1], Perdita media: 5.3068
+2025-09-09 14:07:13,178 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 14:08:01,319 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1733), 'map_50': tensor(0.3422), 'map_75': tensor(0.1585), 'map_small': tensor(0.0336), 'map_medium': tensor(0.1326), 'map_large': tensor(0.2882), 'mar_1': tensor(0.1866), 'mar_10': tensor(0.2713), 'mar_100': tensor(0.2925), 'mar_small': tensor(0.0646), 'mar_medium': tensor(0.2451), 'mar_large': tensor(0.4320), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  35,  36,  37,  38,  39,  41,  42,  43,  44,
+         45,  46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,
+         59,  60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,
+         74,  75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,
+         88,  89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101,
+        102, 103], dtype=torch.int32)}
+2025-09-09 14:08:01,319 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1733, mAR@100: 0.2925
+2025-09-09 14:08:01,319 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 14:08:01,528 - INFO - Nuovo mAP migliore: 0.1733 all'epoca 2 del fine-tuning.
+2025-09-09 14:15:50,418 - INFO - Epoca [1/1], Perdita media: 4.9976
+2025-09-09 14:15:50,418 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 14:16:41,777 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1855), 'map_50': tensor(0.3560), 'map_75': tensor(0.1814), 'map_small': tensor(0.0249), 'map_medium': tensor(0.1452), 'map_large': tensor(0.3072), 'mar_1': tensor(0.1961), 'mar_10': tensor(0.2824), 'mar_100': tensor(0.3021), 'mar_small': tensor(0.0581), 'mar_medium': tensor(0.2612), 'mar_large': tensor(0.4413), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,  60,
+         61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,  75,
+         76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,  89,
+         90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102, 103],
+       dtype=torch.int32)}
+2025-09-09 14:16:41,777 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1855, mAR@100: 0.3021
+2025-09-09 14:16:41,778 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 14:16:41,998 - INFO - Nuovo mAP migliore: 0.1855 all'epoca 3 del fine-tuning.
+2025-09-09 14:24:14,500 - INFO - Epoca [1/1], Perdita media: 4.8177
+2025-09-09 14:24:14,501 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 14:25:02,689 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1944), 'map_50': tensor(0.3629), 'map_75': tensor(0.1895), 'map_small': tensor(0.0293), 'map_medium': tensor(0.1527), 'map_large': tensor(0.3180), 'mar_1': tensor(0.2031), 'mar_10': tensor(0.2905), 'mar_100': tensor(0.3131), 'mar_small': tensor(0.0644), 'mar_medium': tensor(0.2777), 'mar_large': tensor(0.4531), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-09 14:25:02,690 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1944, mAR@100: 0.3131
+2025-09-09 14:25:02,690 - INFO - --- VALUTAZIONE TERMINATA ---
+
+2025-09-09 14:25:02,905 - INFO - Nuovo mAP migliore: 0.1944 all'epoca 4 del fine-tuning.
+2025-09-09 14:25:03,046 - INFO - --- INIZIO VALUTAZIONE ---
+2025-09-09 14:25:50,887 - INFO - Valutazione completata. Risultati mAP Dettagliati: {'map': tensor(0.1944), 'map_50': tensor(0.3629), 'map_75': tensor(0.1895), 'map_small': tensor(0.0293), 'map_medium': tensor(0.1527), 'map_large': tensor(0.3180), 'mar_1': tensor(0.2031), 'mar_10': tensor(0.2905), 'mar_100': tensor(0.3131), 'mar_small': tensor(0.0644), 'mar_medium': tensor(0.2777), 'mar_large': tensor(0.4531), 'map_per_class': tensor(-1.), 'mar_100_per_class': tensor(-1.), 'classes': tensor([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,  15,
+         16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,
+         30,  31,  32,  33,  34,  36,  37,  38,  39,  41,  42,  43,  44,  45,
+         46,  47,  48,  49,  50,  51,  52,  53,  54,  55,  56,  57,  58,  59,
+         60,  61,  62,  63,  64,  65,  67,  68,  69,  70,  71,  72,  73,  74,
+         75,  76,  77,  78,  79,  80,  81,  82,  83,  84,  85,  86,  87,  88,
+         89,  90,  91,  92,  93,  94,  95,  96,  97,  98,  99, 100, 101, 102,
+        103], dtype=torch.int32)}
+2025-09-09 14:25:50,887 - INFO - RIEPILOGO VALUTAZIONE -> mAP: 0.1944, mAR@100: 0.3131
+2025-09-09 14:25:50,887 - INFO - --- VALUTAZIONE TERMINATA ---
+
