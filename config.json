@@ -2,8 +2,9 @@
     "data_dir": "COCO-Home-Objects",
     "annotations_file": "{}/_annotations.coco.json",
     "batch_size": 4,
-    "num_epochs": 5,
+    "num_epochs": 100,
     "learning_rate": 0.001,
     "num_workers": 4,
     "head_train_percent": 0.2
 }
+
