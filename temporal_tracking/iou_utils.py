@@ -26,11 +26,10 @@ def compute_iou(box_a, box_b):
     # Area dell'intersezione
     intersection_area = max(0, x2_inter - x1_inter) * max(0, y2_inter - y1_inter)
     
-    # Area delle singole box
+    # area singole box
     area_a = box_area(box_a)
     area_b = box_area(box_b)
     
-    # Area dell'unione
     union_area = area_a + area_b - intersection_area
     
     if union_area == 0:
@@ -61,12 +60,7 @@ def compute_iou_matrix(boxes_a, boxes_b):
 
 
 def find_best_matches(boxes_current, boxes_previous, iou_threshold=0.3):
-    """
-    Trova i best matches tra detection correnti e precedenti usando IoU.
-    Utile per il modulo temporal_consistency.
-    
-
-    """
+ 
     if len(boxes_current) == 0 or len(boxes_previous) == 0:
         return {}
     
@@ -91,19 +85,15 @@ def find_best_matches(boxes_current, boxes_previous, iou_threshold=0.3):
 #funzioni per lavorare con il formato JSON delle detection
 
 def extract_boxes_from_labels(labels, category_filter=None):
-    """
-    Estrae le bounding boxes da una lista di labels in formato JSON.
-    """
+
     boxes = []
     indices = []
     categories = []
     
     for i, label in enumerate(labels):
-        # Filtra per categoria se richiesto
         if category_filter and label['category'] not in category_filter:
             continue
         
-        # Estrai box2d
         box2d = label['box2d']
         box = (box2d['x1'], box2d['y1'], box2d['x2'], box2d['y2'])
         
