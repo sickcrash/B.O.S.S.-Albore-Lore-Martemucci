@@ -427,7 +427,13 @@ class EnhancedTemporalSSD(nn.Module):
                 return self.ssd(images)
 
     def forward_single_frame(self, image: torch.Tensor):
-        return self.ssd([image])[0]
+        detection = self.ssd([image])[0]
+        formatted_output = {
+            'boxes': detection['boxes'].cpu().detach().numpy(),
+            'scores': detection['scores'].cpu().detach().numpy(),
+            'labels': detection['labels'].cpu().detach().numpy()
+        }
+        return formatted_output
 
     def _format_detections(self, detection):
         boxes = detection['boxes'].cpu().detach().numpy()
