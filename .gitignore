@@ -2,3 +2,4 @@
 __pycache__/
 .pytest_cache/
 source_adapter/test_adapter/
+pipeline_integration/test_pipeline.py
