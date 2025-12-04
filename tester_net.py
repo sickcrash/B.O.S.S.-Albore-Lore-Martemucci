@@ -2,6 +2,7 @@ import torch
 from tqdm import tqdm
 import numpy as np
 import os
+import yaml
 
 from model_builder import (
     EnhancedTemporalSSD,
@@ -10,13 +11,18 @@ from model_builder import (
 )
 
 ##############################################
-# 11. COMPLETE TESTING PIPELINE - VERSIONE FIXED
+# Pipeline di testing completa con metriche
 ##############################################
 
 class CompleteTestingPipeline:
     """Pipeline testing con metriche complete - FIXED VERSION"""
 
     def __init__(self, model_path=None, device='cuda' if torch.cuda.is_available() else 'cpu'):
+        if model_path is None:
+            with open("config.yaml", "r") as f:
+                config = yaml.safe_load(f)
+            model_path = config["paths"]["model_save_path"]
+
         self.device = torch.device(device) if not isinstance(device, torch.device) else device
 
         self.model = EnhancedTemporalSSD(
@@ -29,7 +35,6 @@ class CompleteTestingPipeline:
 
         if model_path and os.path.exists(model_path):
             try:
-                # ✅ FIX: Aggiungi weights_only=False per PyTorch 2.6+
                 checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
                 if "model_state_dict" in checkpoint:
                     self.model.load_state_dict(checkpoint["model_state_dict"])
@@ -46,7 +51,6 @@ class CompleteTestingPipeline:
         self.metrics_calc = DetectionMetricsCalculator()
 
     def test_images(self, test_img_loader, confidence_threshold=0.5):
-        """✅ METODO TEST_IMAGES CORRETTO - DENTRO LA CLASSE"""
         print("🧪 TESTING SU IMMAGINI...")
         self.model.eval()
         all_detections = []
@@ -96,47 +100,83 @@ class CompleteTestingPipeline:
         return all_detections, metrics
 
     def test_videos(self, test_vid_loader, confidence_threshold=0.5):
-        """
-        ✅ VERSIONE MIGLIORATA: Test video con metriche temporali
-        """
+        # Testing completo su video clips con validazione struttura dati
         print("🎥 TESTING SU VIDEO CON METRICHE TEMPORALI...")
         self.model.eval()
         all_video_detections = {}
         all_temporal_metrics = []
 
-        temporal_calc = TemporalMetrics()  # ⬅️ AGGIUNGI QUESTO
+        temporal_calc = TemporalMetrics()
 
         with torch.no_grad():
-            for clips_rgb, clips_gazemap, targets, paths in tqdm(
-                test_vid_loader, desc="Testing video"
-            ):
-                for clip_rgb, video_path in zip(clips_rgb, paths):
-                    video_name = os.path.basename(video_path)
+            for batch in tqdm(test_vid_loader, desc="Testing video"):
+                for sample in batch:
+                    clip_rgb = sample["clip_rgb"]  # [T, C, H, W]
+                    video_path = sample["path"]
 
-                    # Processa clip
-                    detections_clip = self.model(clip_rgb)
+                    try:
+                        # Converti tensore in lista di frame
+                        images = [frame.to(self.device) for frame in clip_rgb]
 
-                    # ⬅️ AGGIUNGI: Calcola metriche temporali
-                    temporal_metrics = temporal_calc.compute_all_metrics(detections_clip)
-                    all_temporal_metrics.append(temporal_metrics)
+                        detections_clip = self.model.forward_video_clip(images)
 
-                    # Filtra per confidence
-                    video_detections = []
-                    for frame_idx, frame_dets in enumerate(detections_clip):
-                        for det in frame_dets:
-                            if det["score"] >= confidence_threshold:
-                                video_detections.append({
-                                    "video_name": video_name,
-                                    "frame_id": frame_idx,
-                                    "bbox": det["bbox"],
-                                    "score": det["score"],
-                                    "label": det["label"],
-                                    "track_id": det.get("track_id", -1)
-                                })
+                        if not isinstance(detections_clip, list):
+                            print(f"⚠️ Errore: detections_clip non è una lista. Tipo: {type(detections_clip)}")
+                            continue
 
-                    all_video_detections[video_name] = video_detections
+                        valid_clip = True
+                        for frame_idx, frame_dets in enumerate(detections_clip):
+                            if not isinstance(frame_dets, list):
+                                print(f"⚠️ Frame {frame_idx} non è una lista: {type(frame_dets)}")
+                                valid_clip = False
+                                break
+                            
+                            for det_idx, det in enumerate(frame_dets):
+                                if not isinstance(det, dict):
+                                    print(f"⚠️ Detection {det_idx} nel frame {frame_idx} non è dict: {type(det)}")
+                                    valid_clip = False
+                                    break
+                                
+                                required_keys = ['bbox', 'score', 'label']
+                                missing_keys = [k for k in required_keys if k not in det]
+                                if missing_keys:
+                                    print(f"⚠️ Detection manca chiavi {missing_keys}: {det.keys()}")
+                                    valid_clip = False
+                                    break
+                            
+                            if not valid_clip:
+                                break
+                        
+                        if not valid_clip:
+                            print(f"⚠️ Clip {video_path} ha struttura dati non valida, skip")
+                            continue
 
-        # ⬅️ AGGIUNGI: Aggrega e stampa metriche temporali
+                        # Calcolo metriche temporali
+                        temporal_metrics = temporal_calc.compute_all_metrics(detections_clip)
+                        all_temporal_metrics.append(temporal_metrics)
+
+                        video_detections = []
+                        for frame_idx, frame_dets in enumerate(detections_clip):
+                            for det in frame_dets:
+                                score = det.get("score", 0.0)
+                                if score >= confidence_threshold:
+                                    video_detections.append({
+                                        "frame_id": frame_idx,
+                                        "bbox": det.get("bbox"),
+                                        "score": score,
+                                        "label": det.get("label"),
+                                        "track_id": det.get("track_id", -1)
+                                    })
+
+                        video_name = os.path.basename(video_path)
+                        all_video_detections[video_name] = video_detections
+
+                    except Exception as e:
+                        print(f"❌ Errore durante test video {video_path}: {e}")
+                        import traceback
+                        traceback.print_exc()
+                        continue
+
         if all_temporal_metrics:
             aggregated = {
                 'id_switch_rate': np.mean([
@@ -163,5 +203,7 @@ class CompleteTestingPipeline:
             print(f"   Mean Track Len: {aggregated['mean_track_length']:.2f}")
             print(f"   Track Complet.: {aggregated['track_completion_rate']:.4f}")
 
-        print(f"✅ Testing video completato: {len(all_video_detections)} video")
-        return all_video_detections, aggregated if all_temporal_metrics else {}
+            return all_video_detections, aggregated
+        else:
+            print("⚠️ Nessuna metrica temporale calcolata")
+            return all_video_detections, {}

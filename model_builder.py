@@ -9,6 +9,7 @@ from datetime import datetime
 import random
 import contextlib
 import torch.nn.functional as F
+import yaml
 
 
 ##############################################
@@ -221,7 +222,7 @@ class AdvancedTemporalConsistency:
 
 
 ##############################################
-# 4. DOMAIN ADAPTER LAYERS
+# Moduli di supporto per il modello Enhanced SSD
 ##############################################
 
 class DomainAdapter(nn.Module):
@@ -238,17 +239,16 @@ class DomainAdapter(nn.Module):
             nn.Sigmoid()
         )
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        adapter_weights = self.adapter(x)
-        return x * adapter_weights
-
+    def forward(self, x):
+        """Passaggio in avanti per il DomainAdapter"""
+        return x * self.adapter(x)
 
 ##############################################
-# 5. FOCAL LOSS (Custom Loss Function)
+# Custom Loss Function
 ##############################################
 
 class FocalLoss(nn.Module):
-    """Focal Loss per bilanciare easy/hard negative examples"""
+    # Focal Loss per gestione class imbalance
 
     def __init__(self, alpha=0.25, gamma=2.0):
         super().__init__()
@@ -265,11 +265,11 @@ class FocalLoss(nn.Module):
 
 
 ##############################################
-# 6. ENHANCED SSD WITH ABLATION SUPPORT
+# Enanced Temporal SSD con supporto ablativo
 ##############################################
 
 class EnhancedTemporalSSD(nn.Module):
-    """SSD con Domain Adapter, Weather Augmentation, Temporal Consistency"""
+    # SSD con Domain Adapter, Weather Augmentation, Temporal Consistency
 
     def __init__(self, num_classes: int, device: torch.device,
                  use_adapters: bool = True, use_temporal: bool = True,
@@ -378,7 +378,7 @@ class EnhancedTemporalSSD(nn.Module):
         else:
             print("⚠️ WARNING: backbone.extra non trovato!")
 
-        # 3) Validazione finale e assert (se necessario)
+        # 3) Validazione finale e assert
         print("\n🔍 Validazione Hook Registration:")
         all_registered = True
         for hook_name, is_registered in hooks_registered.items():
@@ -388,7 +388,6 @@ class EnhancedTemporalSSD(nn.Module):
                 all_registered = False
 
         if not all_registered:
-            # Non forziamo l'errore in ambiente debug ma segnaliamo
             print("⚠️ Alcuni hook Domain Adapter non sono stati registrati correttamente.")
         else:
             print("\n✅ Tutti gli hook Domain Adapter registrati con successo!\n")
@@ -436,42 +435,67 @@ class EnhancedTemporalSSD(nn.Module):
         return formatted_output
 
     def _format_detections(self, detection):
-        boxes = detection['boxes'].cpu().detach().numpy()
-        scores = detection['scores'].cpu().detach().numpy()
-        labels = detection['labels'].cpu().detach().numpy()
+        # Formatta le detections dal modello SSD in formato standard
 
+        boxes = detection['boxes'].cpu().detach().numpy() if isinstance(detection['boxes'], torch.Tensor) else detection['boxes']
+        scores = detection['scores'].cpu().detach().numpy() if isinstance(detection['scores'], torch.Tensor) else detection['scores']
+        labels = detection['labels'].cpu().detach().numpy() if isinstance(detection['labels'], torch.Tensor) else detection['labels']
+        
+        # Crea lista di detections nel formato atteso
         formatted = []
         for i in range(len(boxes)):
             formatted.append({
-                'bbox': boxes[i].tolist(),
+                'bbox': boxes[i].tolist() if isinstance(boxes[i], np.ndarray) else boxes[i],
                 'score': float(scores[i]),
-                'label': int(labels[i])
+                'label': int(labels[i]),
+                'track_id': i
             })
+        
         return formatted
 
-    def forward_video_clip(self, clip: torch.Tensor):
-        """Processa clip video con temporal consistency"""
-        self.eval()
-        clip = clip.to(self.device)
-
+    def forward_video_clip(self, images):
+        """
+        Forward pass su un batch di frame video.
+        Restituisce lista di frame, ogni frame è lista di detections dict.
+        """
         batch_detections = []
-        with torch.no_grad():
-            for t in range(clip.shape[0]):
-                det = self.forward_single_frame(clip[t])
-                batch_detections.append(self._format_detections(det))
-
+        
+        for image in images:
+            image = image.to(self.device)
+            det = self.ssd([image])[0]  # Output del modello SSD
+            
+            # Validazione output
+            if not isinstance(det, dict):
+                print(f"⚠️ Errore: Output non è dizionario. Tipo: {type(det)}")
+                continue
+            
+            boxes = det['boxes'].cpu().detach().numpy()
+            scores = det['scores'].cpu().detach().numpy()
+            labels = det['labels'].cpu().detach().numpy()
+            
+            frame_detections = []
+            for i in range(len(boxes)):
+                frame_detections.append({
+                    'bbox': boxes[i].tolist(),
+                    'score': float(scores[i]),
+                    'label': int(labels[i]),
+                    'track_id': i  # ID temporaneo
+                })
+            
+            batch_detections.append(frame_detections)
+        
+        # Applica consistenza temporale se abilitata
         if self.temporal_processor is not None:
             batch_detections = self.temporal_processor.process_clip(batch_detections)
-
+        
         return batch_detections
 
-
 ##############################################
-# 7. DETECTION METRICS CALCULATOR
+# Calcolo metriche di detection
 ##############################################
 
 class DetectionMetricsCalculator:
-    """Calcola mAP, Precision, Recall a diversi IoU threshold"""
+    # Calcola mAP, Precision, Recall a diversi IoU threshold
 
     def __init__(self, num_classes=2, iou_thresholds=[0.5, 0.75]):
         self.num_classes = num_classes
@@ -538,11 +562,11 @@ class DetectionMetricsCalculator:
 
 
 ##############################################
-# 7.5 TEMPORAL METRICS CALCULATOR (NUOVO)
+# Calcolo metriche di consistenza temporale
 ##############################################
 
 class TemporalMetrics:
-    """Calcola metriche di consistenza temporale per tracking"""
+    # Calcola metriche di consistenza temporale su clip video
 
     def __init__(self):
         self.id_switches_count = 0
@@ -684,7 +708,7 @@ class TemporalMetrics:
         }
 
     def compute_all_metrics(self, clip_detections):
-        """Calcola tutte le metriche temporali in un colpo solo"""
+        # Calcola tutte le metriche di consistenza temporale
         return {
             'id_switches': self.compute_id_switches(clip_detections),
             'temporal_iou': self.compute_temporal_iou(clip_detections),
@@ -692,7 +716,7 @@ class TemporalMetrics:
         }
 
     def _calculate_iou(self, bbox1, bbox2):
-        """Helper per calcolare IoU"""
+        # Calcola Intersection over Union (IoU) tra due bounding box
         x1_min, y1_min, x1_max, y1_max = bbox1
         x2_min, y2_min, x2_max, y2_max = bbox2
 
@@ -711,16 +735,11 @@ class TemporalMetrics:
 
 
 ##############################################
-# 9. MODEL EXPORT (ONNX ONLY) - VERSIONE SEMPLIFICATA
+# Esportazione modello in ONNX
 ##############################################
 
 @contextlib.contextmanager
 def suppress_stdout_stderr():
-    """
-    Sopprime l'output a livello di sistema (C/C++ e Python).
-    Indispensabile per evitare che torch.jit.trace faccia crashare Colab
-    stampando l'intero grafo del modello.
-    """
     try:
         # Salva i file descriptors originali
         with open(os.devnull, "w") as devnull:
@@ -736,20 +755,25 @@ def suppress_stdout_stderr():
                 os.dup2(old_stdout, 1)
                 os.dup2(old_stderr, 2)
     except Exception:
-        # Se qualcosa va storto nel setup del silenzio, esegui comunque il codice
+        # Se qualcosa va storto nel setup del silenzio, esegue comunque il codice
         yield
 
 
 class ModelExporter:
-    """Esporta modello in ONNX - VERSIONE SEMPLIFICATA"""
+    # Esporta il modello Enhanced SSD in ONNX
 
-    def __init__(self, model, save_dir='/content/drive/MyDrive/Boss'):
+    def __init__(self, model, save_dir=None):
+        if save_dir is None:
+            with open("config.yaml", "r") as f:
+                config = yaml.safe_load(f)
+            save_dir = config["paths"]["exports_dir"]
+
         self.model = model
         self.save_dir = save_dir
         os.makedirs(save_dir, exist_ok=True)
 
     def export_models(self, dummy_input_shape=(1, 3, 300, 300)):
-        """Export semplificato - SOLO ONNX senza TorchScript"""
+        # Export semplificato - SOLO ONNX senza TorchScript
         filepath = os.path.join(self.save_dir, 'ssd_backbone.onnx')
         print(f"⚙️ Export ONNX in corso... ", end="", flush=True)
 

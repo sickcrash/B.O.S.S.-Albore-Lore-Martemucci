@@ -10,17 +10,17 @@ import cv2
 from decord import VideoReader, cpu
 
 ##############################################
-# 13. DATASET CLASSES (SEMPLIFICATI)
+# Classi Dataset
 ##############################################
 
 class RealBDDImageDataset(Dataset):
-    """Dataset BDD100K immagini"""
+    # Dataset BDDA immagini
 
     def __init__(self, annotations_path, img_root, split: str, is_train: bool = True, max_samples=None):
         if os.path.exists(annotations_path):
             with open(annotations_path, 'r') as f:
                 self.annotations = json.load(f)
-            print(f"✅ BDD {split} - {len(self.annotations)} immagini")
+            print(f"✅ BDDA {split} - {len(self.annotations)} immagini")
         else:
             self.annotations = []
             print(f"⚠️ Annotations non trovate: {annotations_path}")
@@ -69,30 +69,25 @@ class RealBDDImageDataset(Dataset):
     def __getitem__(self, idx):
         ann = self.annotations[idx]
         fname = ann["name"]
-        img_path = os.path.join(self.img_root, "100k", self.split, fname)
+        img_path = os.path.join(self.img_root, self.split, fname)
+        if not os.path.exists(img_path):
+            print(f"⚠️ Immagine non trovata: {img_path}")
+            raise FileNotFoundError(f"Immagine non trovata: {img_path}")
         try:
-            if os.path.exists(img_path):
-                image = np.array(Image.open(img_path).convert("RGB"))
-                boxes, labels = self._parse_labels(ann)
-                transformed = self.transforms(image=image, bboxes=boxes, labels=labels)
-                image_t = transformed["image"]
-                boxes_t = transformed["bboxes"]
-                labels_t = transformed["labels"]
-                target = {
-                    "boxes": torch.tensor(boxes_t, dtype=torch.float32),
-                    "labels": torch.tensor(labels_t, dtype=torch.int64)
-                }
-                return image_t, target, img_path
-            else:
-                raise FileNotFoundError
-        except Exception:
-            image_t = torch.randn(3, 300, 300)
+            image = np.array(Image.open(img_path).convert("RGB"))
+            boxes, labels = self._parse_labels(ann)
+            transformed = self.transforms(image=image, bboxes=boxes, labels=labels)
+            image_t = transformed["image"]
+            boxes_t = transformed["bboxes"]
+            labels_t = transformed["labels"]
             target = {
-                "boxes": torch.tensor([[0, 0, 1, 1]], dtype=torch.float32),
-                "labels": torch.tensor([0], dtype=torch.int64)
+                "boxes": torch.tensor(boxes_t, dtype=torch.float32),
+                "labels": torch.tensor(labels_t, dtype=torch.int64)
             }
-            return image_t, target, "error"
-
+            return image_t, target, img_path
+        except Exception as e:
+            print(f"⚠️ Errore parsing immagine: {img_path}, {e}")
+            raise
 
 class RealBDDAVideoDataset(Dataset):
     """Dataset BDDA video"""
@@ -135,15 +130,16 @@ class RealBDDAVideoDataset(Dataset):
                 idx = idx[:num_frames]
             else:
                 idx = np.linspace(0, total - 1, num_frames, dtype=int)
-            frames = vr.get_batch(idx).asnumpy()
+            frames = vr.get_batch(idx).asnumpy()  # Restituisce [T, H, W, C]
             processed = []
             for f in frames:
-                rgb = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)
-                t = self.transforms(image=rgb)["image"]
+                rgb = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)  # Converti in RGB
+                t = self.transforms(image=rgb)["image"]  # Applica trasformazioni
                 processed.append(t)
-            return torch.stack(processed)
-        except Exception:
-            return torch.randn(num_frames, 3, 300, 300)
+            return torch.stack(processed) # Restituisce [T, C, H, W]
+        except Exception as e:
+            print(f"❌ Errore caricamento clip: {e}")
+            return torch.randn(num_frames, 3, 300, 300)  # [T, C, H, W]
 
     def __getitem__(self, idx):
         cam_path = self.video_paths[idx]
@@ -159,7 +155,7 @@ class RealBDDAVideoDataset(Dataset):
 
 
 ##############################################
-# 12. COLLATE FUNCTIONS
+# Funzioni di collate per DataLoader
 ##############################################
 
 def collate_fn(batch):
@@ -167,5 +163,12 @@ def collate_fn(batch):
     return list(images), list(targets), list(paths)
 
 def collate_fn_video(batch):
-    clips_rgb, clips_gazemap, targets, paths = zip(*batch)
-    return list(clips_rgb), list(clips_gazemap), list(targets), list(paths)
+    collated = []
+    for clip_rgb, clip_gazemap, target, path in batch:
+        collated.append({
+            "clip_rgb": clip_rgb,
+            "clip_gazemap": clip_gazemap,
+            "target": target,
+            "path": path
+        })
+    return collated

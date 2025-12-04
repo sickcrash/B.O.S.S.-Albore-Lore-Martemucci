@@ -44,12 +44,14 @@ class FileVideoSource(VideoSourceAdapter):
                 }
             })
             frame_index += 1
-        print(f"Buffering completato: {len(self.buffer)} frame caricati.")
 
     # Restituisce un iteratore sui frame del buffer
+    def __iter__(self):
+        return self.frames()
+
     def frames(self) -> Iterator[Dict[str, Any]]:
-        for frame in self.buffer:
-            yield frame
+        for frame_data in self.buffer:
+            yield frame_data
 
     # Chiude il file video
     def close(self) -> None:

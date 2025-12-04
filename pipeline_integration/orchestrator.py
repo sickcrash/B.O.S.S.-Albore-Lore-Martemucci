@@ -1,10 +1,10 @@
+import os
 import torch
-import time
-from torchvision.models.detection.ssd import SSD300_VGG16_Weights
 from source_adapter.file_video_source import FileVideoSource
 from source_adapter.image_folder_source import ImageFolderSource
 from pipeline_integration.logging_system import LoggingSystem
-from torchvision.models.detection import ssd300_vgg16
+from dataset_builder import RealBDDImageDataset, RealBDDAVideoDataset
+from model_builder import EnhancedTemporalSSD
 
 class PipelineOrchestrator:
     def __init__(self, source_type: str, source_path: str, model_path: str, device: str = "cuda"):
@@ -18,33 +18,47 @@ class PipelineOrchestrator:
     # Configura la sorgente video o immagini
     def setup_source(self):
         if self.source_type == "video":
-            self.source = FileVideoSource(self.source_path)
+            if os.path.isfile(self.source_path):
+                self.source = FileVideoSource(self.source_path)
+                self.source.open()
+            else:
+                self.source = RealBDDAVideoDataset(root_dir=self.source_path, clip_length=8)
         elif self.source_type == "image_folder":
-            self.source = ImageFolderSource(self.source_path)
+            if os.path.isdir(self.source_path):
+                self.source = ImageFolderSource(self.source_path)
+                self.source.open()
+            else:
+                self.source = RealBDDImageDataset(
+                    annotations_path=os.path.join(self.source_path, "annotations.json"),
+                    img_root=self.source_path,
+                    split="train",
+                    is_train=False
+                )
         else:
             raise ValueError(f"Tipo di sorgente non supportato: {self.source_type}")
 
     # Configura il modello
     def setup_model(self):
         try:
-            weights = SSD300_VGG16_Weights.COCO_V1
-            self.model = ssd300_vgg16(weights=weights).to(self.device)
-            
-            # Caricamento robusto del checkpoint
+            self.model = EnhancedTemporalSSD(
+                num_classes=2,
+                device=self.device,
+                use_adapters=True,
+                use_temporal=True,
+                use_weather_aug=False
+            ).to(self.device)
+
             checkpoint = torch.load(self.model_path, map_location=self.device, weights_only=False)
             if "model_state_dict" in checkpoint:
                 self.model.load_state_dict(checkpoint["model_state_dict"], strict=False)
                 print(f"✅ Checkpoint caricato correttamente: {self.model_path}")
             else:
-                print("⚠️ Struttura checkpoint non riconosciuta. Uso pesi predefiniti.")
+                print("⚠️ Struttura checkpoint non riconosciuta. Uso pesi non addestrati.")
+            
+            self.model.eval()
         except Exception as e:
-            print(f"❌ Errore durante il caricamento del checkpoint: {e}")
-            print("⚠️ Uso pesi predefiniti.")
-            weights = SSD300_VGG16_Weights.COCO_V1
-            self.model = ssd300_vgg16(weights=weights).to(self.device)
-        
-        self.model.eval()
-        print(f"Device utilizzato dal modello: {next(self.model.parameters()).device}")
+            print(f"❌ Errore durante il caricamento del modello: {e}")
+            print("⚠️ Uso pesi non addestrati.")
 
     # Debug
     def debug_pytorch(self):
@@ -57,45 +71,46 @@ class PipelineOrchestrator:
         try:
             self.debug_pytorch()
             self.setup_source()
-            self.source.open()
             self.setup_model()
             self.logger.start()
-            self.start_time = time.time()
+
             frame_count = 0
+            for data in self.source:
+                if isinstance(data, dict):  # Sorgenti esterne
+                    images = [torch.tensor(data["image"]).permute(2, 0, 1).to(self.device).float() / 255.0]
+                    meta = data["meta"]
+                    targets = [{}]  # Target vuoto per inferenza
+                elif isinstance(data, tuple):
+                    clip_rgb, clip_gazemap, target, path = data
+                    images = [frame.to(self.device) for frame in clip_rgb]
+                    meta = {"source": path}
+                    targets = [{}]
+                else:
+                    raise ValueError(f"Formato dati non supportato: {type(data)}")
 
-            for frame in self.source.frames():
-                frame_start_time = time.time()
+                # Inferenza
+                detection_results = self.model(images, targets)
 
-                # Lettura e pre-elaborazione
-                start_time = time.time()
-                image_tensor = torch.tensor(frame["image"]).permute(2, 0, 1).to(self.device)
-                image_tensor = image_tensor.float() / 255.0
-                preproc_time = time.time()
+                formatted_results = []
+                for result in detection_results:
+                    formatted_results.append({
+                        'boxes': result['boxes'].cpu().detach().numpy(),
+                        'scores': result['scores'].cpu().detach().numpy(),
+                        'labels': result['labels'].cpu().detach().numpy()
+                    })
 
-                # Elaborazione del modello
-                detection_results = self.model([image_tensor])[0]  # Usa il metodo forward
-                model_time = time.time()
-
-                # Formatta l'output per la pipeline
-                formatted_results = {
-                    'boxes': detection_results['boxes'].cpu().detach().numpy(),
-                    'scores': detection_results['scores'].cpu().detach().numpy(),
-                    'labels': detection_results['labels'].cpu().detach().numpy()
-                }
-                self.logger.log(frame["meta"], formatted_results)
-                log_time = time.time()
-
+                # Logging
+                self.logger.log(meta, formatted_results)
                 frame_count += 1
 
-                frame_end_time = time.time()
-                print(f"Frame {frame_count}: Tempo totale: {frame_end_time - frame_start_time:.4f}s "
-                      f"(Lettura: {preproc_time - start_time:.4f}s, "
-                      f"Modello: {model_time - preproc_time:.4f}s, "
-                      f"Logging: {log_time - model_time:.4f}s)")
-
-            self.source.close()
             fps, total_frames, elapsed_time = self.logger.end()
-            print(f"Pipeline completata. FPS: {fps:.2f} (Frame totali: {total_frames}, Tempo totale: {elapsed_time:.2f}s)")
+
+            print("\n" + "=" * 80)
+            print(f"🎯 RISULTATI FINALI DELLA PIPELINE 🎯")
+            print(f"📊 FPS: {fps:.2f}")
+            print(f"📈 Frame totali elaborati: {total_frames}")
+            print(f"⏱️ Tempo totale: {elapsed_time:.2f} secondi")
+            print("=" * 80 + "\n")
 
         except Exception as e:
-            print(f"Errore durante l'esecuzione della pipeline: {e}")
+            print(f"❌ Errore durante l'esecuzione della pipeline: {e}")

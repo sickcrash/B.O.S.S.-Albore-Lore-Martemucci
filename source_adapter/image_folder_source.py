@@ -21,18 +21,20 @@ class ImageFolderSource(VideoSourceAdapter):
             raise ValueError(f"Nessuna immagine trovata nella cartella: {self.folder_path}")
 
     # Restituisce un iteratore sui frame della cartella
+    def __iter__(self):
+        return self.frames()
+
     def frames(self) -> Iterator[Dict[str, Any]]:
-        frame_index = 0
-        for image_file in self.image_files:
+        for index, image_file in enumerate(self.image_files):
             image = cv2.imread(image_file)
             yield {
                 "image": image,
                 "meta": {
-                    "file_name": image_file,
-                    "frame_index": frame_index
+                    "source": self.folder_path,
+                    "frame_index": index,
+                    "file_name": os.path.basename(image_file)
                 }
             }
-            frame_index += 1
-    
+
     def close(self) -> None:
         self.image_files = []

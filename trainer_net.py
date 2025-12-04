@@ -1,5 +1,5 @@
 import os
-
+import random
 import torch
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
@@ -7,6 +7,7 @@ import numpy as np
 from datetime import datetime
 import json
 import csv
+import yaml
 
 from model_builder import (
     FocalLoss,
@@ -15,14 +16,19 @@ from model_builder import (
 )
 
 ##############################################
-# 8. ABLATION STUDY FRAMEWORK
+# Framework PER ABLATION STUDY
 ##############################################
 
 class AblationStudy:
-    """Framework per ablation study sistematico"""
+    # Framework per ablation study sistematico
 
-    def __init__(self, save_dir='logs/ablation'):
-        self.save_dir = save_dir if save_dir.startswith("/content") else "/content/drive/MyDrive/Boss"
+    def __init__(self, save_dir=None):
+        if save_dir is None:
+            with open("config.yaml", "r") as f:
+                config = yaml.safe_load(f)
+            save_dir = config["paths"]["logs_dir"]
+
+        self.save_dir = save_dir
         os.makedirs(save_dir, exist_ok=True)
         self.results = []
 
@@ -43,22 +49,26 @@ class AblationStudy:
     def save_results(self, filename='ablation_results.json'):
         filepath = os.path.join(self.save_dir, filename)
         with open(filepath, 'w') as f:
+            import json
             json.dump(self.results, f, indent=2)
         print(f"✅ Risultati ablation salvati: {filepath}")
+
+        # Salva anche in formato CSV
         csv_path = os.path.join(self.save_dir, filename.replace('.json', '.csv'))
         if self.results:
             keys = self.results[0].keys()
             with open(csv_path, 'w', newline='') as f:
+                import csv
                 writer = csv.DictWriter(f, fieldnames=keys)
                 writer.writeheader()
                 writer.writerows(self.results)
             print(f"✅ Risultati CSV salvati: {csv_path}")
 ##############################################
-# 10. COMPLETE TRAINING PIPELINE
+# Pipeline di training completa
 ##############################################
 
 class CompleteTrainingPipeline:
-    """Pipeline completa con metriche, ablation, export"""
+    # Pipeline completa con metriche, ablation, export
 
     def __init__(self, model, train_img_loader, train_vid_loader,
                  val_img_loader, device, use_focal_loss=True,
@@ -102,28 +112,29 @@ class CompleteTrainingPipeline:
 
         # Training su video con mini-clip temporali
         if self.train_vid_loader:
-            for clips_rgb, clips_gazemap, targets, paths in tqdm(self.train_vid_loader, desc=f"Epoch {epoch} Vid"):
+            for batch in tqdm(self.train_vid_loader, desc=f"Epoch {epoch} Vid"):
                 try:
-                    for clip in clips_rgb:
-                        if clip.size(0) < 3:
-                            continue
-                        max_start_idx = clip.size(0) - 3
-                        start_idx = random.randint(0, max_start_idx) if max_start_idx > 0 else 0
-                        mini_clip = clip[start_idx:start_idx+3].to(self.device)
-                        for frame_idx in range(mini_clip.size(0)):
-                            frame = mini_clip[frame_idx]
-                            images = [frame]
-                            empty_target = [{
-                                "boxes": torch.zeros((0, 4), dtype=torch.float32, device=self.device),
-                                "labels": torch.zeros((0,), dtype=torch.int64, device=self.device)
-                            }]
-                            loss_dict = self.model(images, empty_target)
-                            loss = sum(loss_dict.values())
-                            optimizer.zero_grad()
-                            loss.backward()
-                            optimizer.step()
-                            total_loss += loss.item()
-                            num_batches += 1
+                    for sample in batch:
+                        clips_rgb = sample["clip_rgb"]  # [T, C, H, W]
+                        clips_gazemap = sample["clip_gazemap"]
+                        targets = sample["target"]
+                        paths = sample["path"]
+
+                        # Itera sui frame del clip
+                        images = [frame.to(self.device) for frame in clips_rgb]  # [C, H, W]
+                        empty_target = [{
+                            "boxes": torch.zeros((0, 4), dtype=torch.float32, device=self.device),
+                            "labels": torch.zeros((0,), dtype=torch.int64, device=self.device)
+                        } for _ in images]
+
+                        # Passa la lista di immagini al modello
+                        loss_dict = self.model(images, empty_target)
+                        loss = sum(loss_dict.values())
+                        optimizer.zero_grad()
+                        loss.backward()
+                        optimizer.step()
+                        total_loss += loss.item()
+                        num_batches += 1
                 except Exception as e:
                     print(f"❌ Errore training video: {e}")
                     continue
@@ -133,7 +144,6 @@ class CompleteTrainingPipeline:
         return avg_loss
 
     def validate(self, epoch):
-        """✅ METODO VALIDATE CORRETTO - DENTRO LA CLASSE"""
         self.model.eval()
         total_loss = 0.0
         num_batches = 0
@@ -195,39 +205,61 @@ class CompleteTrainingPipeline:
         return metrics
 
     def validate_video_clips(self, epoch):
-        """
-        ✅ NUOVO METODO: Validazione su clip video con metriche temporali
-        """
-        if self.val_vid_loader is None:
-            print("⚠️ Nessun video loader per validazione")
-            return {}
-
         print(f"\n🎥 Validazione clip video (epoch {epoch})...")
         self.model.eval()
-
         all_temporal_metrics = []
 
         with torch.no_grad():
-            for clips_rgb, clips_gazemap, targets, paths in tqdm(
-                self.val_vid_loader, desc=f"Val Video {epoch}"
-            ):
-                for clip_rgb, video_path in zip(clips_rgb, paths):
-                    try:
-                        # Forward pass sul clip
-                        clip_detections = self.model(clip_rgb)
+            for batch in tqdm(self.val_vid_loader, desc=f"Val Video {epoch}"):
+                for sample in batch:
+                    clip_rgb = sample["clip_rgb"]  # [T, C, H, W]
+                    video_path = sample["path"]
 
+                    try:
+                        # Converti tensore in lista di frame
+                        images = [frame.to(self.device) for frame in clip_rgb]
+                        
+                        detections = self.model.forward_video_clip(images)
+                        
+                        if not isinstance(detections, list):
+                            print(f"⚠️ Detections non è lista: {type(detections)}")
+                            continue
+                        
+                        valid = True
+                        for frame_idx, frame_dets in enumerate(detections):
+                            if not isinstance(frame_dets, list):
+                                print(f"⚠️ Frame {frame_idx} non è lista: {type(frame_dets)}")
+                                valid = False
+                                break
+                            
+                            for det_idx, det in enumerate(frame_dets):
+                                if not isinstance(det, dict):
+                                    print(f"⚠️ Detection {det_idx} frame {frame_idx} non è dict: {type(det)}")
+                                    valid = False
+                                    break
+                                
+                                required_keys = ['bbox', 'score', 'label']
+                                if not all(k in det for k in required_keys):
+                                    print(f"⚠️ Detection manca chiavi: {det.keys()}")
+                                    valid = False
+                                    break
+                        
+                        if not valid:
+                            continue
+                        
                         # Calcola metriche temporali
-                        metrics = self.temporal_metrics.compute_all_metrics(clip_detections)
+                        metrics = self.temporal_metrics.compute_all_metrics(detections)
                         all_temporal_metrics.append(metrics)
 
                     except Exception as e:
                         print(f"❌ Errore validazione video: {e}")
+                        import traceback
+                        traceback.print_exc()
                         continue
 
         if not all_temporal_metrics:
             return {}
 
-        # Aggrega metriche
         aggregated = {
             'id_switch_rate': np.mean([
                 m['id_switches']['id_switch_rate']
@@ -247,15 +279,10 @@ class CompleteTrainingPipeline:
             ])
         }
 
-        # Log su TensorBoard
-        self.writer.add_scalar("TemporalMetrics/id_switch_rate",
-                              aggregated['id_switch_rate'], epoch)
-        self.writer.add_scalar("TemporalMetrics/temporal_iou",
-                              aggregated['temporal_iou_mean'], epoch)
-        self.writer.add_scalar("TemporalMetrics/mean_track_length",
-                              aggregated['mean_track_length'], epoch)
-        self.writer.add_scalar("TemporalMetrics/track_completion_rate",
-                              aggregated['track_completion_rate'], epoch)
+        self.writer.add_scalar("TemporalMetrics/id_switch_rate", aggregated['id_switch_rate'], epoch)
+        self.writer.add_scalar("TemporalMetrics/temporal_iou", aggregated['temporal_iou_mean'], epoch)
+        self.writer.add_scalar("TemporalMetrics/mean_track_length", aggregated['mean_track_length'], epoch)
+        self.writer.add_scalar("TemporalMetrics/track_completion_rate", aggregated['track_completion_rate'], epoch)
 
         print(f"\n📊 METRICHE TEMPORALI:")
         print(f"   ID Switch Rate: {aggregated['id_switch_rate']:.4f}")

@@ -1,5 +1,5 @@
-
 import os
+import yaml
 from datetime import datetime
 
 import torch
@@ -11,9 +11,16 @@ from trainer_net import CompleteTrainingPipeline, AblationStudy
 from tester_net import CompleteTestingPipeline
 
 
-##############################################
-# 14. MAIN COMPLETE - VERSIONE FINALE SEMPLIFICATA
-##############################################
+def resolve_yaml_variables(config):
+    paths = config["paths"]
+    dataset_root = paths["dataset_root"]
+    
+    for key, value in paths.items():
+        if isinstance(value, str) and "${paths.dataset_root}" in value:
+            paths[key] = value.replace("${paths.dataset_root}", dataset_root)
+    
+    return config
+
 
 def main_complete_real():
     print("=" * 80)
@@ -23,15 +30,27 @@ def main_complete_real():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"💻 Dispositivo: {device}")
 
-    # PATH CONFIGURATION
-    GDRIVE_ROOT = "/content/drive/MyDrive/Boss/dataset"
-    BDD_IMG_ROOT = f"{GDRIVE_ROOT}/bdd100k"
-    BDD_LABEL_TRAIN = f"{GDRIVE_ROOT}/bdd100k_labels_release/labels/bdd100k_labels_images_train.json"
-    BDD_LABEL_VAL = f"{GDRIVE_ROOT}/bdd100k_labels_release/labels/bdd100k_labels_images_val.json"
-    BDD_LABEL_TEST = BDD_LABEL_VAL
-    BDDA_TRAIN_ROOT = f"{GDRIVE_ROOT}/BDDA/training"
-    BDDA_VAL_ROOT = f"{GDRIVE_ROOT}/BDDA/validation"
-    BDDA_TEST_ROOT = f"{GDRIVE_ROOT}/BDDA/test"
+    PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+    def resolve_path(path):
+        return os.path.abspath(os.path.join(PROJECT_ROOT, path))
+
+    with open(resolve_path("config.yaml"), "r") as f:
+        config = yaml.safe_load(f)
+
+    config = resolve_yaml_variables(config)
+
+    DATASET_ROOT = resolve_path(config["paths"]["dataset_root"])
+    BDD_IMG_ROOT = resolve_path(config["paths"]["bdd_img_root"])
+    BDD_LABEL_TRAIN = resolve_path(config["paths"]["bdd_label_train"])
+    BDD_LABEL_VAL = resolve_path(config["paths"]["bdd_label_val"])
+    BDD_LABEL_TEST = resolve_path(config["paths"]["bdd_label_test"])
+    BDDA_TRAIN_ROOT = resolve_path(config["paths"]["bdda_train_root"])
+    BDDA_VAL_ROOT = resolve_path(config["paths"]["bdda_val_root"])
+    BDDA_TEST_ROOT = resolve_path(config["paths"]["bdda_test_root"])
+    LOGS_DIR = resolve_path(config["paths"]["logs_dir"])
+    EXPORTS_DIR = resolve_path(config["paths"]["exports_dir"])
+    MODEL_SAVE_PATH = resolve_path(config["paths"]["model_save_path"])
 
     MAX_TRAIN_IMG, MAX_TRAIN_VID = 500, 50
     MAX_VAL_IMG, MAX_VAL_VID = 100, 20
@@ -64,7 +83,7 @@ def main_complete_real():
     print("🧪 ABLATION STUDY")
     print("=" * 50)
 
-    ablation = AblationStudy(save_dir='logs/ablation')
+    ablation = AblationStudy(save_dir=LOGS_DIR)
 
     experiments = [
         ("Baseline", {"use_adapters": False, "use_temporal": False, "use_weather_aug": False}),
@@ -107,7 +126,6 @@ def main_complete_real():
 
     EPOCHS = 2
     best_val_map = 0.0
-    save_path = "/content/drive/MyDrive/Boss/complete_full_model.pth"
 
     for epoch in range(1, EPOCHS + 1):
         print(f"\n⭐ EPOCH {epoch}/{EPOCHS}")
@@ -136,14 +154,14 @@ def main_complete_real():
                 "optimizer_state_dict": optimizer.state_dict(),
                 "epoch": epoch,
                 "best_val_map": best_val_map,
-            }, save_path, _use_new_zipfile_serialization=False)
+            }, MODEL_SAVE_PATH, _use_new_zipfile_serialization=False)
             print(f"💾 Best model salvato")
 
     print("\n" + "=" * 50)
     print("🧪 TESTING")
     print("=" * 50)
 
-    tester = CompleteTestingPipeline(save_path, device)
+    tester = CompleteTestingPipeline(MODEL_SAVE_PATH, device)
     img_results, img_metrics = tester.test_images(test_img_loader)
     vid_results, vid_temporal_metrics = tester.test_videos(test_vid_loader)
 
@@ -151,9 +169,8 @@ def main_complete_real():
     print("💾 EXPORT MODELLO")
     print("=" * 50)
 
-    exporter = ModelExporter(model, save_dir='/content/drive/MyDrive/Boss')
+    exporter = ModelExporter(model, save_dir=EXPORTS_DIR)
 
-    # Export SOLO ONNX
     onnx_path = exporter.export_models()
 
     metadata = {
@@ -178,7 +195,7 @@ def main_complete_real():
     print("\n" + "=" * 50)
     print("🎯 PIPELINE COMPLETATA!")
     print("=" * 50)
-    print(f"✅ Modello salvato: {save_path}")
+    print(f"✅ Modello salvato: {MODEL_SAVE_PATH}")
     print(f"✅ ONNX: {onnx_path}")
 
     print(f"\n📊 METRICHE FINALI TEST:")
