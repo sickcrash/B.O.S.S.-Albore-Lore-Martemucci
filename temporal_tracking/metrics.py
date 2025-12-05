@@ -1,5 +1,5 @@
 import numpy as np
-from iou_utils import extract_boxes_from_labels, compute_iou, find_best_matches
+from .iou_utils import extract_boxes_from_labels, compute_iou, find_best_matches
 from scipy.optimize import linear_sum_assignment
 
 import csv
@@ -201,7 +201,7 @@ class TemporalConsistencyAnalyzer:
             self.active_tracks[category] = []
     
     def get_results(self):
-        """
+        """ debug
        Ritorna i risultati dell'analisi.
         
         Returns:

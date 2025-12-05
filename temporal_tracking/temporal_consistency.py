@@ -1,7 +1,7 @@
 import numpy as np
 import csv
 import os
-from iou_utils import extract_boxes_from_labels, compute_iou, find_best_matches
+from .iou_utils import extract_boxes_from_labels, compute_iou, find_best_matches
 
 __all__ = ["analyze_clip", "compute_all_metrics", "generate_report", "save_report"]
 
