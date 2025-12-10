@@ -1,0 +1,20 @@
+# Configurazione generale
+model:
+  name: "yolov8n"
+  input_size: [640, 640]
+  confidence: 0.25
+  iou_threshold: 0.45
+
+dataset:
+  name: "coco"
+  yaml_path: "datasets/coco/coco.yaml"
+  calibration_samples: 1000
+
+optimization:
+  quantization:
+    int8: true
+    fp16: true
+  export_formats: ["onnx", "tflite"]
+
+benchmark:
+  num_runs: 100
