@@ -1,4 +1,12 @@
-# progetto B.O.S.S. (Blind Oriented Suggested System)
-Gruppo: Tiziano Albore, Alessio Lorè, Gabriele Martemucci
+# TASK 4 - Modello unificato indoor/outdoor con adattamentodi dominio (2D→BEV “light”)
+Gruppo: Bianca Di Bitetto, Francesco Salvatore Desiderato, Francesco Maria Di Cataldo
 
-Obiettivo:  progettare e ottimizzare reti di Computer Vision dedicate all’individuazione e classificazione di ostacoli all’interno di immagini o video, al fine di supportare la navigazione autonoma e la sicurezza del sistema.
+Obiettivo:  progettare un framework per addestrare un detector unico che generalizzi tra indoor e outdoor, che includa:
+
+1. Modulo di domain alignment (normalizzazione/adaptive layers);
+2. Bridge backbone 2D↔testa BEV;
+3. Plugin per i metodi di adattamento di dominio;
+4. Adapter per unificare loader di dataset eterogenei;
+5. Valutazione cross-domain mAP e degrado fuori dominio.
+
+I dataset utilizzati sono KITTI per dominio outdoor e SUNRGBD per dominio indoor.
