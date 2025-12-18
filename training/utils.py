@@ -1,25 +1,27 @@
 import torch
 
 # Min/Max per: [x, y, z, w, h, d, theta]
-# assumiamo un range generico abbastanza ampio.
 SCENE_LIMITS = {
-    'min': torch.tensor([-40, -10, 0, 0, 0, 0, -3.14]),  # x, y, z, w, h, d, theta
-    'max': torch.tensor([40, 10, 100, 10, 10, 10, 3.14])
+    'kitti': {
+        'min': torch.tensor([-40, -3, 0, 0.1, 0.1, 0.1, 0.0]),
+        'max': torch.tensor([ 40,  3, 70, 8.0, 8.0, 4.0, 6.28]),
+    },
+    'sunrgbd': {
+        'min': torch.tensor([-5, -2, 0, 0.1, 0.1, 0.1, 0.0]),
+        'max': torch.tensor([ 5,  3, 8,  5.0, 5.0, 3.0, 6.28]),
+    },
 }
 
+def normalize_box(boxes_m, device, domain):
+    limits = SCENE_LIMITS[domain]
+    min_v = limits['min'].to(device)[:6]
+    max_v = limits['max'].to(device)[:6]
 
-def normalize_box(boxes_m, device):
-    """ Converte da Metri a [0, 1] per il confronto con Sigmoid """
-    min_v = SCENE_LIMITS['min'].to(device)[:6]
-    max_v = SCENE_LIMITS['max'].to(device)[:6]
-
-    # Clip per normalizzazione
     boxes_m = torch.clamp(boxes_m, min_v, max_v)
     return (boxes_m - min_v) / (max_v - min_v)
 
-
-def denormalize_box(boxes_norm, device):
-    """ Per visualizzazione: da [0, 1] a Metri """
-    min_v = SCENE_LIMITS['min'].to(device)
-    max_v = SCENE_LIMITS['max'].to(device)
+def denormalize_box(boxes_norm, device, domain):
+    limits = SCENE_LIMITS[domain]
+    min_v = limits['min'].to(device)
+    max_v = limits['max'].to(device)
     return boxes_norm * (max_v - min_v) + min_v

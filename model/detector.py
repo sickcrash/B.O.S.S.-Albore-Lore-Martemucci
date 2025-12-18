@@ -19,7 +19,14 @@ class UnifiedDetector(nn.Module):
 
         # 3. Bridge: Proietta da 2D a BEV
         # Input: 256 canali -> Output: 128 canali BEV
-        self.bridge = Bridge(in_channels=256, out_channels=128)
+        self.bridge = Bridge(
+            in_channels=256,
+            out_channels=128,
+            bev_size=(64, 80),
+            z_range=(0, 100),
+            num_depth_bins=60
+        )
+
         # Domain head
         # Input: 256 channel -> Output: 2, predizione di domain(indoor-outdoor)
         self.domain_head = DomainHead(in_channel=256)

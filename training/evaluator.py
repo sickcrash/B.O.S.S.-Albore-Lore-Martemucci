@@ -3,6 +3,34 @@ import numpy as np
 from tqdm import tqdm
 from collections import defaultdict
 from training.utils import SCENE_LIMITS
+import random
+import cv2
+
+def get_3d_box_from_chw(cx, cy, cz, w, h, d):
+    dx, dy, dz = w / 2, h / 2, d / 2
+    corners = np.array([
+        [cx - dx, cy - dy, cz - dz],
+        [cx + dx, cy - dy, cz - dz],
+        [cx + dx, cy + dy, cz - dz],
+        [cx - dx, cy + dy, cz - dz],
+        [cx - dx, cy - dy, cz + dz],
+        [cx + dx, cy - dy, cz + dz],
+        [cx + dx, cy + dy, cz + dz],
+        [cx - dx, cy + dy, cz + dz],
+    ], dtype=np.float32)
+    return corners  # (8,3)
+
+def project_points_K(K, pts3d):
+    pts3d = pts3d.T                      # (3,N)
+    pts2d = K @ pts3d                    # (3,N)
+    pts2d = pts2d / pts2d[2:3, :]        # normalizza
+    return pts2d[:2, :].T.astype(int)    # (N,2)
+
+EDGES_3D = [
+    (0,1),(1,2),(2,3),(3,0),     # fronte
+    (4,5),(5,6),(6,7),(7,4),     # retro
+    (0,4),(1,5),(2,6),(3,7)      # verticali
+]
 
 class Evaluator:
     def __init__(self, model, device, num_classes=8, iou_threshold=0.5):
@@ -59,14 +87,6 @@ class Evaluator:
         cls_targets = []
         cls_preds = []
 
-        # denomalizzazione box 3D
-        min_v = SCENE_LIMITS['min'].to(self.device)[:6]
-        max_v = SCENE_LIMITS['max'].to(self.device)[:6]
-
-        # Calcolo il range (Max - Min)
-        scene_range = max_v - min_v
-        scene_min = min_v
-
         for batch in tqdm(dataloader, desc=desc):
             images = batch["image"].to(self.device)
             Ks = batch["K"].to(self.device)
@@ -109,7 +129,39 @@ class Evaluator:
                 if len(p_boxes) == 0: continue
 
                 # Denormalizzazione
-                p_boxes_scaled = p_boxes[..., :6] * scene_range + scene_min
+                domain = 'kitti' if domain_labels[i].item() == 0 else 'sunrgbd'
+                limits = SCENE_LIMITS[domain]
+                min_v = limits['min'].to(self.device)[:6]
+                max_v = limits['max'].to(self.device)[:6]
+                scene_range = max_v - min_v
+                p_boxes_scaled = p_boxes[..., :6] * scene_range + min_v
+
+                if random.random() < 0.4:
+                    img_t = images[i].detach().cpu()  # (C,H,W), in [0,1] o [0,255]
+                    img_np = img_t.numpy().transpose(1, 2, 0)  # (H,W,C)
+                    img_np = (img_np * 255).clip(0, 255).astype(np.uint8)
+                    img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
+
+                    K = Ks[i].detach().cpu().numpy()  # 3x3
+
+                    # disegna GT in verde
+                    for gt in gt_boxes[..., :6].detach().cpu().numpy():
+                        cx, cy, cz, w, h, d = gt
+                        corners3d = get_3d_box_from_chw(cx, cy, cz, w, h, d)
+                        pts2d = project_points_K(K, corners3d)
+                        for a, b in EDGES_3D:
+                            cv2.line(img_bgr, tuple(pts2d[a]), tuple(pts2d[b]), (0, 255, 0), 2)
+
+                    # disegna pred in blu
+                    for pb in p_boxes_scaled.detach().cpu().numpy():
+                        cx, cy, cz, w, h, d = pb[:6]
+                        corners3d = get_3d_box_from_chw(cx, cy, cz, w, h, d)
+                        pts2d = project_points_K(K, corners3d)
+                        for a, b in EDGES_3D:
+                            cv2.line(img_bgr, tuple(pts2d[a]), tuple(pts2d[b]), (0, 0, 255), 2)
+
+                    cv2.imshow("3D boxes debug", img_bgr)
+                    cv2.waitKey(1)
 
                 iou_matrix = self.compute_iou_aligned(p_boxes_scaled, gt_boxes[..., :6])
 

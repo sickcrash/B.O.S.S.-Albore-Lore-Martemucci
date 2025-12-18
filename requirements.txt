@@ -8,3 +8,4 @@ tqdm
 scipy
 torchvision
 albumentations
+opencv-python

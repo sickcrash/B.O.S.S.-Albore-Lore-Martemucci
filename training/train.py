@@ -5,6 +5,20 @@ import torch.nn.functional as F
 from training.loss import SetCriterion
 from training.utils import normalize_box
 import os
+import random
+import torchvision.transforms as transforms
+import cv2
+import numpy as np
+from training.evaluator import get_3d_box_from_chw, project_points_K
+from training.utils import SCENE_LIMITS
+
+
+EDGES_3D = [
+    (0,1),(1,2),(2,3),(3,0),     # fronte
+    (4,5),(5,6),(6,7),(7,4),     # retro
+    (0,4),(1,5),(2,6),(3,7)      # verticali
+]
+
 
 def run_validation(model,val_loader,criterion,weight_dict,device,best_loss):
     model.eval()
@@ -21,19 +35,17 @@ def run_validation(model,val_loader,criterion,weight_dict,device,best_loss):
             batch_size = images.shape[0]
 
             for i in range(batch_size):
-                # numero effettivo di oggetti (ignoriamo il padding)
+                # numero effettivo di oggetti
                 n_obj = batch["num_objs"][i].item()
 
-                # estrazione dati validi
+                # estraiamo solo i dati validi
                 valid_boxes = batch["target_3d"][i, :n_obj].to(device)  # [N, 6]
                 valid_labels = batch["target_cls"][i, :n_obj].to(device)  # [N]
 
-                # NORMALIZZAZIONE
-                # Portiamo i metri nel range [0, 1] per matchare l'output sigmoid
-                norm_boxes_6d = normalize_box(valid_boxes, device)
+                # normalizzazione
+                domain_str = "kitti" if domain_labels[i].item() == 1 else "sunrgbd"
+                norm_boxes_6d = normalize_box(valid_boxes, device, domain_str)
 
-                # Gestione 6 vs 7 dimensioni
-                # Shape finale: [N, 7]
                 rotation_placeholder = torch.zeros((n_obj, 1), device=device) + 0.5
                 norm_boxes_7d = torch.cat([norm_boxes_6d, rotation_placeholder], dim=1)
 
@@ -42,27 +54,20 @@ def run_validation(model,val_loader,criterion,weight_dict,device,best_loss):
                     'labels': valid_labels
                 })
 
-            # --- FORWARD ---
             outputs = model(images, Ks, domain_labels)
-
-            # --- LOSS ---
-            # outputs['pred_boxes'] è già sigmoid [0, 1]
             loss_dict = criterion(outputs, targets)
 
             # calcolo esplicito della loss di dominio
             loss_domain = F.cross_entropy(outputs['pred_domain'], domain_labels)
 
-            # Somma pesata
             losses = sum(loss_dict[k] * weight_dict[k] for k in loss_dict.keys())
             losses += loss_domain * weight_dict['loss_domain']
 
-            # --- BACKWARD ---
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
 
             val_loss += losses.item()
 
         print(f"Validation Loss: {val_loss:.3f} - Avg Val Loss: {val_loss / len(val_loader):.3f}")
-
 
     if val_loss < best_loss:
         best_loss = val_loss
@@ -71,8 +76,8 @@ def run_validation(model,val_loader,criterion,weight_dict,device,best_loss):
         torch.save(model.state_dict(), '../checkpoints/best_model.pth')
         print(f'Pesi salvati con loss migliorata: {best_loss}')
 
-
     return best_loss
+
 
 def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
 
@@ -80,7 +85,6 @@ def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
     print(f"Device: {device}")
     model = model.to(device)
 
-    # la loss di regressione è più alta di quella di classificazione perché il task è più difficile
     weight_dict = {
         'loss_ce': 2.0,  # Peso per la classificazione
         'loss_bbox': 5.0,  # Peso per i box 3D
@@ -112,7 +116,6 @@ def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
 
         progress_bar = tqdm(loader_train, desc=f"Epoch {epoch+1}/{n_epochs}", unit="batch")
 
-
         for batch in progress_bar:
             images = batch["image"].to(device)
             Ks = batch["K"].to(device)
@@ -122,19 +125,17 @@ def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
             batch_size = images.shape[0]
 
             for i in range(batch_size):
-                # numero effettivo di oggetti (ignoriamo il padding)
+                # numero effettivo di oggetti
                 n_obj = batch["num_objs"][i].item()
 
-                # estrazione dati validi
+                # estraiamo solo i dati validi
                 valid_boxes = batch["target_3d"][i, :n_obj].to(device)  # [N, 6]
                 valid_labels = batch["target_cls"][i, :n_obj].to(device)  # [N]
 
-                # NORMALIZZAZIONE
-                # Portiamo i metri nel range [0, 1] per matchare l'output sigmoid
-                norm_boxes_6d = normalize_box(valid_boxes, device)
+                # normalizzazione
+                domain_str = "kitti" if domain_labels[i].item() == 1 else "sunrgbd"
+                norm_boxes_6d = normalize_box(valid_boxes, device, domain_str)
 
-                # Gestione 6 vs 7 dimensioni
-                # Shape finale: [N, 7]
                 rotation_placeholder = torch.zeros((n_obj, 1), device=device) + 0.5
                 norm_boxes_7d = torch.cat([norm_boxes_6d, rotation_placeholder], dim=1)
 
@@ -143,22 +144,62 @@ def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
                     'labels': valid_labels
                 })
 
-            # --- FORWARD ---
             optimizer.zero_grad()
             outputs = model(images, Ks, domain_labels)
 
-            # --- LOSS ---
-            # outputs['pred_boxes'] è già sigmoid [0, 1]
+            if random.random() < 0.01: # probabilità 1% di visualizzare le immagini con i box 3D
+                for i in range(batch_size):
+                    denorm = transforms.Normalize(mean=[-0.485 / 0.229, -0.456 / 0.224, -0.406 / 0.225],
+                                                  std=[1 / 0.229, 1 / 0.224, 1 / 0.225])
+                    img_t = images[i].detach().cpu()
+                    img_t = denorm(img_t)
+                    img_np = img_t.numpy().transpose(1, 2, 0)  # (H,W,C)
+                    img_np = (img_np * 255).clip(0, 255).astype(np.uint8)
+                    img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
+
+                    K = Ks[i].detach().cpu().numpy()  # 3x3
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+                    gt_boxes = batch["target_3d"][i, :n_obj].to(device)
+
+                    domain = 'kitti' if domain_labels[i].item() == 0 else 'sunrgbd'
+                    limits = SCENE_LIMITS[domain]
+                    min_v = limits['min'].to(device)[:6]
+                    max_v = limits['max'].to(device)[:6]
+                    scene_range = max_v - min_v
+
+                    p_boxes = outputs['pred_boxes'][i]
+
+                    p_boxes_scaled = p_boxes[..., :6] * scene_range + min_v
+
+                    # disegna GT in verde
+                    for gt in gt_boxes[..., :6].detach().cpu().numpy():
+                        cx, cy, cz, w, h, d = gt
+                        corners3d = get_3d_box_from_chw(cx, cy, cz, w, h, d)
+                        pts2d = project_points_K(K, corners3d)
+                        for a, b in EDGES_3D:
+                            cv2.line(img_bgr, tuple(pts2d[a]), tuple(pts2d[b]), (0, 255, 0), 2)
+
+                    # disegna pred in blu
+                    for pb in p_boxes_scaled.detach().cpu().numpy():
+                        cx, cy, cz, w, h, d = pb[:6]
+                        corners3d = get_3d_box_from_chw(cx, cy, cz, w, h, d)
+                        pts2d = project_points_K(K, corners3d)
+                        for a, b in EDGES_3D:
+                            cv2.line(img_bgr, tuple(pts2d[a]), tuple(pts2d[b]), (0, 0, 255), 2)
+
+                    cv2.imshow("3D boxes debug", img_bgr)
+                    cv2.waitKey(1)
+
+
             loss_dict = criterion(outputs, targets)
 
             # calcolo esplicito della loss di dominio
             loss_domain = F.cross_entropy(outputs['pred_domain'], domain_labels)
 
-            # Somma pesata
             losses = sum(loss_dict[k] * weight_dict[k] for k in loss_dict.keys())
             losses += loss_domain * weight_dict['loss_domain']
 
-            # --- BACKWARD ---
             losses.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)  # Vitale per Transformer
             optimizer.step()
@@ -168,5 +209,5 @@ def train_model(model, matcher, loader_train, loader_validation, n_epochs=50):
         print(f"Train Loss: {total_loss:.3f}")
         print(f"Epoch {epoch+1}: Avg Loss {total_loss / len(loader_train)}")
 
-        if epoch % 10 == 0: # Ogni 10 epoche testiamo sul dataset di validation
+        if epoch % 10 == 0:
             best_loss = run_validation(model, loader_validation, criterion, weight_dict, device, best_loss)

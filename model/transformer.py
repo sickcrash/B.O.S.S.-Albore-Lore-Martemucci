@@ -7,21 +7,51 @@ from model.plugin import Plugin
 import math
 
 
-class SineCosine1D(nn.Module):
-    def __init__(self, d_model, max_len=1024):
-        super().__init__()
-        pe = torch.zeros(max_len, d_model)
-        position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.exp(torch.arange(0, d_model, 2, dtype=torch.float) *
-                             -(math.log(10000.0) / d_model))
-        pe[:, 0::2] = torch.sin(position * div_term)
-        pe[:, 1::2] = torch.cos(position * div_term)
-        # Shape: [1, max_len, d_model] per broadcasting su [B, max_len, d_model]
-        self.register_buffer('pe', pe.unsqueeze(0))
+class SineCosine2D(nn.Module):
+    """
+    Positional Encoding Spaziale per griglie 2D (H, W).
+    Ogni pixel riceve una codifica unica basata su (x, y).
+    """
 
-    def forward(self, N):
-        # [1, N, C]
-        return self.pe[:, :N]
+    def __init__(self, d_model, max_h=200, max_w=200):
+        super().__init__()
+        # Assicurati che d_model sia pari e divisibile per 2
+        assert d_model % 2 == 0
+        d_model_half = d_model // 2
+
+        # Encoding Y (Altezza/Profondità)
+        pe_h = torch.zeros(max_h, d_model_half)
+        position_h = torch.arange(0, max_h, dtype=torch.float).unsqueeze(1)
+        div_term_h = torch.exp(
+            torch.arange(0, d_model_half, 2, dtype=torch.float) * -(math.log(10000.0) / d_model_half))
+        pe_h[:, 0::2] = torch.sin(position_h * div_term_h)
+        pe_h[:, 1::2] = torch.cos(position_h * div_term_h)
+
+        # Encoding X (Larghezza)
+        pe_w = torch.zeros(max_w, d_model_half)
+        position_w = torch.arange(0, max_w, dtype=torch.float).unsqueeze(1)
+        div_term_w = torch.exp(
+            torch.arange(0, d_model_half, 2, dtype=torch.float) * -(math.log(10000.0) / d_model_half))
+        pe_w[:, 0::2] = torch.sin(position_w * div_term_w)
+        pe_w[:, 1::2] = torch.cos(position_w * div_term_w)
+
+        self.register_buffer('pe_h', pe_h)  # [MaxH, C/2]
+        self.register_buffer('pe_w', pe_w)  # [MaxW, C/2]
+        self.d_model = d_model
+
+    def forward(self, H, W):
+        # Seleziona le prime H e W posizioni
+        # pe_h: [H, C/2] -> [H, 1, C/2] -> [H, W, C/2]
+        # pe_w: [W, C/2] -> [1, W, C/2] -> [H, W, C/2]
+
+        h_embed = self.pe_h[:H].unsqueeze(1).expand(-1, W, -1)
+        w_embed = self.pe_w[:W].unsqueeze(0).expand(H, -1, -1)
+
+        # Concatena -> [H, W, C]
+        pe = torch.cat([w_embed, h_embed], dim=-1)
+
+        # Flatten -> [1, H*W, C] per essere compatibile col Transformer
+        return pe.flatten(0, 1).unsqueeze(0)
 
 
 class Transformer(nn.Module):
@@ -31,6 +61,7 @@ class Transformer(nn.Module):
 
         self.d_model = d_model
         self.nhead = nhead
+        self.pos_encoder = SineCosine2D(d_model)
 
         # ENCODER
         encoder_layer = TransformerEncoderLayerAdapt(d_model, nhead, dim_feedforward, dropout, num_domains)
@@ -61,8 +92,7 @@ class Transformer(nn.Module):
         src_flat = bev_features.flatten(2).transpose(1, 2)
 
         # Positional Encoding
-        pos_encoder = SineCosine1D(d_model=C, max_len=N_pixels)
-        pos = pos_encoder(N_pixels).to(src_flat.device)  # Shape [1, H*W, C] -> Broadcastable su B
+        pos = self.pos_encoder(H, W).to(src_flat.device)  # Shape [1, H*W, C] -> Broadcastable su B
 
         # Encoder Pass
         # src_flat: [B, Seq, C]

@@ -75,7 +75,7 @@ class Bridge(nn.Module):
         # Range di profondità (Z)
         self.z_min, self.z_max = z_range
 
-        # 1. Riduzione Canali + Strategy Norm
+        # Riduzione Canali + Strategy Norm
         self.reduce_conv = nn.Sequential(
             nn.Conv2d(in_channels, out_channels, 1),
             nn.ReLU()
@@ -91,7 +91,7 @@ class Bridge(nn.Module):
             nn.Sigmoid()
         )
 
-        # 2. Depth Network
+        # Depth Network
         # Predice D probabilità (softmax) per ogni pixel
         self.depth_net = nn.Sequential(
             nn.Conv2d(out_channels + self.cam_dim, out_channels, 3, padding=1),
@@ -100,7 +100,7 @@ class Bridge(nn.Module):
             nn.Conv2d(out_channels, self.num_bins, 1)
         )
 
-        # 3. Context Network: impara il contenuto delle feature
+        # Context Network: impara il contenuto delle feature
         self.context_net = nn.Conv2d(out_channels, out_channels, kernel_size=1)
 
         # Buffer dei bin di profondità

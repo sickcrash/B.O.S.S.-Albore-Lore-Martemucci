@@ -17,14 +17,16 @@ def run_pipeline():
     print(f"--> Esecuzione su device: {device}")
 
 
-    PATH_TO_IMAGES = "datasets/mini_dataset"
+    PATH_TO_IMAGES = "/home/bianca/2DtoBEV/datasets/mini_dataset"
     CHECKPOINT_PATH = "best_model.pth"
+    FINAL_MODEL_PATH = "final_model.pth"
 
-    # true per allenare, false per solo valutare
+    # Metti True se vuoi ri-allenare, False se vuoi solo testare
     TRAIN_MODE = False
 
     print("--> Loading Datasets...")
 
+    # --- TRAIN & VAL (Dataset Misti) ---
     kitti_train = DatasetAdapter(f'{PATH_TO_IMAGES}/KITTI_train.json', PATH_TO_IMAGES, target_size=(512, 512),
                                  domain_label=1, max_objects=10)
     sun_train = DatasetAdapter(f'{PATH_TO_IMAGES}/SUNRGBD_train.json', PATH_TO_IMAGES, target_size=(512, 512),
@@ -40,6 +42,7 @@ def run_pipeline():
     loader_train = DataLoader(combined_train, batch_size=4, shuffle=True, num_workers=2)
     loader_val = DataLoader(combined_val, batch_size=4, shuffle=False)
 
+    # --- TEST (Separati per Ablation Study) ---
     kitti_test = DatasetAdapter(f'{PATH_TO_IMAGES}/KITTI_test.json', PATH_TO_IMAGES, target_size=(512, 512),
                                 domain_label=1, max_objects=10, enable_transformation=False)
     sun_test = DatasetAdapter(f'{PATH_TO_IMAGES}/SUNRGBD_test.json', PATH_TO_IMAGES, target_size=(512, 512),
@@ -51,11 +54,16 @@ def run_pipeline():
     combined_test = ConcatDataset([kitti_test, sun_test])
     loader_test_mixed = DataLoader(combined_test, batch_size=4, shuffle=False)
 
-
+    # ==========================================
+    # INIZIALIZZAZIONE MODELLO
+    # ==========================================
+    print("--> Inizializzazione UnifiedDetector...")
     detector = UnifiedDetector().to(device)
     matcher = HungarianMatcher()
 
-    # checkpoint
+    # ==========================================
+    # GESTIONE CHECKPOINT
+    # ==========================================
     if os.path.exists(CHECKPOINT_PATH):
         print(f"--> Trovato checkpoint: {CHECKPOINT_PATH}. Caricamento...")
         try:
@@ -70,20 +78,24 @@ def run_pipeline():
     else:
         print("--> Nessun checkpoint trovato. Modello inizializzato random.")
 
-    # training
+    # ==========================================
+    # FASE DI TRAINING
+    # ==========================================
     if TRAIN_MODE:
         print("\n" + "=" * 40)
-        print("       AVVIO TRAINING")
+        print("       AVVIO TRAINING LOOP")
         print("=" * 40)
-        train_model(detector, matcher, loader_train, loader_val, n_epochs=10)
-        torch.save(detector.state_dict(), "best_model_retrained.pth")
-        print("Training completato e modello salvato.")
+        train_model(detector, matcher, loader_train, loader_val, n_epochs=1)
+        torch.save(detector.state_dict(), FINAL_MODEL_PATH)
+        print(f"Modello finale salvato in: {FINAL_MODEL_PATH}")
 
-
+    # ==========================================
+    # FASE DI VALUTAZIONE
+    # ==========================================
     print("\n" + "=" * 40)
-    print("       AVVIO EVALUATION")
+    print("       AVVIO EVALUATION      ")
     print("=" * 40)
-    # evaluation
+
     evaluator = Evaluator(model=detector, device=device, num_classes=8, iou_threshold=0.1)
 
     # [A] Mixed Domain
@@ -95,9 +107,11 @@ def run_pipeline():
     # [C] Indoor (SUNRGBD)
     metrics_sun = evaluator.run_evaluation(loader_test_sun, desc="SUNRGBD Eval")
 
-    # report
+    # ==========================================
+    # REPORT E GRAFICI
+    # ==========================================
     print("\n" + "#" * 50)
-    print("           REPORT FINALE           ")
+    print("           REPORT FINALE D'ESAME           ")
     print("#" * 50)
     print(f"{'TEST SET':<15} | {'mAP (IoU=.25)':<15} | {'DOMAIN ACC':<15}")
     print("-" * 50)
@@ -110,7 +124,7 @@ def run_pipeline():
     gap = abs(metrics_kitti['mAP'] - metrics_sun['mAP'])
     print(f"\nDomain Gap (Delta mAP): {gap:.4f}")
 
-    # confusion matrix
+    # --- PLOT CONFUSION MATRIX ---
     targets = metrics_mixed['targets']
     preds = metrics_mixed['preds']
 

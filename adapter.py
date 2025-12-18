@@ -56,7 +56,6 @@ class DatasetAdapter(Dataset):
         # Data Augmentation con albumentations, p indica la probabiltà di applicazione delle trasformazioni
         self.randomized_trans = A.Compose([
             A.OneOf([
-                A.ChannelShuffle(p=0.1),
                 A.GaussianBlur(
                     sigma_limit=(0.2, 0.5),
                     blur_limit=(0, 0),
@@ -71,13 +70,12 @@ class DatasetAdapter(Dataset):
         self.max_objects = max_objects
 
         self.class_map = {
-            # TODO vedere se mantenere raggruppamenti
-            # Outdoor (KITTI Style)
-            'Car': 0, 'Van': 0, 'Truck': 0,  # Raggruppiamo i veicoli
-            'Pedestrian': 1, 'Person': 1,  # Raggruppiamo le persone
-            'Cyclist': 2,
+            # Outdoor
+            'car': 0, 'van': 0, 'truck': 0,  # Raggruppiamo i veicoli
+            'pedestrian': 1, 'person': 1,  # Raggruppiamo le persone
+            'cyclist': 2,
 
-            # Indoor (SUN RGB-D Style)
+            # Indoor
             'chair': 3,
             'table': 4,
             'desk': 4,  # Tavoli e scrivanie insieme
@@ -106,7 +104,7 @@ class DatasetAdapter(Dataset):
         # fattore di scala
         scale = min(target_w / w_orig, target_h / h_orig)
 
-        # Nuove dimensioni dell'immagine scalata
+        # dimensioni dell'immagine scalata
         nw = int(w_orig * scale)
         nh = int(h_orig * scale)
 
@@ -117,13 +115,11 @@ class DatasetAdapter(Dataset):
         final_img = Image.new("RGB", (target_w, target_h), (128, 128, 128))
 
         # Incolliamo l'immagine ridimensionata in alto a sinistra (0, 0)
-        # NOTA: Usare (0,0) semplifica i calcoli di K (niente offset su cx, cy)
         final_img.paste(img_resized, (0, 0))
 
-        # Convertiamo in Tensore PyTorch normalizzato
         img_tensor = self.transform(final_img)
 
-        # Applico le trasformazioni casuali
+        # trasformazioni casuali
         if self.enable_transformation:
             trans = self.randomized_trans(image=img_tensor.numpy())
             trans = torch.from_numpy(trans['image'])  # Riconversione a tensore
@@ -153,7 +149,6 @@ class DatasetAdapter(Dataset):
         target_matrix = torch.zeros((self.max_objects, 6), dtype=torch.float32)
 
         # Vettore Classi: [MAX_OBJ] (Tipo Long/Int per CrossEntropy) per CLASSIFICAZIONE
-        # Riempiamo con -1 per indicare "nessuna classe" (ignore_index)
         target_cls = torch.full((self.max_objects,), -1, dtype=torch.long)
 
         # Maschera: [MAX_OBJ]
@@ -190,4 +185,5 @@ class DatasetAdapter(Dataset):
             "num_objs": torch.tensor(num_objs),
             "domain": torch.tensor(self.domain_label).long()
         }
+
 
