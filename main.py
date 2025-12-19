@@ -1,4 +1,5 @@
 import os
+import shutil
 import yaml
 from datetime import datetime
 
@@ -14,12 +15,19 @@ from tester_net import CompleteTestingPipeline
 def resolve_yaml_variables(config):
     paths = config["paths"]
     dataset_root = paths["dataset_root"]
-    
     for key, value in paths.items():
         if isinstance(value, str) and "${paths.dataset_root}" in value:
             paths[key] = value.replace("${paths.dataset_root}", dataset_root)
-    
     return config
+
+
+def backup_if_exists(path: str):
+    if os.path.exists(path):
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base, ext = os.path.splitext(path)
+        backup_path = f"{base}_backup_{ts}{ext}"
+        shutil.copy2(path, backup_path)
+        print(f"🧷 Backup modello precedente -> {backup_path}")
 
 
 def main_complete_real():
@@ -40,7 +48,6 @@ def main_complete_real():
 
     config = resolve_yaml_variables(config)
 
-    DATASET_ROOT = resolve_path(config["paths"]["dataset_root"])
     BDD_IMG_ROOT = resolve_path(config["paths"]["bdd_img_root"])
     BDD_LABEL_TRAIN = resolve_path(config["paths"]["bdd_label_train"])
     BDD_LABEL_VAL = resolve_path(config["paths"]["bdd_label_val"])
@@ -52,8 +59,20 @@ def main_complete_real():
     EXPORTS_DIR = resolve_path(config["paths"]["exports_dir"])
     MODEL_SAVE_PATH = resolve_path(config["paths"]["model_save_path"])
 
-    MAX_TRAIN_IMG, MAX_TRAIN_VID = 500, 50
-    MAX_VAL_IMG, MAX_VAL_VID = 100, 20
+    CLASS_NAMES = {
+        0: "background",
+        1: "person",
+        2: "vehicle",
+        3: "bike",
+        4: "motor",
+    }
+    NUM_CLASSES = len(CLASS_NAMES)
+
+
+    backup_if_exists(MODEL_SAVE_PATH)
+
+    MAX_TRAIN_IMG, MAX_TRAIN_VID = 5000, 50
+    MAX_VAL_IMG, MAX_VAL_VID = 1000, 20
     MAX_TEST_IMG, MAX_TEST_VID = 50, 10
 
     print("\n" + "=" * 50)
@@ -76,14 +95,14 @@ def main_complete_real():
 
     print(f"\n📊 STATISTICHE:")
     print(f"TRAIN: {len(train_img_dataset)} img, {len(train_vid_dataset)} vid")
-    print(f"VAL: {len(val_img_dataset)} img, {len(val_vid_dataset)} vid")
-    print(f"TEST: {len(test_img_dataset)} img, {len(test_vid_dataset)} vid")
+    print(f"VAL:   {len(val_img_dataset)} img, {len(val_vid_dataset)} vid")
+    print(f"TEST:  {len(test_img_dataset)} img, {len(test_vid_dataset)} vid")
 
     print("\n" + "=" * 50)
     print("🧪 ABLATION STUDY")
     print("=" * 50)
 
-    ablation = AblationStudy(save_dir=LOGS_DIR)
+    ablation = AblationStudy(save_dir=LOGS_DIR, num_classes=NUM_CLASSES, device=device)
 
     experiments = [
         ("Baseline", {"use_adapters": False, "use_temporal": False, "use_weather_aug": False}),
@@ -95,8 +114,8 @@ def main_complete_real():
         ("All Components", {"use_adapters": True, "use_temporal": True, "use_weather_aug": True}),
     ]
 
-    for exp_name, config in experiments:
-        ablation.run_experiment(exp_name, config, None, val_img_loader, device)
+    for exp_name, cfg in experiments:
+        ablation.run_experiment(exp_name, cfg, val_img_loader, device, num_classes=NUM_CLASSES)
 
     ablation.save_results()
 
@@ -105,7 +124,7 @@ def main_complete_real():
     print("=" * 50)
 
     model = EnhancedTemporalSSD(
-        num_classes=2,
+        num_classes=NUM_CLASSES,
         device=device,
         use_adapters=True,
         use_temporal=True,
@@ -119,43 +138,63 @@ def main_complete_real():
     )
 
     trainer = CompleteTrainingPipeline(
-        model, train_img_loader, train_vid_loader,
-        val_img_loader, device, use_focal_loss=True,
-        val_vid_loader=val_vid_loader
+        model=model,
+        train_img_loader=train_img_loader,
+        train_vid_loader=train_vid_loader,
+        val_img_loader=val_img_loader,
+        val_vid_loader=val_vid_loader,
+        device=device,
+        num_classes=NUM_CLASSES,
+        use_focal_loss=True
     )
 
-    EPOCHS = 2
-    best_val_map = 0.0
+    EPOCHS = 10
+    best_val_map = -1.0
 
     for epoch in range(1, EPOCHS + 1):
         print(f"\n⭐ EPOCH {epoch}/{EPOCHS}")
         train_loss = trainer.train_epoch(optimizer, epoch)
         val_metrics = trainer.validate(epoch)
-
         val_temporal = trainer.validate_video_clips(epoch)
 
-        val_map = val_metrics['mAP_avg']
-        val_map_05 = val_metrics['IoU_0.5']['mAP']
-        val_map_075 = val_metrics['IoU_0.75']['mAP']
-
+        val_map = float(val_metrics["mAP_avg"])
         print(f"📊 Train Loss: {train_loss:.4f}")
-        print(f"   Val mAP@0.5:  {val_map_05:.4f}")
-        print(f"   Val mAP@0.75: {val_map_075:.4f}")
         print(f"   Val mAP (avg): {val_map:.4f}")
 
         if val_temporal:
             print(f" Temporal IoU: {val_temporal['temporal_iou_mean']:.4f}")
             print(f"ID Switch Rate: {val_temporal['id_switch_rate']:.4f}")
 
+        # salva best
         if val_map > best_val_map:
             best_val_map = val_map
-            torch.save({
-                "model_state_dict": model.state_dict(),
-                "optimizer_state_dict": optimizer.state_dict(),
-                "epoch": epoch,
-                "best_val_map": best_val_map,
-            }, MODEL_SAVE_PATH, _use_new_zipfile_serialization=False)
-            print(f"💾 Best model salvato")
+            torch.save(
+                {
+                    "model_state_dict": model.state_dict(),
+                    "optimizer_state_dict": optimizer.state_dict(),
+                    "epoch": epoch,
+                    "best_val_map": best_val_map,
+                    "num_classes": NUM_CLASSES,
+                    "class_names": CLASS_NAMES,
+                },
+                MODEL_SAVE_PATH,
+                _use_new_zipfile_serialization=False
+            )
+            print(f"💾 Best model salvato -> {MODEL_SAVE_PATH}")
+
+    torch.save(
+        {
+            "model_state_dict": model.state_dict(),
+            "optimizer_state_dict": optimizer.state_dict(),
+            "epoch": EPOCHS,
+            "best_val_map": best_val_map,
+            "num_classes": NUM_CLASSES,
+            "class_names": CLASS_NAMES,
+        },
+        MODEL_SAVE_PATH,
+        _use_new_zipfile_serialization=False
+    )
+    print(f"💾 Last model salvato -> {MODEL_SAVE_PATH}")
 
     print("\n" + "=" * 50)
     print("🧪 TESTING")
@@ -170,24 +209,24 @@ def main_complete_real():
     print("=" * 50)
 
     exporter = ModelExporter(model, save_dir=EXPORTS_DIR)
-
     onnx_path = exporter.export_models()
 
     metadata = {
-        'model_type': 'SSD300_Enhanced',
-        'num_classes': 2,
-        'input_size': [300, 300],
-        'components': {
-            'domain_adapters': True,
-            'temporal_consistency': True,
-            'weather_augmentation': True
+        "model_type": "SSD300_Enhanced",
+        "num_classes": NUM_CLASSES,
+        "class_names": CLASS_NAMES,
+        "input_size": [300, 300],
+        "components": {
+            "domain_adapters": True,
+            "temporal_consistency": True,
+            "weather_augmentation": True
         },
-        'export_date': str(datetime.now()),
-        'best_val_map': best_val_map,
-        'test_metrics': img_metrics,
-        'export_status': {
-            'onnx': 'success' if onnx_path else 'failed',
-            'torchscript': 'disabled'
+        "export_date": str(datetime.now()),
+        "best_val_map": best_val_map,
+        "test_metrics": img_metrics,
+        "export_status": {
+            "onnx": "success" if onnx_path else "failed",
+            "torchscript": "disabled"
         }
     }
     exporter.save_metadata(metadata)
@@ -197,11 +236,6 @@ def main_complete_real():
     print("=" * 50)
     print(f"✅ Modello salvato: {MODEL_SAVE_PATH}")
     print(f"✅ ONNX: {onnx_path}")
-
-    print(f"\n📊 METRICHE FINALI TEST:")
-    print(f"   mAP medio: {img_metrics['mAP_avg']:.4f}")
-    print(f"   mAP@0.5:   {img_metrics['IoU_0.5']['mAP']:.4f}")
-    print(f"   mAP@0.75:  {img_metrics['IoU_0.75']['mAP']:.4f}")
 
 
 if __name__ == "__main__":

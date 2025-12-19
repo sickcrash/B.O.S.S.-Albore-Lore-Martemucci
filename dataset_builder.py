@@ -10,17 +10,37 @@ import cv2
 from decord import VideoReader, cpu
 
 ##############################################
-# Classi Dataset
+# Dataset - Immagini (BDD100K labels format)
 ##############################################
 
 class RealBDDImageDataset(Dataset):
-    # Dataset BDDA immagini
+    """
+    Dataset immagini con classi multi-categoria (macro-classi).
+
+    Classi:
+      0: background
+      1: person     (person + rider)
+      2: vehicle    (car + truck + bus)
+      3: bike
+      4: motor
+    """
+
+    # mapping category -> label
+    CLASS_MAP = {
+        "person": 1,
+        "rider": 1,
+        "car": 2,
+        "truck": 2,
+        "bus": 2,
+        "bike": 3,
+        "motor": 4,
+    }
 
     def __init__(self, annotations_path, img_root, split: str, is_train: bool = True, max_samples=None):
         if os.path.exists(annotations_path):
-            with open(annotations_path, 'r') as f:
+            with open(annotations_path, "r") as f:
                 self.annotations = json.load(f)
-            print(f"✅ BDDA {split} - {len(self.annotations)} immagini")
+            print(f"✅ BDD {split} - {len(self.annotations)} immagini")
         else:
             self.annotations = []
             print(f"⚠️ Annotations non trovate: {annotations_path}")
@@ -32,20 +52,32 @@ class RealBDDImageDataset(Dataset):
         self.split = split
         self.is_train = is_train
 
+        bbox_params = A.BboxParams(
+            format="pascal_voc",
+            label_fields=["labels"],
+            min_visibility=0.0
+        )
+
         if self.is_train:
-            self.transforms = A.Compose([
-                A.Resize(300, 300),
-                A.HorizontalFlip(p=0.5),
-                A.RandomBrightnessContrast(p=0.3),
-                A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-                ToTensorV2(),
-            ], bbox_params=A.BboxParams(format='pascal_voc', label_fields=['labels']))
+            self.transforms = A.Compose(
+                [
+                    A.Resize(300, 300),
+                    A.HorizontalFlip(p=0.5),
+                    A.RandomBrightnessContrast(p=0.3),
+                    A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+                    ToTensorV2(),
+                ],
+                bbox_params=bbox_params
+            )
         else:
-            self.transforms = A.Compose([
-                A.Resize(300, 300),
-                A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-                ToTensorV2(),
-            ], bbox_params=A.BboxParams(format='pascal_voc', label_fields=['labels']))
+            self.transforms = A.Compose(
+                [
+                    A.Resize(300, 300),
+                    A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+                    ToTensorV2(),
+                ],
+                bbox_params=bbox_params
+            )
 
     def __len__(self):
         return len(self.annotations)
@@ -53,45 +85,65 @@ class RealBDDImageDataset(Dataset):
     def _parse_labels(self, ann):
         boxes = []
         labels = []
+
         if "labels" in ann:
             for obj in ann["labels"]:
                 if "box2d" not in obj:
                     continue
+
+                cat = obj.get("category")
+                if cat not in self.CLASS_MAP:
+                    continue
+
                 b = obj["box2d"]
-                if obj.get("category") in ["car", "truck", "bus", "person", "rider", "bike", "motor"]:
-                    boxes.append([b["x1"], b["y1"], b["x2"], b["y2"]])
-                    labels.append(1)
-        if len(boxes) == 0:
-            boxes = [[0, 0, 1, 1]]
-            labels = [0]
+                x1, y1, x2, y2 = b["x1"], b["y1"], b["x2"], b["y2"]
+
+                # scarta box degeneri
+                if x2 <= x1 or y2 <= y1:
+                    continue
+
+                boxes.append([x1, y1, x2, y2])
+                labels.append(self.CLASS_MAP[cat])
+
+        # boxes=[], labels=[]
         return boxes, labels
 
     def __getitem__(self, idx):
         ann = self.annotations[idx]
         fname = ann["name"]
         img_path = os.path.join(self.img_root, self.split, fname)
+
         if not os.path.exists(img_path):
-            print(f"⚠️ Immagine non trovata: {img_path}")
             raise FileNotFoundError(f"Immagine non trovata: {img_path}")
-        try:
-            image = np.array(Image.open(img_path).convert("RGB"))
-            boxes, labels = self._parse_labels(ann)
-            transformed = self.transforms(image=image, bboxes=boxes, labels=labels)
-            image_t = transformed["image"]
-            boxes_t = transformed["bboxes"]
-            labels_t = transformed["labels"]
-            target = {
-                "boxes": torch.tensor(boxes_t, dtype=torch.float32),
-                "labels": torch.tensor(labels_t, dtype=torch.int64)
-            }
-            return image_t, target, img_path
-        except Exception as e:
-            print(f"⚠️ Errore parsing immagine: {img_path}, {e}")
-            raise
+
+        image = np.array(Image.open(img_path).convert("RGB"))
+        boxes, labels = self._parse_labels(ann)
+
+        # Albumentations con bbox_params accetta anche liste vuote:
+        transformed = self.transforms(image=image, bboxes=boxes, labels=labels)
+
+        image_t = transformed["image"]
+        boxes_t = transformed["bboxes"]
+        labels_t = transformed["labels"]
+
+        # Garantiamo shape corretta anche per empty
+        if len(boxes_t) == 0:
+            boxes_tensor = torch.zeros((0, 4), dtype=torch.float32)
+            labels_tensor = torch.zeros((0,), dtype=torch.int64)
+        else:
+            boxes_tensor = torch.tensor(boxes_t, dtype=torch.float32)
+            labels_tensor = torch.tensor(labels_t, dtype=torch.int64)
+
+        target = {"boxes": boxes_tensor, "labels": labels_tensor}
+        return image_t, target, img_path
+
+
+##############################################
+# Dataset - Video (resta invariato: no labels)
+##############################################
 
 class RealBDDAVideoDataset(Dataset):
-    """Dataset BDDA video"""
-
+    """Dataset BDDA video (clip RGB + gazemap). Nessuna annotazione box."""
     def __init__(self, root_dir, clip_length=8, max_samples=None):
         self.root_dir = root_dir
         self.camera_dir = os.path.join(root_dir, "camera_videos")
@@ -123,6 +175,7 @@ class RealBDDAVideoDataset(Dataset):
             total = len(vr)
             if total == 0:
                 raise RuntimeError("Video vuoto")
+
             if total < num_frames:
                 idx = list(range(total))
                 while len(idx) < num_frames:
@@ -130,23 +183,28 @@ class RealBDDAVideoDataset(Dataset):
                 idx = idx[:num_frames]
             else:
                 idx = np.linspace(0, total - 1, num_frames, dtype=int)
-            frames = vr.get_batch(idx).asnumpy()  # Restituisce [T, H, W, C]
+
+            frames = vr.get_batch(idx).asnumpy()  # [T,H,W,C]
             processed = []
             for f in frames:
-                rgb = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)  # Converti in RGB
-                t = self.transforms(image=rgb)["image"]  # Applica trasformazioni
+                # decord spesso già in RGB, ma lasciamo conversione robusta
+                rgb = cv2.cvtColor(f, cv2.COLOR_BGR2RGB)
+                t = self.transforms(image=rgb)["image"]
                 processed.append(t)
-            return torch.stack(processed) # Restituisce [T, C, H, W]
+
+            return torch.stack(processed)  # [T,C,H,W]
         except Exception as e:
             print(f"❌ Errore caricamento clip: {e}")
-            return torch.randn(num_frames, 3, 300, 300)  # [T, C, H, W]
+            return torch.randn(num_frames, 3, 300, 300)
 
     def __getitem__(self, idx):
         cam_path = self.video_paths[idx]
         video_name = os.path.basename(cam_path)
+
         clip_rgb = self._load_clip(cam_path, self.clip_length)
         gaze_path = os.path.join(self.gazemap_dir, video_name)
         clip_gaze = self._load_clip(gaze_path, self.clip_length) if os.path.exists(gaze_path) else torch.zeros_like(clip_rgb)
+
         target = {
             "boxes": torch.zeros((0, 4), dtype=torch.float32),
             "labels": torch.zeros((0,), dtype=torch.int64)
@@ -155,7 +213,7 @@ class RealBDDAVideoDataset(Dataset):
 
 
 ##############################################
-# Funzioni di collate per DataLoader
+# Collate functions
 ##############################################
 
 def collate_fn(batch):

@@ -1,13 +1,19 @@
-Per scaricare ed utilizzare il dataset COCO-Home-Object è richiesto l'accesso a Roboflow.
+Per scaricare ed utilizzare il dataset bdd100k.
 
--https://universe.roboflow.com/objectdetection-uzld5/coco-home-objects
+-https://www.kaggle.com/datasets/solesensei/solesensei_bdd100k/data
 
--Dalla side bar a sinistra è possibile entrare nella sezione "Dataset" ed avviare il download di quest'ultimo tramite il bottone "Download Dataset".
+-Scaricare inoltre le labels release per training e validation
 
--Selezionare la voce "Get a code snipper or ZIP file".
+Per scaricare ed utilizzare il dataset BBD Attention:
 
--Selezionare come formato delle immagini e delle annotazioni: "JSON/COCO".
+-http://bdd-data.berkeley.edu/download.html
 
--Download zip to computer
+-Scorrere la pagina fin al file chiamato "BDD-Attention" con dimensione 5GB.
 
--Inserire la cartella ESTRATTA nella cartella del progetto che viene utilizzata sull'editor (VSC...)
+
+Nel dataset bdd100k, è stata rimossa la cartella 10k per lo scarso numero di esempi, quindi è stata utilizzata solo la cartella 100k.
+
+Per quanto riguarda il dataset BDD-Attention sono presenti solo video e non immagini.
+
+Entrambi i dataset sono già divisi in train, validation e test.
+

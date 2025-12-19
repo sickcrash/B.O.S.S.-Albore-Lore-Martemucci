@@ -6,3 +6,7 @@ logs/
 exports/
 config.yaml
 complete_full_model.pth
+complete_10epochs_full_model.pth
+inference_results
+exports
+.gradio

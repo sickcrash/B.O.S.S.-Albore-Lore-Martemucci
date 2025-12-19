@@ -339,7 +339,6 @@ class EnhancedTemporalSSD(nn.Module):
 
         print("\n🔧 Registering Domain Adapter Hooks (Deep Search)...")
 
-        # 1) Cerca ultimo Conv2d con out_channels == 1024 (conv7)
         candidates = []
         for name, module in self.ssd.backbone.named_modules():
             if isinstance(module, nn.Conv2d) and module.out_channels == 1024:
@@ -353,7 +352,6 @@ class EnhancedTemporalSSD(nn.Module):
         else:
             print("⚠️ ERRORE: Nessun layer Conv2d con 1024 canali trovato nel backbone!")
 
-        # 2) Cerca in backbone.extra moduli con out_channels == 512 e 256
         targets_extra = {
             512: 'conv8_2',
             256: 'conv9_2'
@@ -378,7 +376,6 @@ class EnhancedTemporalSSD(nn.Module):
         else:
             print("⚠️ WARNING: backbone.extra non trovato!")
 
-        # 3) Validazione finale e assert
         print("\n🔍 Validazione Hook Registration:")
         all_registered = True
         for hook_name, is_registered in hooks_registered.items():

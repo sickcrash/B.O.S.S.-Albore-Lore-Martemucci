@@ -10,7 +10,7 @@ from datetime import datetime
 from tester_net import CompleteTestingPipeline
 from dataset_builder import RealBDDAVideoDataset, collate_fn_video
 from torch.utils.data import DataLoader
-from temporal_consistency_integration import TemporalConsistencyIntegration
+from temporal_tracking.temporal_consistency_integration import TemporalConsistencyIntegration
 
 # Setup
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
