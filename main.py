@@ -17,12 +17,14 @@ def run_pipeline():
     print(f"--> Esecuzione su device: {device}")
 
 
-    PATH_TO_IMAGES = "/home/bianca/2DtoBEV/datasets/mini_dataset"
+    PATH_TO_IMAGES = "./datasets/mini_dataset"
     CHECKPOINT_PATH = "best_model.pth"
     FINAL_MODEL_PATH = "final_model.pth"
 
-    # Metti True se vuoi ri-allenare, False se vuoi solo testare
-    TRAIN_MODE = False
+    TRAIN_MODE = False # true per allenare, false per solo valutazione
+    OUT_DOMAIN = "kitti" # Se "kitti" o "sunrgbd", valuta un dominio alla volta per valutare degrado fuori dominio
+    NUM_EPOCHS = 1
+    BATCH_SIZE = 4
 
     print("--> Loading Datasets...")
 
@@ -39,8 +41,13 @@ def run_pipeline():
                              domain_label=0, max_objects=10, enable_transformation=False)
     combined_val = ConcatDataset([kitti_val, sun_val])
 
-    loader_train = DataLoader(combined_train, batch_size=4, shuffle=True, num_workers=2)
-    loader_val = DataLoader(combined_val, batch_size=4, shuffle=False)
+    loader_train = DataLoader(combined_train, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
+    loader_val = DataLoader(combined_val, batch_size=BATCH_SIZE, shuffle=False)
+
+    loader_train_kitti = DataLoader(kitti_train, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
+    loader_val_kitti = DataLoader(kitti_val, batch_size=BATCH_SIZE, shuffle=False)
+    loader_train_sun = DataLoader(sun_train, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
+    loader_val_sun = DataLoader(sun_val, batch_size=BATCH_SIZE, shuffle=False)
 
     # --- TEST (Separati per Ablation Study) ---
     kitti_test = DatasetAdapter(f'{PATH_TO_IMAGES}/KITTI_test.json', PATH_TO_IMAGES, target_size=(512, 512),
@@ -48,16 +55,15 @@ def run_pipeline():
     sun_test = DatasetAdapter(f'{PATH_TO_IMAGES}/SUNRGBD_test.json', PATH_TO_IMAGES, target_size=(512, 512),
                               domain_label=0, max_objects=10, enable_transformation=False)
 
-    loader_test_kitti = DataLoader(kitti_test, batch_size=4, shuffle=False)
-    loader_test_sun = DataLoader(sun_test, batch_size=4, shuffle=False)
+    loader_test_kitti = DataLoader(kitti_test, batch_size=BATCH_SIZE, shuffle=False)
+    loader_test_sun = DataLoader(sun_test, batch_size=BATCH_SIZE, shuffle=False)
 
     combined_test = ConcatDataset([kitti_test, sun_test])
-    loader_test_mixed = DataLoader(combined_test, batch_size=4, shuffle=False)
+    loader_test_mixed = DataLoader(combined_test, batch_size=BATCH_SIZE, shuffle=False)
 
     # ==========================================
     # INIZIALIZZAZIONE MODELLO
     # ==========================================
-    print("--> Inizializzazione UnifiedDetector...")
     detector = UnifiedDetector().to(device)
     matcher = HungarianMatcher()
 
@@ -85,7 +91,14 @@ def run_pipeline():
         print("\n" + "=" * 40)
         print("       AVVIO TRAINING LOOP")
         print("=" * 40)
-        train_model(detector, matcher, loader_train, loader_val, n_epochs=1)
+        if OUT_DOMAIN in ["kitti", "sunrgbd"]:
+            print(f"Allenamento solo su dominio: {OUT_DOMAIN}")
+            if OUT_DOMAIN == "kitti":
+                train_model(detector, matcher, loader_train_kitti, loader_val_kitti, n_epochs=NUM_EPOCHS)
+            else:
+                train_model(detector, matcher, loader_train_sun, loader_val_sun, n_epochs=NUM_EPOCHS)
+        else:
+            train_model(detector, matcher, loader_train, loader_val, n_epochs=NUM_EPOCHS)
         torch.save(detector.state_dict(), FINAL_MODEL_PATH)
         print(f"Modello finale salvato in: {FINAL_MODEL_PATH}")
 
@@ -120,11 +133,11 @@ def run_pipeline():
     print(f"{'SUN (In)':<15} | {metrics_sun['mAP']:.4f}{'':<9} | {metrics_sun['domain_acc']:.2%}")
     print("-" * 50)
 
-    # Analisi automatica del "Gap"
+    # domain gap
     gap = abs(metrics_kitti['mAP'] - metrics_sun['mAP'])
     print(f"\nDomain Gap (Delta mAP): {gap:.4f}")
 
-    # --- PLOT CONFUSION MATRIX ---
+    # confusion matrix
     targets = metrics_mixed['targets']
     preds = metrics_mixed['preds']
 
