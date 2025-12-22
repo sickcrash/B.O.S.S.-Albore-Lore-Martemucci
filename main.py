@@ -1,8 +1,5 @@
 import torch
 import os
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.metrics import confusion_matrix
 from torch.utils.data import DataLoader, ConcatDataset
 
 from adapter import DatasetAdapter
@@ -22,7 +19,7 @@ def run_pipeline():
     FINAL_MODEL_PATH = "final_model.pth"
 
     TRAIN_MODE = False # true per allenare, false per solo valutazione
-    OUT_DOMAIN = "kitti" # Se "kitti" o "sunrgbd", valuta un dominio alla volta per valutare degrado fuori dominio
+    OUT_DOMAIN = None # Se "kitti" o "sunrgbd", valuta un dominio alla volta per valutare degrado fuori dominio
     NUM_EPOCHS = 1
     BATCH_SIZE = 4
 
@@ -136,31 +133,6 @@ def run_pipeline():
     # domain gap
     gap = abs(metrics_kitti['mAP'] - metrics_sun['mAP'])
     print(f"\nDomain Gap (Delta mAP): {gap:.4f}")
-
-    # confusion matrix
-    targets = metrics_mixed['targets']
-    preds = metrics_mixed['preds']
-
-    if len(targets) > 0:
-        unique_labels = sorted(list(set(targets + preds)))
-        target_names = [evaluator.class_names.get(i, str(i)) for i in unique_labels]
-
-        cm = confusion_matrix(targets, preds, labels=unique_labels)
-
-        plt.figure(figsize=(10, 8))
-        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                    xticklabels=target_names, yticklabels=target_names)
-        plt.title('Confusion Matrix (Mixed Domain)')
-        plt.ylabel('True Class')
-        plt.xlabel('Predicted Class')
-
-        plt.savefig('confusion_matrix_result.png')
-        print("Grafico salvato come 'confusion_matrix_result.png'")
-
-        plt.show()
-    else:
-        print("Non abbastanza dati rilevati per generare la matrice di confusione.")
-
 
 if __name__ == "__main__":
     run_pipeline()
