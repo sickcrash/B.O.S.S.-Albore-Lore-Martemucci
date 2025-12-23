@@ -3,6 +3,7 @@ import numpy as np
 from tqdm import tqdm
 from collections import defaultdict
 from training.utils import SCENE_LIMITS
+import torchvision.transforms as transforms
 import random
 import cv2
 
@@ -137,7 +138,10 @@ class Evaluator:
                 p_boxes_scaled = p_boxes[..., :6] * scene_range + min_v
 
                 if random.random() < 0.4:
+                    denorm = transforms.Normalize(mean=[-0.485 / 0.229, -0.456 / 0.224, -0.406 / 0.225],
+                                                  std=[1 / 0.229, 1 / 0.224, 1 / 0.225])
                     img_t = images[i].detach().cpu()  # (C,H,W), in [0,1] o [0,255]
+                    img_t = denorm(img_t)  # Denormalizziamo per far comparire un'immagine visibile
                     img_np = img_t.numpy().transpose(1, 2, 0)  # (H,W,C)
                     img_np = (img_np * 255).clip(0, 255).astype(np.uint8)
                     img_bgr = cv2.cvtColor(img_np, cv2.COLOR_RGB2BGR)
