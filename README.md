@@ -1,5 +1,5 @@
 # TASK 4 - Modello unificato indoor/outdoor con adattamento di dominio (2D→BEV “light”)
-Gruppo: Bianca Di Bitetto, Francesco Salvatore Desiderato, Francesco Maria Di Cataldo
+Gruppo: Bianca Di Bitetto, Francesco Salvatore Desiderato, Francesco Maria Dicataldo
 
 Obiettivo:  progettare un framework per addestrare un detector unico che generalizzi tra indoor e outdoor, che includa:
 
