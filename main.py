@@ -8,10 +8,11 @@ from training.loss import HungarianMatcher
 from training.train import train_model
 from training.evaluator import Evaluator
 import warnings
-warnings.filterwarnings("ignore")
+import random
 
 
 def run_pipeline():
+    random.seed(42)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"--> Esecuzione su device: {device}")
 
@@ -72,19 +73,14 @@ def run_pipeline():
     if os.path.exists(CHECKPOINT_PATH):
         print(f"--> Trovato checkpoint: {CHECKPOINT_PATH}. Caricamento...")
         try:
-            checkpoint = torch.load(CHECKPOINT_PATH, map_location=device)
-            state = checkpoint["state_dict"] if "state_dict" in checkpoint else checkpoint
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
 
-            model_state = model.state_dict()
-            filtered = {k: v for k, v in state.items()
-                        if k in model_state and model_state[k].shape == v.shape}
-
-            model.load_state_dict(filtered, strict=False)
-            if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
-                detector.load_state_dict(checkpoint['model_state_dict'])
-            else:
-                detector.load_state_dict(checkpoint)
-            print("--> Pesi caricati con successo.")
+                checkpoint = torch.load(CHECKPOINT_PATH, map_location=device)
+                if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
+                    detector.load_state_dict(checkpoint['model_state_dict'])
+                else:
+                    detector.load_state_dict(checkpoint)
         except Exception as e:
             pass
     else:
