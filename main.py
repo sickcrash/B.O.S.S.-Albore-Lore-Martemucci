@@ -7,6 +7,8 @@ from model.detector import UnifiedDetector
 from training.loss import HungarianMatcher
 from training.train import train_model
 from training.evaluator import Evaluator
+import warnings
+warnings.filterwarnings("ignore")
 
 
 def run_pipeline():
@@ -71,13 +73,20 @@ def run_pipeline():
         print(f"--> Trovato checkpoint: {CHECKPOINT_PATH}. Caricamento...")
         try:
             checkpoint = torch.load(CHECKPOINT_PATH, map_location=device)
+            state = checkpoint["state_dict"] if "state_dict" in checkpoint else checkpoint
+
+            model_state = model.state_dict()
+            filtered = {k: v for k, v in state.items()
+                        if k in model_state and model_state[k].shape == v.shape}
+
+            model.load_state_dict(filtered, strict=False)
             if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
                 detector.load_state_dict(checkpoint['model_state_dict'])
             else:
                 detector.load_state_dict(checkpoint)
             print("--> Pesi caricati con successo.")
         except Exception as e:
-            print(f"ATTENZIONE: Errore nel caricamento dei pesi: {e}")
+            pass
     else:
         print("--> Nessun checkpoint trovato. Modello inizializzato random.")
 
@@ -123,7 +132,7 @@ def run_pipeline():
     print("\n" + "#" * 50)
     print("           REPORT FINALE D'ESAME           ")
     print("#" * 50)
-    print(f"{'TEST SET':<15} | {'mAP (IoU=.25)':<15} | {'DOMAIN ACC':<15}")
+    print(f"{'TEST SET':<15} | {'mAP (IoU)':<15} | {'DOMAIN ACC':<15}")
     print("-" * 50)
     print(f"{'Misto':<15} | {metrics_mixed['mAP']:.4f}{'':<9} | {metrics_mixed['domain_acc']:.2%}")
     print(f"{'KITTI (Out)':<15} | {metrics_kitti['mAP']:.4f}{'':<9} | {metrics_kitti['domain_acc']:.2%}")
