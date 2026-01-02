@@ -47,7 +47,7 @@ Un paio di parole sulle tecniche di quantizzazione implementate (ricordiamo che 
 Queste sono quantizzazioni INT8, che riducono significativamente la dimensione del modello (E DELLO STORAGE!!!) e migliorano le prestazioni di inferenza.
 La quantizzazione FP16 viene eseguita esportando il modello ONNX in formato FP16, riducendo la precisione dei pesi e delle attivazioni a 16 bit floating point.
 
-Tutte i metodi che gestiscono le quantizzazioni e le ottimizzazioni (inclusi gli export in ONNX), sono contenuti nel 
+Tutti i metodi che gestiscono le quantizzazioni e le ottimizzazioni (inclusi gli export in ONNX), sono contenuti nel 
 file 'optimizer.py', all'interno del pacchetto 'src'. E' UN FILE DIVERSO DA OPTIMIZE.PY, CHE E' UNO SCRIPT CHE RICHIAMA LE FUNZIONI CONTENUTE IN QUESTO FILE.
 
 Per un'esecuzione live del modello tramite la webcam del pc (figata), eseguite il file 'live_demo.py' in 'scripts'.
