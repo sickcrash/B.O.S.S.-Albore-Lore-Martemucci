@@ -1,12 +1,10 @@
 import argparse
-import sys
 import yaml
 import requests
 import zipfile
-import shutil
 from pathlib import Path
 from tqdm import tqdm
-from ultralytics.data.utils import check_det_dataset
+
 
 
 def download_file(url, destination):
@@ -17,7 +15,7 @@ def download_file(url, destination):
 
     response = requests.get(url, stream=True)
     total_size = int(response.headers.get('content-length', 0))
-    block_size = 1024  # 1 Kibibyte
+    block_size = 1024
 
     print(f"Download: {url}...")
     with open(destination, 'wb') as file, tqdm(
@@ -42,7 +40,7 @@ def unzip_file(zip_path, extract_to):
 
 def main():
     parser = argparse.ArgumentParser(description='Scarica SOLO Validation Set COCO')
-    parser.add_argument('--config', type=str, default='../datasets/coco.yaml',
+    parser.add_argument('--config', type=str, default='datasets/coco.yaml',
                         help='Nome del file .yaml')
     args = parser.parse_args()
 
@@ -50,7 +48,7 @@ def main():
     print(f"DOWNLOAD SELECTIVE: COCO VAL2017 ONLY")
     print("=" * 60)
 
-    # 1. Leggiamo il YAML per capire DOVE scaricare i dati
+    # 1. Leggiamo il YAML per capire dove scaricare i dati
     yaml_path = Path(args.config)
     if not yaml_path.exists():
         print(f"Errore: File {yaml_path} non trovato.")
@@ -60,13 +58,9 @@ def main():
         config = yaml.safe_load(f)
 
     # Risolviamo il path root del dataset
-    # Se nel yaml 'path' è relativo (es ../datasets/coco), lo risolviamo rispetto al yaml
     if 'path' in config:
         root_dir = Path(config['path'])
         if not root_dir.is_absolute():
-            # Se è relativo, assumiamo sia relativo alla posizione dello script o del yaml
-            # Ultralytics di solito usa path relativi alla root di esecuzione.
-            # Qui proviamo a risolvere ../datasets/coco
             root_dir = Path(config['path']).resolve()
     else:
         # Fallback se non c'è 'path'

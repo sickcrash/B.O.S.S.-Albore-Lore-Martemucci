@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
 """
 YOLOv8 Live Demo - Edge Detection in tempo reale
-Implementazione con Pattern Corretti: Facade, Strategy, Dependency Injection
 """
 import argparse
 import cv2

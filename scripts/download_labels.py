@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
 """
-Script di emergenza per scaricare e posizionare le etichette COCO.
+Script per scaricare e posizionare le etichette COCO.
 """
 import requests
 import zipfile
 import shutil
-import os
 from pathlib import Path
 from tqdm import tqdm
 
@@ -31,17 +29,16 @@ def main():
     print("=" * 60)
 
     # 1. Setup Percorsi
-    base_dir = Path("../datasets/coco")
+    base_dir = Path("datasets/coco")
     if not base_dir.exists():
-        base_dir = Path("datasets/coco")
+        base_dir = Path("../datasets/coco")
 
-    # Crea la cartella base se non esiste
     base_dir.mkdir(parents=True, exist_ok=True)
 
     # Percorso finale dove vogliamo i txt
     dest_labels_dir = base_dir / "labels" / "val2017"
 
-    # Pulizia preventiva: se esiste e vuota o corrotta, rimuovi
+    # Pulizia preventiva
     if dest_labels_dir.exists():
         print(f"Pulizia vecchia cartella labels: {dest_labels_dir}")
         shutil.rmtree(base_dir / "labels", ignore_errors=True)
@@ -53,62 +50,62 @@ def main():
     print(f"Download da: {zip_url}")
     download_file(zip_url, zip_path)
 
-    # Estrazione in cartella temporanea
-    temp_extract_dir = base_dir / "temp_extract"
-    if temp_extract_dir.exists():
-        shutil.rmtree(temp_extract_dir)
-    temp_extract_dir.mkdir()
-
+    # 3. Estrazione diretta nella cartella base (non in temp)
     print("Estrazione...")
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        zip_ref.extractall(temp_extract_dir)
+        zip_ref.extractall(base_dir)
 
+    # 4. Lo zip estrae in "coco/labels/", quindi dobbiamo spostare
+    extracted_labels = base_dir / "coco" / "labels"
 
-    # Cerchiamo la cartella 'val2017' che contiene i txt dentro la temp
-    found_val_dir = list(temp_extract_dir.rglob("val2017"))
+    if extracted_labels.exists():
+        print(f"Trovate labels estratte in: {extracted_labels}")
 
-    source_val = None
-    for d in found_val_dir:
-        # Controlliamo se contiene txt
-        if any(d.glob("*.txt")):
-            source_val = d
-            break
+        # Sposta labels/train2017 e labels/val2017 nella posizione corretta
+        final_labels_dir = base_dir / "labels"
 
-    if source_val:
-        print(f"Trovate etichette in: {source_val}")
+        if final_labels_dir.exists():
+            shutil.rmtree(final_labels_dir)
 
-        # Creiamo la destinazione
-        dest_labels_dir.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(extracted_labels), str(final_labels_dir))
+        print(f"Labels spostate in: {final_labels_dir}")
 
-        # Spostiamo
-        if dest_labels_dir.exists(): shutil.rmtree(dest_labels_dir)
-        shutil.move(str(source_val), str(dest_labels_dir))
-
-        print(f"Spostate in: {dest_labels_dir}")
-
-        # Facciamo lo stesso per il train (già che ci siamo, pesa poco)
-        source_train = source_val.parent / "train2017"
-        dest_train = base_dir / "labels" / "train2017"
-        if source_train.exists():
-            if dest_train.exists(): shutil.rmtree(dest_train)
-            shutil.move(str(source_train), str(dest_train))
-            print(f"Spostate train labels in: {dest_train}")
+        # Rimuovi la cartella "coco" extra
+        extra_coco_dir = base_dir / "coco"
+        if extra_coco_dir.exists():
+            shutil.rmtree(extra_coco_dir)
+            print("Rimossa cartella 'coco' ridondante")
 
     else:
-        print("ERRORE")
+        print(f"⚠️ ERRORE: Labels non trovate in {extracted_labels}")
+        print("Contenuto estratto:")
+        for item in base_dir.rglob("*"):
+            print(f"  - {item}")
 
-    # Pulizia file temporanei
+    # 5. Pulizia file temporanei
     zip_path.unlink()
-    shutil.rmtree(temp_extract_dir)
 
-    # RIMUOVIAMO LA CACHE VECCHIA per forzare YOLO a ri-scansionare
+    # 6. Rimuovi cache vecchia
     for cache in base_dir.rglob("*.cache"):
         cache.unlink()
-        print("Cache rimossa.")
+        print(f"Cache rimossa: {cache}")
 
-    # Verifica finale
-    count = len(list(dest_labels_dir.glob("*.txt")))
-    print(f"Operazione conclusa. File .txt in val2017: {count}")
+    # 7. Verifica finale
+    final_val = base_dir / "labels" / "val2017"
+    final_train = base_dir / "labels" / "train2017"
+
+    if final_val.exists():
+        count_val = len(list(final_val.glob("*.txt")))
+        print(f"✅ File .txt in val2017: {count_val}")
+    else:
+        print(f"❌ val2017 non trovata!")
+
+    if final_train.exists():
+        count_train = len(list(final_train.glob("*.txt")))
+        print(f"✅ File .txt in train2017: {count_train}")
+    else:
+        print(f"⚠️ train2017 non trovata")
+
 
 
 

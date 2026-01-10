@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Benchmark modelli ottimizzati"""
 
 import argparse
@@ -32,8 +31,8 @@ def main():
     parser = argparse.ArgumentParser(description='Benchmark YOLO')
     parser.add_argument('--test-images', default="./datasets/coco/images/val2017")
     parser.add_argument('--baseline', default='./model/yolov8n.pt')
-    parser.add_argument('--optimized', default='./model/yolov8nbase_int8_static.onnx')
-    parser.add_argument('--num-runs', type=int, default=100)
+    parser.add_argument('--optimized', default='./model/yolov8nbase_int8_dynamic.onnx')
+    parser.add_argument('--num-runs', type=int, default=10)
     parser.add_argument('--output', default='results/benchmark.json')
 
     args = parser.parse_args()
@@ -49,7 +48,7 @@ def main():
 
     results = {}
 
-    # Benchmark baseline
+    # Benchmark modello baseline
     if Path(args.baseline).exists():
         print(f"\n{'=' * 70}")
         print("Benchmark PyTorch Baseline")
@@ -68,10 +67,10 @@ def main():
         print(f"Latenza: {res['mean_time'] * 1000:.2f} ms")
         platform_baseline.cleanup()
 
-    # Benchmark ottimizzato
+    # Benchmark modello ottimizzato
     if Path(args.optimized).exists():
         print(f"\n{'=' * 70}")
-        print("Benchmark ONNX INT8")
+        print("Benchmark ONNX Ottimizzato")
         print(f"{'=' * 70}")
 
         platform_opt = EdgePlatform(
@@ -116,11 +115,11 @@ def main():
     def eval_map(model_path, data_yaml):
         m = YOLO(model_path)
         metrics = m.val(data=data_yaml, imgsz = 480, save=False, save_json=False, plots=False, project="", name="", exist_ok=True,
-                        verbose=False)
+                        verbose=False, device='cpu')
         return float(metrics.box.map50), float(metrics.box.map)
 
     # dopo aver creato le piattaforme e misurato FPS:
-    data_yaml = './datasets/coco.yaml'  # path assoluto consigliato
+    data_yaml = './datasets/coco.yaml'
     b_map50, b_map = eval_map(args.baseline, data_yaml)
     q_map50, q_map = eval_map(args.optimized, data_yaml)
 
