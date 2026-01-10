@@ -121,12 +121,10 @@ class FastNMS(PostProcessor):
         if len(indices) == 0:
             return []
 
-            # Appiattiamo qualsiasi cosa esca (lista di liste, array numpy, ecc) in un array 1D
+            # Appiattiamo qualsiasi output (lista di liste, array numpy, ecc) in un array 1D
         indices = np.array(indices).flatten()
 
         for idx in indices:
-            # Ora 'idx' è sicuramente un numero puro, non serve più l'if/else
-
             # Ripristina coordinate x1,y1,x2,y2 per il disegno
             box = boxes[idx]
             x, y, w, h = box
@@ -216,7 +214,6 @@ class TorchBackend(InferenceBackend):
     def get_name(self) -> str:
         return "PyTorch"
 
-
 class ONNXBackend(InferenceBackend):
     """Backend ONNX Runtime"""
 
@@ -249,6 +246,15 @@ class ONNXBackend(InferenceBackend):
             for dim in input_shape
         )
 
+        # Rileva dtype richiesto dall'input
+        input_type = self.session.get_inputs()[0].type
+        if 'float16' in input_type:
+            self.input_dtype = np.float16
+            print(f"Modello richiede input FP16")
+        else:
+            self.input_dtype = np.float32
+            print(f"Modello richiede input FP32")
+
         print(f"[ONNX] Threads: {num_threads}, Input shape: {self.input_shape}")
 
         # Warmup
@@ -257,16 +263,17 @@ class ONNXBackend(InferenceBackend):
     def _warmup(self):
         """Warmup per ottimizzare allocazioni"""
         try:
-            dummy = np.zeros(self.input_shape, dtype=np.float32)
+            #Usa il dtype corretto per il warmup
+            dummy = np.zeros(self.input_shape, dtype=self.input_dtype)
             self.session.run([self.output_name], {self.input_name: dummy})
         except Exception as e:
             print(f"Warning: Warmup fallito: {e}")
 
     def infer(self, input_data: np.ndarray) -> np.ndarray:
         """Inferenza ONNX"""
-        # Assicurarsi che sia float32
-        if input_data.dtype != np.float32:
-            input_data = input_data.astype(np.float32)
+        # Converti al dtype richiesto dal modello
+        if input_data.dtype != self.input_dtype:
+            input_data = input_data.astype(self.input_dtype)
 
         # Esegui inferenza
         outputs = self.session.run([self.output_name], {self.input_name: input_data})
@@ -280,8 +287,6 @@ class ONNXBackend(InferenceBackend):
 
     def get_name(self) -> str:
         return "ONNX Runtime"
-
-
 
 
 class HardwareIO:

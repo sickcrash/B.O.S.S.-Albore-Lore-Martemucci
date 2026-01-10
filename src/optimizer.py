@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import numpy as np
 import cv2
 import torch
-import torch_pruning as tp
+#import torch_pruning as tp
 from copy import deepcopy
 import yaml
 from src.pruning_utils import replace_c2f_with_c2f_v2
@@ -46,7 +46,7 @@ class ModelOptimizer:
     def __init__(self, model_path: str, dataset_yaml: str):
         self.model_path = model_path
         self.dataset_yaml = dataset_yaml
-        self.model = YOLO(model_path)
+        self.model = YOLO(model_path).to('cuda' if torch.cuda.is_available() else 'cpu')
 
         self.calib_img_dir = "datasets/coco/images/val2017"
 
@@ -57,7 +57,7 @@ class ModelOptimizer:
             format='onnx',
             simplify=True,
             opset=13,
-            dynamic=False,  # Static shape è più veloce su Edge
+            dynamic=False,
             imgsz = 480
         )
 
@@ -65,20 +65,6 @@ class ModelOptimizer:
         Path(path).rename(out_path)
         return str(out_path)
 
-    def export_fp16(self) -> str:
-        """Esporta modello FP16"""
-        print(f"3. Exporting FP16 ONNX...")
-        path = self.model.export(
-            format='onnx',
-            dynamic=False,
-            opset=13,
-            half=True,
-            imgsz=480
-        )
-
-        out_path = str(Path(path).with_stem(Path(path).stem + '_fp16'))
-        Path(path).rename(out_path)
-        return out_path
 
     def quantize_int8_dynamic(self, onnx_path: str) -> str:
         """Quantizzazione dinamica INT8"""
@@ -99,7 +85,7 @@ class ModelOptimizer:
             return onnx_path
 
     def quantize_int8_static(self, onnx_path: str) -> str:
-        """Quantizzazione statica INT8 parziale """
+        """Quantizzazione statica INT8"""
         print(f"2. Starting Standard Static INT8 Quantization on {onnx_path}...")
 
         pre_path = str(Path(onnx_path).with_stem(Path(onnx_path).stem + '_pre'))
@@ -128,7 +114,7 @@ class ModelOptimizer:
             print(f"Static Quantization Error: {e}")
             return onnx_path
 
-
+'''
     #Pruning method
     def prune(self, amount=0.05):
         """
@@ -322,3 +308,4 @@ class ModelOptimizer:
             print(f"⚠️ Errore Fine-Tuning: {e}")
 
         return results
+'''
