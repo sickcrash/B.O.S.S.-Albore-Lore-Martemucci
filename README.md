@@ -1,5 +1,13 @@
 Prima di eseguire il progetto, assicurarsi di installare le dipendenze contenute nel file `requirements.txt`. 
-È possibile farlo eseguendo il seguente comando nel terminale:
+
+Creare il proprio ambiente virtuale (consigliato).
+
+```
+conda create -n env_name python=3.11
+conda activate env_name
+```
+
+Installare le dipendenze con il comando:
 
 ```
 pip install -r requirements.txt
@@ -11,15 +19,13 @@ scaricarlo grazie ai link contenuti nel file 'coco.yaml' nella cartella 'dataset
 Per scaricarlo, procedete con l'esecuzione dello script 'download_datasets.py' per il download delle immagini, runnando il seguente comando:
 
 ```
-python -m scripts.download_datasets
+python -m scripts.download_dataset
 ```
 Successivamente è necessario scaricare le labels tramite lo script 'download_labels.py', eseguendo il comando:
 
 ```
 python -m scripts.download_labels
 ```
-
-Dopo aver fatto ciò, inizia il divertimento! 
 
 Per ottimizzare i modelli, ed eseguire i vari tipi di quantizzazione, eseguite lo script 'optimize.py', 
 contenuto nella cartella 'scripts'.
@@ -39,25 +45,23 @@ python -m scripts.benchmark
 ```
 
 Un paio di parole sulle tecniche di quantizzazione implementate (ricordiamo che vengnono eseguite sul modello convertito in ONNX):
-- **Dynamic Quantization**: Questa tecnica quantizza solo i pesi del modello durante l'inferenza, 
-    mantenendo le attivazioni in precisione a 32 bit;
+- **Dynamic Quantization**: Questa tecnica quantizza solo i pesi del modello, 
+    mantenendo le attivazioni in precisione a 32 bit, quantizzate dinamicamente durante l'inferenza;
 - **Static Quantization**: Questa tecnica quantizza sia i pesi che le attivazioni del modello, ma solo di quelle esplicitate dal parametro
   op_types_to_quantize. Richiede una fase di calibrazione in cui il modello viene eseguito su un set di dati di calibrazione per raccogliere statistiche sulle attivazioni.
 
-Queste sono quantizzazioni INT8, che riducono significativamente la dimensione del modello (E DELLO STORAGE!!!) e migliorano le prestazioni di inferenza.
-La quantizzazione FP16 viene eseguita esportando il modello ONNX in formato FP16, riducendo la precisione dei pesi e delle attivazioni a 16 bit floating point.
+Queste sono quantizzazioni INT8, che riducono significativamente la dimensione del modello e dello storage necessario e migliorano le prestazioni di inferenza.
 
-Tutti i metodi che gestiscono le quantizzazioni e le ottimizzazioni (inclusi gli export in ONNX), sono contenuti nel 
-file 'optimizer.py', all'interno del pacchetto 'src'. E' UN FILE DIVERSO DA OPTIMIZE.PY, CHE E' UNO SCRIPT CHE RICHIAMA LE FUNZIONI CONTENUTE IN QUESTO FILE.
+Tutte i metodi che gestiscono le quantizzazioni e le ottimizzazioni (inclusi gli export in ONNX), sono contenuti nel 
+file 'optimizer.py', all'interno del pacchetto 'src'.
 
-Per un'esecuzione live del modello tramite la webcam del pc (figata), eseguite il file 'live_demo.py' in 'scripts'.
-Selezionate il modello modificando il flag 'model' nel metodo main()
+Per un'esecuzione live del modello tramite la webcam del pc, eseguite il file 'live_demo.py' in 'scripts'.
+Selezionate il modello modificando il flag 'model' nel metodo main(). Se si vuole usare un'altra sorgente video, modificate il flag 'cam', indicando l'indice del dispositivo video.
 
 ```
 python -m scripts.live_demo
 ```
 
 Nel pacchetto 'src' trovate il file 'patterns.py', che contiene i pattern di progettazione utilizzati nel progetto.
-Per ora tralasciate 'pruning_utils.py'
 
 Buon divertimento!
