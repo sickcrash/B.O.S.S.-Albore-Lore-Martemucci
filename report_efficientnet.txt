@@ -1,0 +1,19 @@
+
+        ============================================
+        B.O.S.S. BENCHMARKING REPORT
+        ============================================
+        Modello:     EfficientNet_efficientnet_b0
+        Dataset:     5 immagini
+        Dispositivo: cpu
+
+        METRICHE MEDIE:
+        --------------------------------------------
+        Latenza Media:      474.59 ms
+        Throughput (FPS):   2.11
+        RAM Media Occupata: 358.14 MB
+
+        TOTALE:
+        --------------------------------------------
+        Tempo Totale Test:  2.37 secondi
+        ============================================
+        

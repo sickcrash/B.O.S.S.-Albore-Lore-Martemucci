@@ -1,0 +1,12 @@
+#Ignora l'ambiente virtuale
+venv/
+.idea/
+__pycache__/
+
+#Ignora i file pesanti dei pesi
+checkpoints/*.pth
+*.pt
+
+#Ignora file temporanei e log
+*.log
+*.csv
