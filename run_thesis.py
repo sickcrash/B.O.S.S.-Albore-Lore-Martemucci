@@ -2,8 +2,8 @@ import argparse
 import glob
 import os
 import sys
-from platform_core import BenchmarkPlatform
-from adapters import ResNetAdapter, EfficientNetAdapter
+from modules.platform_core import BenchmarkPlatform
+from modules.adapters import ResNetAdapter, EfficientNetAdapter
 
 #Configurazione pesi
 FILE_RESNET = "resnet.pth"

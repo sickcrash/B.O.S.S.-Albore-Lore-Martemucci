@@ -8,5 +8,5 @@ checkpoints/*.pth
 *.pt
 
 #Ignora file temporanei e log
-*.log
 *.csv
+*.txt

@@ -8,12 +8,12 @@
 
         METRICHE MEDIE:
         --------------------------------------------
-        Latenza Media:      474.59 ms
-        Throughput (FPS):   2.11
-        RAM Media Occupata: 358.14 MB
+        Latenza Media:      267.55 ms
+        Throughput (FPS):   3.74
+        RAM Media Occupata: 363.47 MB
 
         TOTALE:
         --------------------------------------------
-        Tempo Totale Test:  2.37 secondi
+        Tempo Totale Test:  1.34 secondi
         ============================================
         
