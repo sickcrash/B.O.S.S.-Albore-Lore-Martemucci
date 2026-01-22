@@ -44,7 +44,7 @@ st.divider()
 
 #Sidebar
 st.sidebar.header("Configurazione Test")
-device_option = st.sidebar.selectbox("Dispositivo Hardware", ["CPU", "GPU (se disponibile)"])
+device_option = st.sidebar.selectbox("Dispositivo Hardware", ["CPU"])
 num_images = len(glob.glob("dataset_test/*.jpg"))
 st.sidebar.info(f"Dataset caricato: {num_images} immagini")
 
@@ -52,11 +52,12 @@ st.sidebar.info(f"Dataset caricato: {num_images} immagini")
 def run_benchmark_logic():
     progress_bar = st.progress(0)
     status_text = st.empty()
+    target_device = "cpu"
 
     #Lancio Res
-    status_text.text("Avvio Processo Isolato: DeepLabV3 (ResNet50)...")
+    status_text.text(f"Avvio Processo Isolato su {target_device.upper()}: DeepLabV3 (ResNet50)...")
     try:
-        subprocess.run([sys.executable, "run_thesis.py", "--model", "resnet"], check=True)
+        subprocess.run([sys.executable, "run_thesis.py", "--model", "resnet", "--device", target_device], check=True)
         status_text.text("ResNet completato. Pulizia RAM...")
     except subprocess.CalledProcessError as e:
         st.error(f"Errore durante il test ResNet: {e}")
@@ -66,9 +67,9 @@ def run_benchmark_logic():
     time.sleep(1)
 
     #Lancio Efficient
-    status_text.text("Avvio Processo Isolato: EfficientNet...")
+    status_text.text(f"Avvio Processo Isolato su {target_device.upper()}: EfficientNet...")
     try:
-        subprocess.run([sys.executable, "run_thesis.py", "--model", "efficientnet"], check=True)
+        subprocess.run([sys.executable, "run_thesis.py", "--model", "efficientnet", "--device", target_device], check=True)
     except subprocess.CalledProcessError as e:
         st.error(f"Errore durante il test EfficientNet: {e}")
         return

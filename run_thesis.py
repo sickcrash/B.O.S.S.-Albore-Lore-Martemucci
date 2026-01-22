@@ -15,6 +15,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, required=True, choices=["resnet", "efficientnet"],
                         help="Quale modello testare")
+    parser.add_argument("--device", type=str, default="cpu", help="Dispositivo (solo cpu)")
     args = parser.parse_args()
 
     #Controllo Dataset

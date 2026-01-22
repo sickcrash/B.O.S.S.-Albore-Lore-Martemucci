@@ -33,14 +33,6 @@ class BenchmarkPlatform:
             print(f"ERRORE CRITICO nel caricamento modello: {e}")
             return
 
-        #Warm-up per scaldare la GPU
-        print("Warm-up...")
-        if len(self.dataset) > 0:
-            try:
-                self.model.predict(self.dataset[0])
-            except Exception as e:
-                print(f"Errore durante il warm-up: {e}")
-
         total_inference_time = 0
         total_ram_usage = 0
 
